@@ -1,6 +1,6 @@
 {
-    name: "Parpaing",
-    version: "0.0.1",
-    description: "Version Beta de Parpaing",
-    homepage: "https://www.armagnet.fr/parpaing/"
+    "name": "Parpaing",
+    "version": "0.0.1",
+    "description": "Version Beta de Parpaing",
+    "homepage": "https://www.armagnet.fr/parpaing/"
 }
