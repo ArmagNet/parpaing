@@ -96,6 +96,8 @@ $language = SessionUtils::getLanguage($_SESSION);
 				-->
 				<ul class="nav navbar-nav navbar-right">
 
+					<li <?php if ($page == "ugrader") echo 'class="active"'; ?>><a href="upgrader.php"><?php echo lang("menu_upgrader"); ?><?php if ($page == "upgrader") echo ' <span class="sr-only">(current)</span>'; ?></a></li>
+
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo str_replace("{language}", lang("language_$language"), lang("menu_language")); ?> <span
 							class="caret"></span> </a>
 						<ul class="dropdown-menu" role="menu">

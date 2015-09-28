@@ -17,21 +17,22 @@
     along with OpenTweetBar.  If not, see <http://www.gnu.org/licenses/>.
 */
 session_start();
-include_once("config/database.php");
+require_once("config/config.php");
 require_once("engine/utils/SessionUtils.php");
 
-$data = array();
+if (!isset($_SERVER["HTTP_REFERER"])) exit();
 
-SessionUtils::logout($_SESSION);
+if ($config["wifi"]["isdummy"]) {
+	$content = "test";
+}
+else {
+	// Remove all previous files
+	array_map('unlink', glob("upgrade/{*,*/*,*/*/*,*/*/*/*}", GLOB_BRACE));
 
-if (isset($_COOKIE['userId'])) {
-	unset($_COOKIE['userId']);
-	unset($_COOKIE['userCode']);
-	setcookie('userId', "", -1);
-	setcookie('userCode', "", -1);
+	$zipPath = 'upgrade/upgrade.zip';
+	$content = file_get_contents($config["parpaing"]["zip_url"]);
+	file_put_contents($zipPath, $content);
 }
 
-$data["ok"] = "ok";
-
-echo json_encode($data);
+echo json_encode(array("ok" => "ok", "md5" => md5($content), "sha1" => sha1($content)));
 ?>

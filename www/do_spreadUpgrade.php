@@ -17,21 +17,34 @@
     along with OpenTweetBar.  If not, see <http://www.gnu.org/licenses/>.
 */
 session_start();
-include_once("config/database.php");
+require_once("config/config.php");
 require_once("engine/utils/SessionUtils.php");
 
-$data = array();
+if (!isset($_SERVER["HTTP_REFERER"])) exit();
 
-SessionUtils::logout($_SESSION);
+if (true) {
+	$upgrade = "upgrade/" . $config["parpaing"]["branch"] . "/www/";
 
-if (isset($_COOKIE['userId'])) {
-	unset($_COOKIE['userId']);
-	unset($_COOKIE['userCode']);
-	setcookie('userId', "", -1);
-	setcookie('userCode', "", -1);
+	$files = glob($upgrade . "{*,*/*,*/*/*,*/*/*/*}", GLOB_BRACE);
+
+	foreach($files as $file) {
+		$destination = str_replace($upgrade, "", $file);
+//		error_log("Handle $file to $destination");
+		if (is_dir($file)) {
+			if (!is_dir($destination)) {
+				mkdir($destination);
+			}
+		}
+		else {
+//			error_log("Copy $file to $destination");
+			copy($file, $destination);
+		}
+	}
+
+	echo json_encode(array("ok" => "ok"));
+
+	exit();
 }
 
-$data["ok"] = "ok";
-
-echo json_encode($data);
+echo json_encode(array("ko" => "ko"));
 ?>
