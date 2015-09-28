@@ -17,11 +17,16 @@
     along with OpenTweetBar.  If not, see <http://www.gnu.org/licenses/>.
 */
 session_start();
+require_once("config/config.php");
 require_once("engine/utils/SessionUtils.php");
+require_once("engine/bo/UserBo.php");
 
 if (!isset($_SERVER["HTTP_REFERER"])) exit();
 
+$userBo = UserBo::newInstance($config);
+
 SessionUtils::setLanguage($_REQUEST["lang"], $_SESSION);
+$userBo->setLanguage($_REQUEST["lang"]);
 
 header("Location: " . $_SERVER["HTTP_REFERER"]);
 ?>

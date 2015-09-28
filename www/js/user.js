@@ -1,5 +1,5 @@
  /*
-    Copyright 2014 Cédric Levieux, Jérémy Collot, ArmagNet
+    Copyright 2014-2015 Cédric Levieux, Jérémy Collot, ArmagNet
 
     This file is part of Parpaing.
 
@@ -18,24 +18,11 @@
 */
 
 $(function() {
-	$("#rememberMe").click(function(event) {
-		if ($(this).attr("checked")) {
-			$(this).removeAttr("checked");
-		}
-		else {
-			$(this).attr("checked", "checked");
-		}
-	});
-
-	$("#loginLink, #connectButton").click(function(event) {
+	$("#loginForm #renewButton").click(function(event) {
 		event.stopPropagation();
 		event.preventDefault();
 
-		$("#loginForm").show();
-	});
-
-	$("#loginForm").mouseleave(function(event) {
-		$("#loginForm").hide();
+		$(".renew-password").toggleClass("hidden");
 	});
 
 	$("#loginForm #loginButton").click(function(event) {
@@ -43,21 +30,28 @@ $(function() {
 		event.preventDefault();
 
 		var myform = {
-			login : $("#loginInput").val(),
 			password : $("#passwordInput").val(),
-			rememberMe : $("#rememberMe").attr("checked") ? 1 : 0
+			newPassword : $("#newPasswordInput").val(),
+			confirmNewPassword : $("#confirmNewPasswordInput").val()
 		};
 
 		$.post("do_login.php", myform, function(data) {
-			$("#loginForm").hide();
-			if (data.ok) {
+//			$("#loginForm").hide();
+//			return;
+			$(".renew-password").addClass("hidden");
+
+			if (data.status == "ok") {
 				window.location.reload(true);
-			} else {
-				$("#" + data.message + "Alert").parents(".container").show();
-				$("#" + data.message + "Alert").show().delay(2000).fadeOut(1000, function() {
-					$(this).parents(".container").hide();
-				});
 			}
+			else if (data.status == "renew_password") {
+				$(".renew-password").removeClass("hidden");
+			}
+
+			$("#" + data.message + "Alert").parent(".container").removeClass("hidden");
+			$("#" + data.message + "Alert").removeClass("hidden").show().delay(2000).fadeOut(1000, function() {
+				$(this).parent(".container").addClass("hidden");
+			});
+
 		}, "json");
 	});
 

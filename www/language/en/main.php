@@ -215,24 +215,9 @@ Please change it as soon as you are connected.
 
 The #Parpaing Team";
 
-$lang["okTweet"] = "Your tweet is gone in validation";
-$lang["koTweet"] = "Problem in the handling of your tweet";
-$lang["okDeleteTweet"] = "Your tweet has been deleted";
-$lang["okValidateTweet"] = "Your tweet validation has been taken into account";
-$lang["okFinalValidateTweet"] = "Your tweet validation has been taken into account, and the tweet has been completly validated";
-$lang["error_cant_change_password"] = "The password change failed";
-$lang["ok_operation_success"] = "Succeeded operation";
-$lang["error_passwords_not_equal"] = "Your password and its confirmation are different";
-$lang["error_cant_send_mail"] = "Parpaing can not send mail to your mail address";
-$lang["error_cant_register"] = "Parpaing can not process your registration";
-$lang["error_cant_delete_files"] = "Parpaing can not delete delete installation files";
-$lang["error_cant_connect"] = "Impossible to connect to the database";
-$lang["error_database_already_exists"] = "The database already exists";
-$lang["error_database_dont_exist"] = "The database does not exist";
-$lang["error_login_ban"] = "Your IP has been blocked for 10mn.";
-$lang["error_login_bad"] = "Vérifier vos identifiants, l'identification a échouée.";
-$lang["ok_twitter_success"] = "The Twitter configuration works";
-$lang["error_twitter_cant_authenticate"] = "The Twitter configuration doesn't work, verify the differents connection parameters";
+$lang["defaultPasswordAlert"] = "Default password, to change";
+$lang["notSameNewPasswordAlert"] = "The new passwords are not the same";
+$lang["badPasswordAlert"] = "Bad password";
 
 $lang["install_guide"] = "Welcome on the installation page of Parpaing.";
 $lang["install_tabs_database"] = "Database";

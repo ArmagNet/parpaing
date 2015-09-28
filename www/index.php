@@ -18,8 +18,8 @@
 */
 include_once("header.php");
 
-
 ?>
+	<?php if ($isConnected) {?>
 <div class="container theme-showcase" role="main">
 	<ol class="breadcrumb">
 		<li class="active"><?php echo lang("breadcrumb_index"); ?></li>
@@ -28,6 +28,57 @@ include_once("header.php");
 		<p><?php echo lang("index_guide"); ?></p>
 	</div>
 </div>
+	<?php } else {?>
+
+<div class="container theme-showcase" role="main">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title">Identification</h3>
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" id="loginForm">
+				<fieldset>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="passwordInput">Mot de passe</label>
+						<div class="col-md-10">
+							<input id="passwordInput" name="passwordInput" type="password" placeholder="mot de passe du parpaing" class="form-control input-md" required="">
+						</div>
+					</div>
+					<div class="form-group hidden renew-password">
+						<label class="col-md-2 control-label" for="newPasswordInput">Nouveau mot de passe</label>
+						<div class="col-md-10">
+							<input id="newPasswordInput" name="newPasswordInput" type="password" placeholder="nouveau mot de passe du parpaing" class="form-control input-md">
+						</div>
+					</div>
+					<div class="form-group hidden renew-password">
+						<label class="col-md-2 control-label" for="confirmNewPasswordInput">Confirmation</label>
+						<div class="col-md-10">
+							<input id="confirmNewPasswordInput" name="confirmNewPasswordInput" type="password" placeholder="confirmation du mot de passe du parpaing" class="form-control input-md">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-12 text-center">
+							<button id="loginButton" type="submit" name="loginButton" class="btn btn-primary">Identifier</button>
+							<button id="renewButton" type="button" name="renewButton" class="btn btn-default">Changer</button>
+							<button id="resetButton" type="reset" name="resetButton" class="btn btn-inverse">Reset</button>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div class="container hidden padding-left-0" style="padding-right: 30px;">
+		<?php echo addAlertDialog("defaultPasswordAlert", lang("defaultPasswordAlert"), "warning"); ?>
+		<?php echo addAlertDialog("notSameNewPasswordAlert", lang("notSameNewPasswordAlert"), "warning"); ?>
+		<?php echo addAlertDialog("badPasswordAlert", lang("badPasswordAlert"), "danger"); ?>
+	</div>
+
+</div>
+
+	<?php }?>
+
 
 <script type="text/javascript">
 var userLanguage = '<?php echo SessionUtils::getLanguage($_SESSION); ?>';

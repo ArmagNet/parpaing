@@ -91,18 +91,5 @@ foreach($vpnDivs as $vpnDiv) {
 <div class="lastDiv"></div>
 
 <?php include("footer.php");?>
-<script>
-$(function() {
-	$(".panel").hover(function() {
-					$(this).removeClass("panel-default");
-					$(this).addClass("panel-success");
-					$(this).find(".panel-body").addClass("text-success");
-				}, function() {
-					$(this).addClass("panel-default");
-					$(this).removeClass("panel-success");
-					$(this).find(".panel-body").removeClass("text-success");
-				});
-});
-</script>
 </body>
 </html>

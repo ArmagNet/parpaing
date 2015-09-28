@@ -47,19 +47,6 @@ html,body {
 	display: none;
 }
 
-#loginForm {
-	position: relative;
-	z-index: 1000;
-	width: 260px;
-	margin-left: -260px;
-	float: right;
-	color: #ffffff;
-	background: rgba(0, 0, 0, 0.75);
-	top: -60px;
-	right: 10px;
-	border-radius: 10px;
-}
-
 .otbHidden {
 	display: none;
 }
@@ -77,26 +64,6 @@ html,body {
 	height: 72px;
 }
 
-.authorColumn {
-	width: 160px;
-	max-width: 160px;
-}
-
-.dateColumn {
-	width: 160px;
-	max-width: 160px;
-}
-
-.validationColumn {
-	width: 130px;
-	max-width: 130px;
-}
-
-.actionColumn {
-	width: 230px;
-	max-width: 230px;
-}
-
 .padding-left-0 {
 	padding-left: 0;
 }
@@ -109,18 +76,4 @@ html,body {
 	border: 0;
 	box-shadow: none;
 	-webkit-box-shadow: none;
-}
-
-.tweeter-count {
-	background-color: transparent;
-	color: #8899a6;
-	display: inline-block;
-	width: 35px;
-	border: 0;
-	padding: 0 3px;
-	position: relative;
-	vertical-align: top;
-	text-align: right;
-	font-size: 14px;
-	text-shadow: 0 1px 1px rgba(255, 255, 255, .75);
 }

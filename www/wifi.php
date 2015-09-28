@@ -157,16 +157,6 @@ $(function() {
 			retrieveWifiInformationHandler(data.wifiInfos);
 		}, "json");
 	});
-
-	$(".panel").hover(function() {
-					$(this).removeClass("panel-default");
-					$(this).addClass("panel-success");
-					$(this).find(".panel-body").addClass("text-success");
-				}, function() {
-					$(this).addClass("panel-default");
-					$(this).removeClass("panel-success");
-					$(this).find(".panel-body").removeClass("text-success");
-				});
 });
 </script>
 </body>

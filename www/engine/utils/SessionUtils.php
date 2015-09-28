@@ -19,13 +19,6 @@
 
 class SessionUtils {
 
-	static function getUser($session) {
-		if (isset($session["user"])) {
-			return $session["user"];
-		}
-		return null;
-	}
-
 	static function getLanguage($session) {
 		if (isset($session["language"]) && $session["language"]) {
 			return $session["language"];
@@ -44,23 +37,17 @@ class SessionUtils {
 		$session["language"] = $language;
 	}
 
-	static function getUserId($session) {
-		if (isset($session["userId"])) {
-			return $session["userId"];
-		}
-		return null;
-	}
-
 	static function logout(&$session) {
 		session_destroy();
 		session_start();
 	}
 
-	static function login(&$session, $user) {
-		$session["userId"] = $user["use_id"];
-		$session["user"] = $user["use_login"];
+	static function login(&$session) {
+		$session["is_connected"] = true;
+	}
 
-		SessionUtils::setLanguage($user["use_language"], $session);
+	static function isConnected($session) {
+		return isset($session["is_connected"]) && $session["is_connected"];
 	}
 }
 ?>

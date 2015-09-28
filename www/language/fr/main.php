@@ -215,24 +215,9 @@ Veuillez le changer aussitôt que vous serez connecté.
 
 L'équipe #Parpaing";
 
-$lang["okTweet"] = "Votre tweet est parti en validation";
-$lang["koTweet"] = "Problème de traitement dans votre tweet";
-$lang["okDeleteTweet"] = "Votre tweet a été supprimé";
-$lang["okValidateTweet"] = "Votre validation du tweet a été prise en compte";
-$lang["okFinalValidateTweet"] = "Votre validation du tweet a été prise en compte, et le tweet a été complètement validé";
-$lang["error_cant_change_password"] = "Le changement de mot de passe a échoué";
-$lang["ok_operation_success"] = "Opération réussie";
-$lang["error_passwords_not_equal"] = "Votre mot de passe et sa confirmation sont différents";
-$lang["error_cant_send_mail"] = "Parpaing n'arrive pas à envoyer de mail à votre adresse mail";
-$lang["error_cant_register"] = "Parpaing n'arrive pas à traiter votre enregistrement";
-$lang["error_cant_delete_files"] = "Parpaing n'arrive pas à supprimer les fichiers d'installation";
-$lang["error_cant_connect"] = "Impossible de se connecter à la base de données";
-$lang["error_database_already_exists"] = "La base de données existe déjà";
-$lang["error_database_dont_exist"] = "La base de données n'existe pas";
-$lang["error_login_ban"] = "Votre IP a été bloquée pour 10mn.";
-$lang["error_login_bad"] = "Vérifier vos identifiants, l'identification a échouée.";
-$lang["ok_twitter_success"] = "La configuration Twitter fonctionne";
-$lang["error_twitter_cant_authenticate"] = "La configuration Twitter ne fonctionne pas, vérifiez les différents paramètres de connexion";
+$lang["defaultPasswordAlert"] = "Mot de passe par défaut, à changer";
+$lang["notSameNewPasswordAlert"] = "Les nouveaux mots de passe indiqués ne sont pas identiques";
+$lang["badPasswordAlert"] = "Mauvais mot de passe";
 
 $lang["install_guide"] = "Bienvenue sur la page d'installation d'Parpaing.";
 $lang["install_tabs_database"] = "Base de données";
