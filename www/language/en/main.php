@@ -42,6 +42,13 @@ $lang["menu_mypreferences"] = "My preferences";
 $lang["menu_myaccounts"] = "My accounts";
 $lang["menu_logout"] = "Log out";
 
+$lang["upgrader_actualVersion"] = "Actual version";
+$lang["upgrader_newVersion"] = "Available version";
+$lang["upgrader_version_version"] = "Version";
+$lang["upgrader_version_description"] = "Description";
+$lang["upgrader_startUpgrade_button"] = "Upgrade";
+$lang["upgrader_rebootInterface_button"] = "Relaunch interface";
+
 $lang["login_title"] = "Log in";
 $lang["login_loginInput"] = "Identifier";
 $lang["login_passwordInput"] = "Password";
@@ -86,20 +93,6 @@ You can directly validate this tweet by clicking on this link below :
 {validationLink}
 
 The #Parpaing Team";
-
-$lang["history_guide"] = "List of tweets that have been validated.";
-$lang["history_button_validators"] = "Validators";
-$lang["history_account_title"] = "Tweets History for <strong><em>{account}</em></strong>";
-$lang["history_cron_datetime_format"] = "Won't be emitted before the {date} at {time}";
-
-$lang["validation_guide"] = "List of tweets waiting for validation.";
-$lang["validation_account_title"] = "Tweets for <strong><em>{account}</em></strong> in validation";
-$lang["validation_anonymous"] = "(anonymous)";
-$lang["validation_tooltip_author_validation"] = "Author validation";
-$lang["validation_tooltip_mine_validation"] = "My validation";
-$lang["validation_tooltip_other_validation"] = "Validation from other users";
-$lang["validation_cron_datetime_format"] = "Won't be emitted before the {date} at {time}";
-$lang["validation_duration_remaining"] = "Remaining time before expiration : {duration}";
 
 $lang["do_validation_error"] = "Your validation failed (already done, tweet already sent or erased)";
 $lang["do_validation_ok"] = "Your tweet validation has been taken into account";

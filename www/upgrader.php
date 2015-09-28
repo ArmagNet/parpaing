@@ -1,20 +1,20 @@
 <?php /*
-	Copyright 2014 Cédric Levieux, Jérémy Collot, ArmagNet
+	Copyright 2014-2015 Cédric Levieux, Jérémy Collot, ArmagNet
 
-	This file is part of OpenTweetBar.
+	This file is part of Parpaing.
 
-    OpenTweetBar is free software: you can redistribute it and/or modify
+    Parpaing is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    OpenTweetBar is distributed in the hope that it will be useful,
+    Parpaing is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with OpenTweetBar.  If not, see <http://www.gnu.org/licenses/>.
+    along with Parpaing.  If not, see <http://www.gnu.org/licenses/>.
 */
 include_once("header.php");
 
@@ -28,15 +28,15 @@ include_once("header.php");
 	<div class="col-md-6">
 		<div id="currentVersionPanel" class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">Version actuelle</h3>
+				<h3 class="panel-title"><?php echo lang("upgrader_actualVersion"); ?></h3>
 			</div>
 			<div class="panel-body">
 				<div class="clearfix">
-					<div class="col-md-3 text-right"><label>Version :</label></div>
+					<div class="col-md-3 text-right"><label><?php echo lang("upgrader_version_version"); ?> :</label></div>
 					<div class="col-md-9"><label class="versionLabel"></label></div>
 				</div class="clearfix">
 				<div>
-					<div class="col-md-3 text-right"><label>Description :</label></div>
+					<div class="col-md-3 text-right"><label><?php echo lang("upgrader_version_description"); ?> :</label></div>
 					<div class="col-md-9"><label class="descriptionLabel"></label></div>
 				</div>
 			</div>
@@ -45,15 +45,15 @@ include_once("header.php");
 	<div class="col-md-6">
 		<div id="lastVersionPanel" class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">Version disponible</h3>
+				<h3 class="panel-title"><?php echo lang("upgrader_newVersion"); ?></h3>
 			</div>
 			<div class="panel-body">
 				<div class="clearfix">
-					<div class="col-md-3 text-right"><label>Version :</label></div>
+					<div class="col-md-3 text-right"><label><?php echo lang("upgrader_version_version"); ?> :</label></div>
 					<div class="col-md-9"><label class="versionLabel"></label></div>
-				</div>
-				<div class="clearfix">
-					<div class="col-md-3 text-right"><label>Description :</label></div>
+				</div class="clearfix">
+				<div>
+					<div class="col-md-3 text-right"><label><?php echo lang("upgrader_version_description"); ?> :</label></div>
 					<div class="col-md-9"><label class="descriptionLabel"></label></div>
 				</div>
 			</div>
@@ -61,7 +61,7 @@ include_once("header.php");
 	</div>
 
 	<div id="upgradeDiv" class="col-md-12 text-center hidden">
-		<button class="btn btn-primary">Faire la mise à jour</button>
+		<button class="btn btn-primary"><?php echo lang("upgrader_startUpgrade_button"); ?></button>
 	</div>
 	<div id="upgradingDiv" class="col-md-12 text-center hidden">
 		<div class="progress">
@@ -71,7 +71,7 @@ include_once("header.php");
 		</div>
 	</div>
 	<div id="rebootDiv" class="col-md-12 text-center hidden">
-		<button class="btn btn-success">Relancer l'interface</button>
+		<button class="btn btn-success"><?php echo lang("upgrader_rebootInterface_button");?></button>
 	</div>
 </div>
 
