@@ -22,17 +22,12 @@ require_once("engine/utils/SessionUtils.php");
 
 if (!isset($_SERVER["HTTP_REFERER"])) exit();
 
-if ($config["wifi"]["isdummy"]) {
-	$content = "test";
-}
-else {
-	// Remove all previous files
-	array_map('unlink', glob("upgrade/{*,*/*,*/*/*,*/*/*/*}", GLOB_BRACE));
+// Remove all previous files
+array_map('unlink', glob("upgrade/{*,*/*,*/*/*,*/*/*/*}", GLOB_BRACE));
 
-	$zipPath = 'upgrade/upgrade.zip';
-	$content = file_get_contents($config["parpaing"]["zip_url"]);
-	file_put_contents($zipPath, $content);
-}
+$zipPath = 'upgrade/upgrade.zip';
+$content = file_get_contents($config["parpaing"]["zip_url"]);
+file_put_contents($zipPath, $content);
 
 echo json_encode(array("ok" => "ok", "md5" => md5($content), "sha1" => sha1($content)));
 ?>

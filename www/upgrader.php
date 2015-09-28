@@ -61,7 +61,7 @@ include_once("header.php");
 	</div>
 
 	<div id="upgradeDiv" class="col-md-12 text-center hidden">
-		<button class="btn btn-primary">Faire la mise-à-jour</button>
+		<button class="btn btn-primary">Faire la mise à jour</button>
 	</div>
 	<div id="upgradingDiv" class="col-md-12 text-center hidden">
 		<div class="progress">
@@ -143,7 +143,6 @@ function spreadUpgrade() {
 			$("#upgradingDiv .progress-bar").attr("aria-valuenow", "100");
 			$("#upgradingDiv .progress-bar").css({"width": "100%"});
 
-			// TODO show reboot interface
 			setTimeout(finishUpgrade, 2000);
 //			spreadUpgrade();
 		}
@@ -161,18 +160,20 @@ function finishUpgrade() {
 $(function() {
 	updateVersionPanel($("#currentVersionPanel"), version);
 
-//	$.post(versionUrl + "version.json", {}, function(data) {
-//		newVersion = data;
-		newVersion = {version: "0.0.1", description: "dummy"};
-
+	$.post(versionUrl + "version.json", {}, function(data) {
+		newVersion = data;
 		updateVersionPanel($("#lastVersionPanel"), newVersion);
 		testUpgradability(version, newVersion);
-//	}, "json");
+	}, "json");
 
 	$("#upgradeDiv button").click(function() {
 		$("#upgradingDiv").removeClass("hidden");
 		$("#upgradeDiv").addClass("hidden");
 		startUpgrade();
+	});
+
+	$("#rebootDiv button").click(function() {
+		window.location.reload(true);
 	});
 });
 

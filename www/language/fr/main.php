@@ -36,6 +36,7 @@ $lang["menu_vpn"] = "VPN";
 $lang["menu_tv"] = "TV";
 $lang["menu_telephone"] = "Téléphone";
 $lang["menu_wifi"] = "Wifi";
+$lang["menu_upgrader"] = "Mise à jour";
 
 $lang["menu_mypreferences"] = "Mes préférences";
 $lang["menu_myaccounts"] = "Mes comptes";
@@ -54,6 +55,7 @@ $lang["breadcrumb_vpn"] = "VPN";
 $lang["breadcrumb_tv"] = "TV";
 $lang["breadcrumb_telephone"] = "Telephone";
 $lang["breadcrumb_wifi"] = "Wifi";
+$lang["breadcrumb_upgrader"] = "Mise à jour";
 $lang["breadcrumb_about"] = "À Propos";
 
 $lang["index_guide"] = "Parpaing est l'interface de gestion simple de votre mini routeur VPN.";
