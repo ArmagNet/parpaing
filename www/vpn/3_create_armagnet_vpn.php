@@ -1,4 +1,4 @@
-<li role="presentation" class=""><a href="#create_armagnet_vpn" aria-controls="create_armagnet_vpn" role="tab" data-toggle="tab">Ouvrir compte ArmagNet</a></li>
+<li role="presentation" class=""><a href="#create_armagnet_vpn" aria-controls="create_armagnet_vpn" role="tab" data-toggle="tab"><?php echo lang("vpn_3_tab_legend");?></a></li>
 
 <div role="tabpanel" class="tab-pane fade" id="create_armagnet_vpn">
 
@@ -105,8 +105,7 @@
 
 					<!-- Button (Double) -->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="orderButton"></label>
-						<div class="col-md-8">
+						<div class="col-md-12 text-center">
 							<button id="orderButton" type="submit" name="orderButton" class="btn btn-primary">Commander</button>
 							<button id="resetButton" type="reset" name="resetButton" class="btn btn-inverse">Reset</button>
 						</div>

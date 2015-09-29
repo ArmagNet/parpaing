@@ -46,7 +46,15 @@ config wifi-iface
 
 		foreach($lines as $line) {
 			$explLine = explode(" ", trim($line), 3);
-			$value = $explLine[2];
+			if (count($explLine) < 2) {
+				continue;
+			}
+			else if (count($explLine) < 3) {
+				$value = "";
+			}
+			else {
+				$value = $explLine[2];
+			}
 
 			if (substr($value, 0, 1) == "'") {
 				$value = substr($value, 1, strlen($value) - 2);

@@ -1,5 +1,5 @@
 <?php /*
-	Copyright 2014 Cédric Levieux, Jérémy Collot, ArmagNet
+	Copyright 2014-2015 Cédric Levieux, Jérémy Collot, ArmagNet
 
 	This file is part of Parpaing.
 
@@ -17,7 +17,6 @@
     along with Parpaing.  If not, see <http://www.gnu.org/licenses/>.
 */
 session_start();
-//include_once("config/database.php");
 require_once 'config/config.php';
 include_once("language/language.php");
 require_once("engine/bo/UserBo.php");
@@ -45,11 +44,8 @@ else {
 		exit();
 	}
 }
-//$connection = openConnection();
 
 $language = SessionUtils::getLanguage($_SESSION);
-
-//$accountBo = AccountBo::newInstance($connection);
 
 ?>
 <!DOCTYPE html>
@@ -100,18 +96,13 @@ $language = SessionUtils::getLanguage($_SESSION);
 					<?php if ($isConnected) {?>
 					<li <?php if ($page == "vpn") echo 'class="active"'; ?>><a href="vpn.php"><?php echo lang("menu_vpn"); ?><?php if ($page == "vpn") echo ' <span class="sr-only">(current)</span>'; ?></a></li>
 					<li <?php if ($page == "wifi") echo 'class="active"'; ?>><a href="wifi.php"><?php echo lang("menu_wifi"); ?><?php if ($page == "wifi") echo ' <span class="sr-only">(current)</span>'; ?></a></li>
+					<?php 	if (false) {?>
 					<li <?php if ($page == "tv") echo 'class="active"'; ?>><a href="tv.php"><?php echo lang("menu_tv"); ?><?php if ($page == "tv") echo ' <span class="sr-only">(current)</span>'; ?></a></li>
 					<li <?php if ($page == "telephone") echo 'class="active"'; ?>><a href="telephone.php"><?php echo lang("menu_telephone"); ?><?php if ($page == "telephone") echo ' <span class="sr-only">(current)</span>'; ?></a></li>
+					<?php 	}?>
 					<?php }?>
 				</ul>
-				<!--
-				<form class="navbar-form navbar-left" role="search">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
-					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
-				-->
+
 				<ul class="nav navbar-nav navbar-right">
 
 					<?php if ($isConnected) {?>

@@ -1,4 +1,4 @@
-<li role="presentation" class="active" id="vpns_tab"><a href="#vpns" aria-controls="vpns" role="tab" data-toggle="tab">VPNs</a>
+<li role="presentation" class="active" id="vpns_tab"><a href="#vpns" aria-controls="vpns" role="tab" data-toggle="tab"><?php echo lang("vpn_0_tab_legend");?></a>
 </li>
 
 <div role="tabpanel" class="tab-pane fade in active" id="vpns">
@@ -8,21 +8,29 @@
 	</ul>
 
 	<div class="text-right">
-		<button type="button" id="vpns_activateButton" class="btn btn-success">Engager le VPN</button>
-		<button type="button" id="vpns_deactivateButton" class="btn btn-danger">Desengager le VPN</button>
-		<button type="button" id="vpns_addVpnButton" class="btn btn-primary">Ajouter un VPN</button>
+		<button type="button" id="vpns_activateButton" class="btn btn-success"><?php echo lang("vpn_engageVpn_button"); ?></button>
+		<button type="button" id="vpns_deactivateButton" class="btn btn-danger"><?php echo lang("vpn_disengageVpn_button"); ?></button>
+		<button type="button" id="vpns_addVpnButton" class="btn btn-primary"><?php echo lang("vpn_addVpn_button"); ?></button>
 	</div>
 
 	<templates>
 		<li aria-template-id="template-vpn-listitem" class="template list-group-item ${active}">
 			<span class="vpn-name">${label}</span>
 			<span class="pull-right">
-				<a href="#" data-configuration-id="${configurationId}" class="activate">Activer</a>
-				<a href="#" data-configuration-id="${configurationId}" class="modify">Modifier</a>
-				<a href="#" data-configuration-id="${configurationId}" class="delete">Supprimer</a>
+				<a href="#" data-configuration-id="${configurationId}" class="activate text-success"><span
+					title="<?php echo lang("common_activate"); ?>"
+					class="glyphicon glyphicon-ok" data-toggle="tooltip" data-placement="bottom"></span></a>
+				<a href="#" data-configuration-id="${configurationId}" class="modify"><span
+					title="<?php echo lang("common_modify"); ?>"
+					class="glyphicon glyphicon-cog" data-toggle="tooltip" data-placement="bottom"></span></a>
+				<a href="#" data-configuration-id="${configurationId}" class="delete text-danger"><span
+					title="<?php echo lang("common_delete"); ?>"
+					class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="bottom"></span></a>
 			</span>
 		</li>
-	</templates>
+		<span aria-template-id="template-vpn-activate" class="template"><?php echo lang("vpn_activateVpn_question"); ?></span>
+		<span aria-template-id="template-vpn-delete" class="template"><?php echo lang("vpn_deleteVpn_question"); ?></span>
+</templates>
 
 <script type="text/javascript">
 
@@ -96,7 +104,10 @@ function updateAvailableConfigurations(configurations) {
 		}
 		var configurationId = $(this).data("configuration-id");
 		bootbox.setLocale("fr");
-		bootbox.confirm("Activer le VPN \"" + $(this).parents("li").find(".vpn-name").text() + "\" ?", function(result) {
+		var question = $("*[aria-template-id=template-vpn-activate]").template("use", {
+					data: {	"vpnLabel" : $(this).parents("li").find(".vpn-name").text()}
+			}).text();
+		bootbox.confirm(question, function(result) {
 			if (result) {
 				activateVpn(configurationId);
 			}
@@ -106,7 +117,10 @@ function updateAvailableConfigurations(configurations) {
 	list.find("a.delete").click(function() {
 		var configurationId = $(this).data("configuration-id");
 		bootbox.setLocale("fr");
-		bootbox.confirm("Supprimer le VPN \"" + $(this).parents("li").find(".vpn-name").text() + "\" ?", function(result) {
+		var question = $("*[aria-template-id=template-vpn-delete]").template("use", {
+			data: {	"vpnLabel" : $(this).parents("li").find(".vpn-name").text()}
+		}).text();
+		bootbox.confirm(question, function(result) {
 			if (result) {
 				deleteVpn(configurationId);
 			}
@@ -121,6 +135,7 @@ function updateAvailableConfigurations(configurations) {
 
 $(function() {
 	$("#vpns_addVpnButton").click(function() {
+		$("#raw_vpn #resetButton").click();
 		$("#vpnTabs #raw_vpn_tab a").tab("show");
 	});
 
@@ -136,8 +151,6 @@ $(function() {
 			$("#vpns_activateButton").removeClass("disabled");
 		});
 	});
-
-	$("templates *.template").template();
 });
 </script>
 

@@ -1,4 +1,4 @@
-<li role="presentation" id="raw_vpn_tab" class=""><a href="#raw_vpn" aria-controls="raw_vpn" role="tab" data-toggle="tab">Ajouter un VPN</a>
+<li role="presentation" id="raw_vpn_tab" class=""><a href="#raw_vpn" aria-controls="raw_vpn" role="tab" data-toggle="tab"><?php echo lang("vpn_1_tab_legend");?></a>
 </li>
 
 <div role="tabpanel" class="tab-pane fade" id="raw_vpn">
@@ -121,8 +121,7 @@
 
 					<!-- Button (Double) -->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="commitVpnButton"></label>
-						<div class="col-md-8">
+						<div class="col-md-12 text-center">
 							<button id="commitVpnButton" type="submit" name="commitVpnButton" class="btn btn-primary">Ajouter</button>
 							<button id="resetButton" type="reset" name="resetButton" class="btn btn-inverse">Reset</button>
 						</div>
@@ -189,6 +188,10 @@
 			event.stopPropagation();
 
 			commitVpn();
+		});
+
+		$("#raw_vpn_tab a").click(function(event) {
+			$("#raw_vpn #resetButton").click();
 		});
 
 	});

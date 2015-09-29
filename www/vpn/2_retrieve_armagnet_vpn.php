@@ -1,4 +1,4 @@
-<li role="presentation" class=""><a href="#retrieve_armagnet_vpn" aria-controls="retrieve_armagnet_vpn" role="tab" data-toggle="tab">Configurations ArmagNet</a></li>
+<li role="presentation" class=""><a href="#retrieve_armagnet_vpn" aria-controls="retrieve_armagnet_vpn" role="tab" data-toggle="tab"><?php echo lang("vpn_2_tab_legend");?></a></li>
 
 <div role="tabpanel" class="tab-pane fade" id="retrieve_armagnet_vpn">
 	</br>
@@ -29,8 +29,7 @@
 
 					<!-- Button (Double) -->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="addButton"></label>
-						<div class="col-md-8">
+						<div class="col-md-12 text-center">
 							<button id="retrieveArmagnetVpnButton" type="submit" name="retrieveArmagnetVpnButton" class="btn btn-primary">Connecter</button>
 							<button id="resetButton" type="reset" name="resetButton" class="btn btn-inverse">Reset</button>
 						</div>
