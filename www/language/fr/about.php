@@ -1,5 +1,5 @@
 <?php /*
-	Copyright 2014 Cédric Levieux, Jérémy Collot, ArmagNet
+	Copyright 2014-2015 Cédric Levieux, Jérémy Collot, ArmagNet
 
 	This file is part of Parpaing.
 
@@ -16,20 +16,12 @@
     You should have received a copy of the GNU General Public License
     along with Parpaing.  If not, see <http://www.gnu.org/licenses/>.
 */
-$lang["about_what_s_Parpaing_legend"] = "Qu'est ce qu'Parpaing ?";
-$lang["about_what_s_Parpaing_content"] = "Parpaing est une application web permettant la proposition de tweet pour
-un compte Twitter de type communautaire, sa validation par sa communauté et donc une prise de
-responsabilité globale et réfléchie de la communication.<br >
-<br />
-Il permet de gérer des listes d'utilisateurs, chacune avec un score lors de la validation permettant
-de donner plus ou moins de poids à une personne pour la validation
-d'un tweet (un porte parole peut avoir plus de poids qu'un membre d'une association, et il pourrait
-falloir par exemple, 3 membres pour faire une validation ou 1 membre et 1 porte parole).<br />
-<br />
-L'outil permet aussi d'éviter de donner à tout le monde les accès au compte Twitter géré et la
-révocation des droits d'une personne n'implique plus le changement du mot de passe du compte
-twitter, et enfin de savoir qui a proposé quoi et qui a validé, permettant une facilitation de votre
-rôle de communicant et d'éditeur.";
+$lang["about_what_s_parpaing_legend"] = "Qu'est ce que Parpaing ?";
+$lang["about_what_s_parpaing_content"] = "Parpaing est une application web permettant un pilotage simple de routeurs
+de préférence en OpenHardware sous OpenWrt.<br/>
+<br/>
+Son but premier est de permettre une activation simple de VPN, de parametrer votre wifi et d'avoir ainsi un réseau
+transportable où que vous branchiez votre routeur sous Parpaing.";
 
 $lang["about_help_us_legend"] = "Nous aider";
 $lang["about_help_us_content"] = "Parpaing est édité par l'association, de loi 1901, <a href=\"https://www.armagnet.fr/\">ArmagNet</a>. Vous pouvez
@@ -53,8 +45,8 @@ Pour cela vous pouvez nous envoyez des sous sous forme de chèque à l'adresse s
 ou nous <a href=\"#contactus\">contacter</a> pour nous faire un virement.";
 
 $lang["about_need_help_legend"] = "Besoin d'aide ?";
-$lang["about_need_help_content"] = "Vous voulez une installation propre d'Parpaing dans votre infrastructure ?<br />
-Vous avez besoin d'une fonctionnalité précise qui manque à Parpaing ?<br />
+$lang["about_need_help_content"] = "Vous voulez une installation propre de Parpaing dans votre infrastructure ?<br />
+Vous avez besoin d'une fonctionnalité précise qui manque au Parpaing ?<br />
 <br />
 Pas de soucis, <a href=\"#contactus\">contactez-nous</a> pour nous en parler et au besoin
 nous vous ferons un devis sur mesure.<br />
@@ -71,6 +63,5 @@ $lang["about_contact_us_content"] = "Vous avez besoin de nous parler ?<br />
 Utilisez l'un de nos moyens de communication suivants :";
 
 $lang["about_releases_legend"] = "Releases";
-$lang["about_releases_content"] = "Voici les différentes releases de notre application web pour que vous puissiez
-l'installer vous même :";
+$lang["about_releases_content"] = "Où trouver Parpaing pour que vous puissiez l'installer vous même :";
 ?>

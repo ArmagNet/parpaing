@@ -1,5 +1,5 @@
 <?php /*
-	Copyright 2014 Cédric Levieux, Jérémy Collot, ArmagNet
+	Copyright 2014-2015 Cédric Levieux, Jérémy Collot, ArmagNet
 
 	This file is part of Parpaing.
 
@@ -17,18 +17,12 @@
     along with Parpaing.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-$lang["about_what_s_Parpaing_legend"] = "What is Parpaing ?";
-$lang["about_what_s_Parpaing_content"] = "Parpaing is a web application allowing the proposal of a tweet for a
-twitter account community type, its validation by its community and therefore taking a comprehensive
-and thoughtful responsibility for communication.<br />
-<br />
-It allows to handle lists of users, each with a score during validation to give more or less weight to a person for
-the validation of a tweet (a spokesperson can have more weight than a member of an association, and it may
-take, for example, 3 members for a validation or 1 member and 1 spokesperson).<br />
-<br />
-The tool also allows to avoid giving everyone access to the managed Twitter account and termination of the rights
-of a person no longer involves changing the password of the Twitter account, and finally know who proposed what
-and who validated, allowing facilitating your role as a communicator and an editor.";
+$lang["about_what_s_parpaing_legend"] = "What is Parpaing ?";
+$lang["about_what_s_parpaing_content"] = "Parpaing is a web application allowing a simple handling of an,
+preferabily OpenHardware, routeur under OpenWrt.<br/>
+<br/>
+It's first purpose is allowing a simple VPN activation, to parameter your wifi, and by the way having a transportable
+network whereever you switch on your Parpaing routeur.";
 
 $lang["about_help_us_legend"] = "Help us";
 $lang["about_help_us_content"] = "Parpaing is published by the 1901 law association <a href=\"https://www.armagnet.fr/\">ArmagNet</a>. You can help us by donations so that we can:
@@ -66,5 +60,5 @@ $lang["about_contact_us_content"] = "You need to speak to us ?<br />
 Use one of our following means of communication :";
 
 $lang["about_releases_legend"] = "Releases";
-$lang["about_releases_content"] = "Here are the releases of our web application that you can install yourself :";
+$lang["about_releases_content"] = "Where do you find Parpaing that you can install yourself :";
 ?>
