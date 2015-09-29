@@ -29,4 +29,20 @@ $lang["vpn_addVpn_button"] = "Ajouter un VPN";
 $lang["vpn_activateVpn_question"] = 'Activer le VPN "${vpnLabel}" ?';
 $lang["vpn_deleteVpn_question"] = 'Supprimer le VPN "${vpnLabel}" ?';
 
+$lang["vpn_addvpn_panel"] = "Ajouter une configuration OpenVPN";
+$lang["vpn_addvpn_label"] = "Libellé";
+$lang["vpn_addvpn_label_placeholder"] = "Libellé de la configuration VPN";
+$lang["vpn_addvpn_key"] = "key";
+$lang["vpn_addvpn_cert"] = "cert";
+$lang["vpn_addvpn_cacert"] = "cacert";
+$lang["vpn_addvpn_dev"] = "dev";
+$lang["vpn_addvpn_proto"] = "proto";
+$lang["vpn_addvpn_cipher"] = "cipher";
+$lang["vpn_addvpn_complzo"] = "comp-lzo";
+$lang["vpn_addvpn_remoteip"] = "remote ip";
+$lang["vpn_addvpn_remoteip_placeholder"] = "Ip du serveur VPN";
+$lang["vpn_addvpn_remoteport"] = "remote port";
+$lang["vpn_addvpn_remoteport_placeholder"] = "Port du serveur VPN";
+$lang["vpn_addvpn_remotecerttls"] = "remote cert tls";
+$lang["vpn_addvpn_remotecerttls_placeholder"] = "Nom du certificat du serveur";
 ?>

@@ -6,7 +6,7 @@
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">Ajouter une configuration OpenVPN</h3>
+			<h3 class="panel-title"><?php echo lang("vpn_addvpn_panel");?></h3>
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal" id="commitVpnForm">
@@ -17,19 +17,19 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="labelInput">Libellé</label>
+						<label class="col-md-2 control-label" for="labelInput"><?php echo lang("vpn_addvpn_label");?></label>
 						<div class="col-md-10">
-							<input id="labelInput" name="labelInput" type="text" placeholder="nom de la configuration" class="form-control input-md" required="">
+							<input id="labelInput" name="labelInput" type="text" placeholder="<?php echo lang("vpn_addvpn_label_placeholder");?>" class="form-control input-md" required="">
 						</div>
 					</div>
 
 					<!-- File Button -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="keyButton">Key</label>
+						<label class="col-md-2 control-label" for="keyButton"><?php echo lang("vpn_addvpn_key");?></label>
 						<div class="col-md-4">
 							<input id="keyButton" name="keyButton" class="input-file" type="file">
 						</div>
-						<label class="col-md-2 control-label" for="certButton">Cert</label>
+						<label class="col-md-2 control-label" for="certButton"><?php echo lang("vpn_addvpn_cert");?></label>
 						<div class="col-md-4">
 							<input id="certButton" name="certButton" class="input-file" type="file">
 						</div>
@@ -37,7 +37,7 @@
 
 					<!-- File Button -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="caButton">CA</label>
+						<label class="col-md-2 control-label" for="caButton"><?php echo lang("vpn_addvpn_cacert");?></label>
 						<div class="col-md-4">
 							<input id="caButton" name="caButton" class="input-file" type="file">
 						</div>
@@ -55,14 +55,14 @@
 
 					<!-- Select -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="devInput">dev</label>
+						<label class="col-md-2 control-label" for="devInput"><?php echo lang("vpn_addvpn_dev");?></label>
 						<div class="col-md-4">
 							<select id="devInput" name="devInput" class="form-control">
 								<option value="tun">tun</option>
 								<option value="tap">tap</option>
 							</select>
 						</div>
-						<label class="col-md-2 control-label" for="protoInput">proto</label>
+						<label class="col-md-2 control-label" for="protoInput"><?php echo lang("vpn_addvpn_proto");?></label>
 						<div class="col-md-4">
 							<select id="protoInput" name="protoInput" class="form-control">
 								<option value="udp">udp</option>
@@ -73,7 +73,7 @@
 
 					<!-- Select -->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="cipherInput">cipher</label>
+						<label class="col-md-2 control-label" for="cipherInput"><?php echo lang("vpn_addvpn_cipher");?></label>
 						<div class="col-md-4">
 							<select id="cipherInput" name="cipherInput" class="form-control">
 								<option value="BF-CBC">BF-CBC</option>
@@ -89,7 +89,7 @@
 								<option value="AES-256-CBC">AES-256-CBC</option>
 							</select>
 						</div>
-						<label class="col-md-2 control-label" for="compLzoInput">comp-lzo</label>
+						<label class="col-md-2 control-label" for="compLzoInput"><?php echo lang("vpn_addvpn_complzo");?></label>
 						<div class="col-md-4">
 							<select id="compLzoInput" name="compLzoInput" class="form-control">
 								<option value="adaptive">adaptive</option>
@@ -101,29 +101,29 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="remoteIpInput">remote ip</label>
+						<label class="col-md-2 control-label" for="remoteIpInput"><?php echo lang("vpn_addvpn_remoteip");?></label>
 						<div class="col-md-4">
-							<input id="remoteIpInput" name="remoteIpInput" type="text" placeholder="ip du server vpn" class="form-control input-md" required="">
+							<input id="remoteIpInput" name="remoteIpInput" type="text" placeholder="<?php echo lang("vpn_addvpn_remoteip_placeholder");?>" class="form-control input-md" required="">
 						</div>
-						<label class="col-md-2 control-label" for="remoteIpInput">remote port</label>
+						<label class="col-md-2 control-label" for="remoteIpInput"><?php echo lang("vpn_addvpn_remoteport");?></label>
 						<div class="col-md-4">
-							<input id="remotePortInput" name="remotePortInput" type="text" placeholder="port du server vpn" value="1194" class="form-control input-md" required="">
+							<input id="remotePortInput" name="remotePortInput" type="text" placeholder="<?php echo lang("vpn_addvpn_remoteport_placeholder");?>" value="1194" class="form-control input-md" required="">
 						</div>
 					</div>
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="remoteCertTlsInput">remote_cert_tls</label>
+						<label class="col-md-2 control-label" for="remoteCertTlsInput"><?php echo lang("vpn_addvpn_remotecerttls");?></label>
 						<div class="col-md-4">
-							<input id="remoteCertTlsInput" name="remoteCertTlsInput" type="text" placeholder="nom du certificat" value="server" class="form-control input-md" required="">
+							<input id="remoteCertTlsInput" name="remoteCertTlsInput" type="text" placeholder="<?php echo lang("vpn_addvpn_remotecerttls_placeholder");?>" value="server" class="form-control input-md" required="">
 						</div>
 					</div>
 
 					<!-- Button (Double) -->
 					<div class="form-group">
 						<div class="col-md-12 text-center">
-							<button id="commitVpnButton" type="submit" name="commitVpnButton" class="btn btn-primary">Ajouter</button>
-							<button id="resetButton" type="reset" name="resetButton" class="btn btn-inverse">Reset</button>
+							<button id="commitVpnButton" type="submit" name="commitVpnButton" class="btn btn-primary"><?php echo lang("common_add");?></button>
+							<button id="resetButton" type="reset" name="resetButton" class="btn btn-inverse"><?php echo lang("common_reset");?></button>
 						</div>
 					</div>
 
