@@ -5,7 +5,7 @@
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">Récuperation des configurations OpenVPN de votre compte ArmagNet</h3>
+			<h3 class="panel-title"><?php echo lang("vpn_retrieveArmagnet_panel");?></h3>
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal" id="retrieveArmagnetVpnForm">
@@ -13,25 +13,25 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="loginInput">Identifiant</label>
+						<label class="col-md-4 control-label" for="loginInput"><?php echo lang("vpn_retrieveArmagnet_login"); ?></label>
 						<div class="col-md-5">
-							<input id="loginInput" name="loginInput" type="text" placeholder="votre login" class="form-control input-md" required="">
+							<input id="loginInput" name="loginInput" type="text" placeholder="<?php echo lang("vpn_retrieveArmagnet_login_placeholder"); ?>" class="form-control input-md" required="">
 						</div>
 					</div>
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="passwordInput">Mot de passe</label>
+						<label class="col-md-4 control-label" for="passwordInput"><?php echo lang("vpn_retrieveArmagnet_password"); ?></label>
 						<div class="col-md-5">
-							<input id="passwordInput" name="passwordInput" type="password" placeholder="votre mot de passe" class="form-control input-md" required="">
+							<input id="passwordInput" name="passwordInput" type="password" placeholder="<?php echo lang("vpn_retrieveArmagnet_password_placeholder"); ?>" class="form-control input-md" required="">
 						</div>
 					</div>
 
 					<!-- Button (Double) -->
 					<div class="form-group">
 						<div class="col-md-12 text-center">
-							<button id="retrieveArmagnetVpnButton" type="submit" name="retrieveArmagnetVpnButton" class="btn btn-primary">Connecter</button>
-							<button id="resetButton" type="reset" name="resetButton" class="btn btn-inverse">Reset</button>
+							<button id="retrieveArmagnetVpnButton" type="submit" name="retrieveArmagnetVpnButton" class="btn btn-primary"><?php echo lang("common_connect");?></button>
+							<button id="resetButton" type="reset" name="resetButton" class="btn btn-inverse"><?php echo lang("common_reset");?></button>
 						</div>
 					</div>
 
@@ -43,7 +43,7 @@
 
 	<div class="panel panel-default hidden" id="configurationsPanel">
 		<div class="panel-heading">
-			<h3 class="panel-title">Configurations à ajouter</h3>
+			<h3 class="panel-title"><?php echo lang("vpn_retrieveArmagnetConfiguration_panel"); ?></h3>
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal" id="commitArmagnetVpnsForm">
@@ -57,7 +57,7 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="commitArmagnetVpnsButton"></label>
 						<div class="col-md-8">
-							<button id="commitArmagnetVpnsButton" type="submit" name="commitArmagnetVpnsButton" class="btn btn-success">Ajouter</button>
+							<button id="commitArmagnetVpnsButton" type="submit" name="commitArmagnetVpnsButton" class="btn btn-success"><?php echo lang("common_add");?></button>
 						</div>
 					</div>
 

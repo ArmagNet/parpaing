@@ -27,6 +27,7 @@ $lang["common_activate"] = "Activer";
 $lang["common_add"] = "Ajouter";
 $lang["common_modify"] = "Modifier";
 $lang["common_reset"] = "Reset";
+$lang["common_connect"] = "Connecter";
 
 $lang["language_fr"] = "Français";
 $lang["language_en"] = "Anglais";

@@ -45,4 +45,12 @@ $lang["vpn_addvpn_remoteport"] = "remote port";
 $lang["vpn_addvpn_remoteport_placeholder"] = "Port du serveur VPN";
 $lang["vpn_addvpn_remotecerttls"] = "remote cert tls";
 $lang["vpn_addvpn_remotecerttls_placeholder"] = "Nom du certificat du serveur";
+
+$lang["vpn_retrieveArmagnet_panel"] = "Récuperation des configurations OpenVPN de votre compte ArmagNet";
+$lang["vpn_retrieveArmagnetConfiguration_panel"] = "Configurations à ajouter";
+$lang["vpn_retrieveArmagnet_login"] = "Identifiant";
+$lang["vpn_retrieveArmagnet_login_placeholder"] = "Votre identifiant Armagnet";
+$lang["vpn_retrieveArmagnet_password"] = "Mot de passe";
+$lang["vpn_retrieveArmagnet_password_placeholder"] = "Votre mot de passe Armagnet";
+
 ?>
