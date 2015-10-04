@@ -6,7 +6,7 @@ set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
 require_once 'config/config.php';
 require_once 'vpn/api_client.php';
-require_once 'engine/bo/VpnBo.php';
+require_once 'engine/bo/VpnBo.'.$config["parpaing"]["dialect"].'.php';
 require_once 'engine/bo/VpnConfigurationBo.php';
 
 $vpnConfigurationBo = VpnConfigurationBo::newInstance($config);
