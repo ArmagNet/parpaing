@@ -17,7 +17,7 @@
     along with OpenTweetBar.  If not, see <http://www.gnu.org/licenses/>.
 */
 include_once("header.php");
-require_once 'engine/bo/WifiBo.php';
+require_once 'engine/bo/WifiBo.'.$config["parpaing"]["dialect"].'.php';
 
 $wifiBo = WifiBo::newInstance($config);
 $info = $wifiBo->getInfo();
