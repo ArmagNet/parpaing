@@ -20,6 +20,9 @@ class WifiBo {
 		$lines = explode("\n", $info);
 		$infos = array();
 
+		$infos["disabled"] = 0;
+		$infos["encryption"] = "none";
+
 		foreach($lines as $line) {
 			$explLine = explode("=", trim($line), 2);
 			if (count($explLine) < 2) {
@@ -40,7 +43,7 @@ class WifiBo {
 					$infos["key"] = $value;
 					break;
 				case "wpa_key_mgmt":
-					$infos["encryption"] = $value;
+					$infos["wpa_key_mgmt"] = $value;
 					break;
 // 				case "disabled":
 // 					if ($wifiDevice) {

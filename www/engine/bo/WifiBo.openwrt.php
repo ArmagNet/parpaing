@@ -44,6 +44,8 @@ config wifi-iface
 		$lines = explode("\n", $info);
 		$infos = array();
 
+		$infos["disabled"] = 0;
+
 		foreach($lines as $line) {
 			$explLine = explode(" ", trim($line), 3);
 			if (count($explLine) < 2) {
