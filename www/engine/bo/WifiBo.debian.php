@@ -15,77 +15,38 @@ class WifiBo {
 	}
 
 	function getInfo() {
-		if (!$this->config || !$this->config["wifi"]["isdummy"]) {
-			$info = WifiBo::sendCommand("cat /etc/config/wireless");
-		}
-		else {
-			$info = "
-config wifi-device 'radio0'
-	option type 'mac80211'
-	option hwmode '11ng'
-	option path 'platform/ar933x_wmac'
-	option htmode 'HT20'
-	option disabled '0'
-	option channel 'auto'
-	option txpower '18'
-	option country 'US'
-
-config wifi-iface
-	option device 'radio0'
-	option mode 'ap'
-	option network 'lan'
-	option encryption 'psk-mixed'
-	option disabled '0'
-	option ssid 'LaBriqueArmagnet'
-	option key 'archange'
-		";
-		}
+		$info = WifiBo::sendCommand("cat /etc/hostapd/hostapd.conf");
 
 		$lines = explode("\n", $info);
 		$infos = array();
 
 		foreach($lines as $line) {
-			$explLine = explode(" ", trim($line), 3);
+			$explLine = explode("=", trim($line), 2);
 			if (count($explLine) < 2) {
 				continue;
 			}
-			else if (count($explLine) < 3) {
-				$value = "";
-			}
 			else {
-				$value = $explLine[2];
+				$value = $explLine[1];
 			}
 
-			if (substr($value, 0, 1) == "'") {
-				$value = substr($value, 1, strlen($value) - 2);
-			}
-
-			switch($explLine[1]) {
-				case "wifi-device":
-					$wifiDevice = $value;
-					$wifiIface = "";
-					break;
-				case "wifi-iface":
-					$wifiDevice = "";
-					$wifiIface = $value;
-					break;
+			switch($explLine[0]) {
 				case "channel":
 					$infos["channel"] = $value;
 					break;
 				case "ssid":
 					$infos["ssid"] = $value;
 					break;
-				case "key":
+				case "wpa_passphrase":
 					$infos["key"] = $value;
 					break;
-				case "encryption":
+				case "wpa_key_mgmt":
 					$infos["encryption"] = $value;
 					break;
-				case "disabled":
-					if ($wifiDevice) {
-						$infos["disabled"] = $value;
-					}
-					break;
+// 				case "disabled":
+// 					if ($wifiDevice) {
+// 						$infos["disabled"] = $value;
+// 					}
+// 					break;
 			}
 		}
 
