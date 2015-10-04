@@ -10,11 +10,6 @@ class VpnBo {
 		return new VpnBo($config);
 	}
 
-	function _getVpnPath() {
-		$path = "/var/www/html/parpaing/";
-		return "$path/vpn_configurations.json";
-	}
-
 	function setConfiguration($configuration) {
 		file_put_contents($this->config["openvpn"]["config"] . "_cacert.crt", $configuration["cacrt"]);
 		file_put_contents($this->config["openvpn"]["config"] . "_cert.crt", $configuration["crt"]);
