@@ -20,7 +20,7 @@ class WifiBo {
 		$lines = explode("\n", $info);
 		$infos = array();
 
-		$infos["disabled"] = 0;
+		$infos["disabled"] = WifiBo::sendCommand("/etc/init.d/hostapd status");
 		$infos["encryption"] = "none";
 
 		foreach($lines as $line) {
@@ -57,50 +57,80 @@ class WifiBo {
 	}
 
 	function activate() {
-		WifiBo::sendCommand("uci set wireless.@wifi-device[0].disabled=0; uci commit wireless; wifi");
+//		WifiBo::sendCommand("uci set wireless.@wifi-device[0].disabled=0; uci commit wireless; wifi");
+		WifiBo::sendCommand("/etc/init.d/hostapd start");
 	}
 
 	function deactivate() {
-		WifiBo::sendCommand("uci set wireless.@wifi-device[0].disabled=1; uci commit wireless; wifi");
+//		WifiBo::sendCommand("uci set wireless.@wifi-device[0].disabled=1; uci commit wireless; wifi");
+		WifiBo::sendCommand("/etc/init.d/hostapd stop");
 	}
 
 	function setConfiguration($configuration) {
 		$updated = false;
+
+		$oldConfiguration = $this->getInfo();
+
+		$hostapd = "";
+
 		if (isset($configuration["ssid"])) {
-			WifiBo::sendCommand("uci set wireless.@wifi-iface[0].ssid='" . $configuration["ssid"] . "';");
+			$hostapd += "ssid=" . $configuration["ssid"] . "\n";
 			$updated = true;
 		}
-		if (isset($configuration["ssid"])) {
-			WifiBo::sendCommand("uci set wireless.@wifi-device[0].channel='" . $configuration["channel"] . "';");
-			$updated = true;
-		}
-		if (isset($configuration["ssid"])) {
-			WifiBo::sendCommand("uci set wireless.@wifi-iface[0].key='" . $configuration["key"] . "';");
-			$updated = true;
-		}
-		if (isset($configuration["encryption"])) {
-			WifiBo::sendCommand("uci set wireless.@wifi-iface[0].encryption='" . $configuration["encryption"] . "';");
-			$updated = true;
+		else {
+			$hostapd += "ssid=" . $oldConfiguration["ssid"] . "\n";
 		}
 
+		if (isset($configuration["channel"])) {
+			$hostapd += "channel=" . $configuration["channel"] . "\n";
+			$updated = true;
+		}
+		else {
+			$hostapd += "channel=" . $oldConfiguration["channel"] . "\n";
+		}
+
+		// TODO
+// 		if (isset($configuration["ssid"])) {
+// 			WifiBo::sendCommand("uci set wireless.@wifi-iface[0].key='" . $configuration["key"] . "';");
+// 			$updated = true;
+// 		}
+// 		if (isset($configuration["encryption"])) {
+// 			WifiBo::sendCommand("uci set wireless.@wifi-iface[0].encryption='" . $configuration["encryption"] . "';");
+// 			$updated = true;
+// 		}
+
+		$hostapd += "interface=wlan0
+bridge=br0
+driver=rtl871xdrv
+country_code=FR
+ctrl_interface=/var/run/hostapd
+hw_mode=g
+beacon_int=100
+macaddr_acl=0
+wmm_enabled=1
+ieee80211n=1
+ht_capab=[SHORT-GI-20][SHORT-GI-40][HT40+]
+";
+
 		if ($updated) {
-			WifiBo::sendCommand("uci commit wireless; wifi");
+			file_put_contents("/etc/hostapd/hostapd.conf", $hostapd);
+			WifiBo::sendCommand("/etc/init.d/hostapd restart");
 		}
 
 		return $updated;
 	}
 
-	function setSsid($ssid) {
-		WifiBo::sendCommand("uci set wireless.@wifi-iface[0].ssid='$ssid'; uci commit wireless; wifi");
-	}
+// 	function setSsid($ssid) {
+// 		WifiBo::sendCommand("uci set wireless.@wifi-iface[0].ssid='$ssid'; uci commit wireless; wifi");
+// 	}
 
-	function setChannel($channel) {
-		WifiBo::sendCommand("uci set wireless.@wifi-device[0].channel='$channel'; uci commit wireless; wifi");
-	}
+// 	function setChannel($channel) {
+// 		WifiBo::sendCommand("uci set wireless.@wifi-device[0].channel='$channel'; uci commit wireless; wifi");
+// 	}
 
-	function setKey($key) {
-		WifiBo::sendCommand("uci set wireless.@wifi-iface[0].key='$key'; uci commit wireless; wifi");
-	}
+// 	function setKey($key) {
+// 		WifiBo::sendCommand("uci set wireless.@wifi-iface[0].key='$key'; uci commit wireless; wifi");
+// 	}
 
 	static function sendCommand($cmd) {
 		// TODO add security
