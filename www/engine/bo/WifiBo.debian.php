@@ -67,10 +67,10 @@ class WifiBo {
 		}
 
 		if (isset($infos["key"]) && $infos["key"] && isset($infos["wpa"])) {
-			if ($infos["wpa"] == 0) {
+			if ($infos["wpa"] == 1) {
 				$infos["encryption"] = "psk";
 			}
-			else if ($infos["wpa"] == 1) {
+			else if ($infos["wpa"] == 2) {
 				$infos["encryption"] = "psk2";
 				if ($infos["wpa_pairwise"] == "TKIP") {
 					$infos["encryption"] = "psk-mixed";
