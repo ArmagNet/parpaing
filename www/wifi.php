@@ -84,8 +84,8 @@ $info = $wifiBo->getInfo();
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="commitButton"></label>
 						<div class="col-md-8">
-							<button id="enableButton" type="submit" name="enableButton" class="btn btn-success disabled">Active</button>
-							<button id="disableButton" type="submit" name="disableButton" class="btn btn-danger disabled">Désactiver</button>
+							<button id="enableButton" type="submit" name="enableButton" class="btn btn-success disabled"><?php echo lang("common_activate"); ?></button>
+							<button id="disableButton" type="submit" name="disableButton" class="btn btn-danger disabled"><?php echo lang("common_deactivate"); ?></button>
 							<button id="commitButton" type="submit" name="commitButton" class="btn btn-primary disabled">Mettre à jour</button>
 						</div>
 					</div>

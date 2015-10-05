@@ -24,6 +24,7 @@ $lang["datetime_format"] = "the {date} at {time}";
 $lang["common_validate"] = "Validate";
 $lang["common_delete"] = "Delete";
 $lang["common_activate"] = "Activate";
+$lang["common_deactivate"] = "Deactivate";
 $lang["common_add"] = "Add";
 $lang["common_modify"] = "Modify";
 $lang["common_reset"] = "Reset";
