@@ -99,30 +99,30 @@ class WifiBo {
 		$hostapd = "";
 
 		if (isset($configuration["ssid"])) {
-			$hostapd += "ssid=" . $configuration["ssid"] . "\n";
+			$hostapd .= "ssid=" . $configuration["ssid"] . "\n";
 			$updated = true;
 		}
 		else {
-			$hostapd += "ssid=" . $oldConfiguration["ssid"] . "\n";
+			$hostapd .= "ssid=" . $oldConfiguration["ssid"] . "\n";
 		}
 
 		if (isset($configuration["channel"])) {
-			$hostapd += "channel=" . $configuration["channel"] . "\n";
+			$hostapd .= "channel=" . $configuration["channel"] . "\n";
 			$updated = true;
 		}
 		else {
-			$hostapd += "channel=" . $oldConfiguration["channel"] . "\n";
+			$hostapd .= "channel=" . $oldConfiguration["channel"] . "\n";
 		}
 
 		if ($configuration["encryption"] == "psk") {
-			$hostapd += "
+			$hostapd .= "
 wpa_passphrase=" . $configuration["key"]  . "
 wpa=0
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP";
 		}
 		else if ($configuration["encryption"] == "psk2") {
-			$hostapd += "
+			$hostapd .= "
 wpa_passphrase=" . $configuration["key"]  . "
 wpa=1
 wpa_key_mgmt=WPA-PSK
@@ -130,7 +130,7 @@ wpa_pairwise=CCMP
 rsn_pairwise=CCMP";
 		}
 		else if ($configuration["encryption"] == "psk-mixed") {
-			$hostapd += "
+			$hostapd .= "
 wpa_passphrase=" . $configuration["key"]  . "
 wpa=1
 wpa_key_mgmt=WPA-PSK
@@ -138,7 +138,7 @@ wpa_pairwise=TKIP
 rsn_pairwise=CCMP";
 		}
 
-		$hostapd += "
+		$hostapd .= "
 interface=wlan0
 bridge=br0
 driver=rtl871xdrv
