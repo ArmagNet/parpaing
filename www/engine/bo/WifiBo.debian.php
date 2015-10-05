@@ -117,14 +117,14 @@ class WifiBo {
 		if ($configuration["encryption"] == "psk") {
 			$hostapd .= "
 wpa_passphrase=" . $configuration["key"]  . "
-wpa=0
+wpa=1
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP";
 		}
 		else if ($configuration["encryption"] == "psk2") {
 			$hostapd .= "
 wpa_passphrase=" . $configuration["key"]  . "
-wpa=1
+wpa=2
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=CCMP
 rsn_pairwise=CCMP";
@@ -132,7 +132,7 @@ rsn_pairwise=CCMP";
 		else if ($configuration["encryption"] == "psk-mixed") {
 			$hostapd .= "
 wpa_passphrase=" . $configuration["key"]  . "
-wpa=1
+wpa=2
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP";
@@ -153,7 +153,7 @@ ht_capab=[SHORT-GI-20][SHORT-GI-40][HT40+]
 ";
 
 		if ($updated) {
-			file_put_contents($this->config["incron"]["path"] . "/incron/hostapd.conf", $hostapd);
+			file_put_contents($this->config["incron"]["path"] . "/hostapd.conf", $hostapd);
 //			WifiBo::sendCommand("/etc/init.d/hostapd restart");
 			sleep(10);
 		}
