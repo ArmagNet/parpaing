@@ -52,11 +52,30 @@ class WifiBo {
 				case "wpa_key_mgmt":
 					$infos["wpa_key_mgmt"] = $value;
 					break;
+				case "wpa":
+					$infos["wpa"] = $value;
+					break;
+				case "wpa_pairwise":
+					$infos["wpa_pairwise"] = $value;
+					break;
+				case "rsn_pairwise":
+					$infos["rsn_pairwise"] = $value;
+					break;
 // 				case "disabled":
 // 					if ($wifiDevice) {
 // 						$infos["disabled"] = $value;
 // 					}
 // 					break;
+			}
+		}
+
+		if ($infos["wpa"] = 0) {
+			$infos["encryption"] = "psk";
+		}
+		else if ($infos["wpa"] = 1) {
+			$infos["encryption"] = "psk2";
+			if ($infos["wpa_pairwise"] == "TKIP") {
+				$infos["encryption"] = "psk-mixed";
 			}
 		}
 
@@ -96,17 +115,32 @@ class WifiBo {
 			$hostapd += "channel=" . $oldConfiguration["channel"] . "\n";
 		}
 
-		// TODO
-// 		if (isset($configuration["ssid"])) {
-// 			WifiBo::sendCommand("uci set wireless.@wifi-iface[0].key='" . $configuration["key"] . "';");
-// 			$updated = true;
-// 		}
-// 		if (isset($configuration["encryption"])) {
-// 			WifiBo::sendCommand("uci set wireless.@wifi-iface[0].encryption='" . $configuration["encryption"] . "';");
-// 			$updated = true;
-// 		}
+		if ($configuration["encryption"] == "psk") {
+			$hostapd += "
+wpa_passphrase=" . $configuration["key"]  . "
+wpa=0
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP";
+		}
+		else if ($configuration["encryption"] == "psk2") {
+			$hostapd += "
+wpa_passphrase=" . $configuration["key"]  . "
+wpa=1
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=CCMP
+rsn_pairwise=CCMP";
+		}
+		else if ($configuration["encryption"] == "psk-mixed") {
+			$hostapd += "
+wpa_passphrase=" . $configuration["key"]  . "
+wpa=1
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP";
+		}
 
-		$hostapd += "interface=wlan0
+		$hostapd += "
+interface=wlan0
 bridge=br0
 driver=rtl871xdrv
 country_code=FR
@@ -126,18 +160,6 @@ ht_capab=[SHORT-GI-20][SHORT-GI-40][HT40+]
 
 		return $updated;
 	}
-
-// 	function setSsid($ssid) {
-// 		WifiBo::sendCommand("uci set wireless.@wifi-iface[0].ssid='$ssid'; uci commit wireless; wifi");
-// 	}
-
-// 	function setChannel($channel) {
-// 		WifiBo::sendCommand("uci set wireless.@wifi-device[0].channel='$channel'; uci commit wireless; wifi");
-// 	}
-
-// 	function setKey($key) {
-// 		WifiBo::sendCommand("uci set wireless.@wifi-iface[0].key='$key'; uci commit wireless; wifi");
-// 	}
 
 	static function sendCommand($cmd) {
 		// TODO add security
