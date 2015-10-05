@@ -23,6 +23,13 @@ class WifiBo {
 		$infos["disabled"] = WifiBo::sendCommand("/etc/init.d/hostapd status");
 		$infos["encryption"] = "none";
 
+		if (strpos($infos["disabled"], "not running") === false) {
+			$infos["disabled"] = 0;
+		}
+		else {
+			$infos["disabled"] = 1;
+		}
+
 		foreach($lines as $line) {
 			$explLine = explode("=", trim($line), 2);
 			if (count($explLine) < 2) {
