@@ -153,8 +153,9 @@ ht_capab=[SHORT-GI-20][SHORT-GI-40][HT40+]
 ";
 
 		if ($updated) {
-			file_put_contents("incron/hostapd.conf", $hostapd);
-			WifiBo::sendCommand("/etc/init.d/hostapd restart");
+			file_put_contents($this->config["incron"]["path"] . "/incron/hostapd.conf", $hostapd);
+//			WifiBo::sendCommand("/etc/init.d/hostapd restart");
+			sleep(10);
 		}
 
 		return $updated;
