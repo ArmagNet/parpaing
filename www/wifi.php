@@ -137,6 +137,8 @@ $(function() {
 	$("#enableButton").click(function(event) {
 		event.preventDefault();
 		$("#enableButton").addClass("disabled");
+		$("#disableButton").addClass("disabled");
+		$("#commitButton").addClass("disabled");
 		$.post("wifi/actions/do_activate_wifi.php", {}, function(data) {
 			retrieveWifiInformationHandler(data.wifiInfos);
 		}, "json");
@@ -144,7 +146,9 @@ $(function() {
 
 	$("#disableButton").click(function(event) {
 		event.preventDefault();
+		$("#enableButton").addClass("disabled");
 		$("#disableButton").addClass("disabled");
+		$("#commitButton").addClass("disabled");
 		$.post("wifi/actions/do_deactivate_wifi.php", {}, function(data) {
 			retrieveWifiInformationHandler(data.wifiInfos);
 		}, "json");
@@ -152,6 +156,8 @@ $(function() {
 
 	$("#commitButton").click(function(event) {
 		event.preventDefault();
+		$("#enableButton").addClass("disabled");
+		$("#disableButton").addClass("disabled");
 		$("#commitButton").addClass("disabled");
 		$.post("wifi/actions/do_commit_wifi.php", $("form").serialize(), function(data) {
 			retrieveWifiInformationHandler(data.wifiInfos);

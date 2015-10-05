@@ -11,6 +11,7 @@ class WifiBo {
 	}
 
 	function getClients() {
+		// TODO
 		WifiBo::sendCommand("iwinfo radio0 assoclist");
 	}
 
@@ -82,13 +83,14 @@ class WifiBo {
 	}
 
 	function activate() {
-//		WifiBo::sendCommand("uci set wireless.@wifi-device[0].disabled=0; uci commit wireless; wifi");
-		WifiBo::sendCommand("/etc/init.d/hostapd start");
+		file_put_contents($this->config["incron"]["path"] . "/hostapd.activate", $hostapd);
+		sleep(10);
+
 	}
 
 	function deactivate() {
-//		WifiBo::sendCommand("uci set wireless.@wifi-device[0].disabled=1; uci commit wireless; wifi");
-		WifiBo::sendCommand("/etc/init.d/hostapd stop");
+		file_put_contents($this->config["incron"]["path"] . "/hostapd.deactivate", $hostapd);
+		sleep(2);
 	}
 
 	function setConfiguration($configuration) {
@@ -154,7 +156,6 @@ ht_capab=[SHORT-GI-20][SHORT-GI-40][HT40+]
 
 		if ($updated) {
 			file_put_contents($this->config["incron"]["path"] . "/hostapd.conf", $hostapd);
-//			WifiBo::sendCommand("/etc/init.d/hostapd restart");
 			sleep(10);
 		}
 
