@@ -31,6 +31,8 @@ class WifiBo {
 		}
 
 		foreach($lines as $line) {
+			if (strlen($line) > 0 && substr($line, 0, 1) == "#") continue;
+
 			$explLine = explode("=", trim($line), 2);
 			if (count($explLine) < 2) {
 				continue;
@@ -61,21 +63,18 @@ class WifiBo {
 				case "rsn_pairwise":
 					$infos["rsn_pairwise"] = $value;
 					break;
-// 				case "disabled":
-// 					if ($wifiDevice) {
-// 						$infos["disabled"] = $value;
-// 					}
-// 					break;
 			}
 		}
 
-		if ($infos["wpa"] = 0) {
-			$infos["encryption"] = "psk";
-		}
-		else if ($infos["wpa"] = 1) {
-			$infos["encryption"] = "psk2";
-			if ($infos["wpa_pairwise"] == "TKIP") {
-				$infos["encryption"] = "psk-mixed";
+		if (isset($infos["key"]) && $infos["key"] && isset($infos["wpa"])) {
+			if ($infos["wpa"] == 0) {
+				$infos["encryption"] = "psk";
+			}
+			else if ($infos["wpa"] == 1) {
+				$infos["encryption"] = "psk2";
+				if ($infos["wpa_pairwise"] == "TKIP") {
+					$infos["encryption"] = "psk-mixed";
+				}
 			}
 		}
 
