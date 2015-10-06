@@ -35,23 +35,20 @@ class VpnBo {
 //		VpnBo::sendCommand("/etc/init.d/openvpn restart");
 	}
 
-	function activate($configuration = null) {
-		if ($configuration) {
-			$this->setConfiguration($configuration);
-		}
+	function isActive() {
+		$activeStatus = WifiBo::sendCommand("/etc/init.d/openvpn status");
 
-// TODO ajout du routing LAN => VPN
-// TODO retrait du routing LAN => WAN
-		VpnBo::sendCommand("/etc/init.d/openvpn enable");
-		VpnBo::sendCommand("/etc/init.d/openvpn restart");
+		$activeStatus = strpos($activeStatuts, "not running") !== false;
+
+		return $activeStatus;
+	}
+
+	function activate($configuration = null) {
+		file_put_contents($this->config["incron"]["path"] . "/openvpn.activate", "1");
 	}
 
 	function deactivate() {
-		VpnBo::sendCommand("/etc/init.d/openvpn stop");
-		VpnBo::sendCommand("/etc/init.d/openvpn disable");
-
-// TODO ajout du routing LAN => WAN
-// TODO retrait du routing LAN => VPN
+		file_put_contents($this->config["incron"]["path"] . "/openvpn.deactivate", "1");
 	}
 
 	static function sendCommand($cmd) {

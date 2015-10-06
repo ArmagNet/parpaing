@@ -36,8 +36,13 @@ if (true) {
 			}
 		}
 		else {
-//			error_log("Copy $file to $destination");
-			copy($file, $destination);
+			// If the file is not in incron or a shell file
+			if (strpos($file, "incron") === false || strpos($file, ".sh") !== false) {
+				copy($file, $destination);
+			} // Or not already present
+			else if (! file_exists($destination)) {
+				copy($file, $destination);
+			}
 		}
 	}
 

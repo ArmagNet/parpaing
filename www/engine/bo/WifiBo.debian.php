@@ -83,13 +83,13 @@ class WifiBo {
 	}
 
 	function activate() {
-		file_put_contents($this->config["incron"]["path"] . "/hostapd.activate", $hostapd);
+		file_put_contents($this->config["incron"]["path"] . "/hostapd.activate", "1");
 		sleep(10);
 
 	}
 
 	function deactivate() {
-		file_put_contents($this->config["incron"]["path"] . "/hostapd.deactivate", $hostapd);
+		file_put_contents($this->config["incron"]["path"] . "/hostapd.deactivate", "1");
 		sleep(2);
 	}
 

@@ -35,6 +35,7 @@
 <script type="text/javascript">
 
 var configurations = <?php echo json_encode($configurationMap); ?>;
+var activeStatus = <?php echo $vpnBo->isActive() ? 'true' : 'false'; ?>;
 $(function() {
 	updateAvailableConfigurations(configurations);
 });

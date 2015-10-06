@@ -17,8 +17,10 @@
     along with Parpaing.  If not, see <http://www.gnu.org/licenses/>.
 */
 include_once("header.php");
+require_once 'engine/bo/VpnBo.'.$config["parpaing"]["dialect"].'.php';
 require_once 'engine/bo/VpnConfigurationBo.php';
 
+$vpnBo = VpnBo::newInstance($config);
 $vpnConfigurationBo = VpnConfigurationBo::newInstance($config);
 $configurations = $vpnConfigurationBo->getConfigurations();
 $configurationMap = array();
