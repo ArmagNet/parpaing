@@ -52,7 +52,6 @@ $configuration["json"]["remote"] = $_REQUEST["remoteIpInput"] . " " . $_REQUEST[
 $configuration["json"]["cipher"] = $_REQUEST["cipherInput"];
 $configuration["json"]["comp_lzo"] = $_REQUEST["compLzoInput"];
 
-
 $previousConfiguration = $vpnConfigurationBo->getConfigurationById($configurationId);
 if ($previousConfiguration) {
 	if (!$configuration["crt"]) $configuration["crt"] = $previousConfiguration["crt"];

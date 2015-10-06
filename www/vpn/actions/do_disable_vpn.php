@@ -11,6 +11,8 @@ $vpnBo = VpnBo::newInstance($config);
 
 $vpnBo->deactivate();
 
-echo json_encode(array("ok" => "ok"));
+$activeStatus = $vpnBo->isActive();
+
+echo json_encode(array("ok" => "ok", "isActive" => $activeStatus));
 
 ?>
