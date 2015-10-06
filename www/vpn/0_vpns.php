@@ -48,12 +48,12 @@ $(function() {
 
 function updateStatus() {
 	if (activeStatus) {
-		$("#vpns_deactivateButton").addClass("disabled");
-		$("#vpns_activateButton").removeClass("disabled");
-	}
-	else {
 		$("#vpns_deactivateButton").removeClass("disabled");
 		$("#vpns_activateButton").addClass("disabled");
+	}
+	else {
+		$("#vpns_deactivateButton").addClass("disabled");
+		$("#vpns_activateButton").removeClass("disabled");
 	}
 }
 
@@ -72,7 +72,7 @@ function activateVpn(configurationId) {
 	$.post("vpn/actions/do_activate_vpn.php", myForm, function(data) {
 		updateAvailableConfigurations(data.configurations);
 
-		activeStatus = data.isActive == "true" ? true : false;
+		activeStatus = "" + data.isActive == "true" ? true : false;
 		updateStatus();
 	}, "json");
 }
@@ -164,18 +164,18 @@ $(function() {
 		$("#vpns_activateButton").addClass("disabled");
 
 		$.post("vpn/actions/do_enable_vpn.php", {}, function(data) {
-			activeStatus = data.isActive == "true" ? true : false;
+			activeStatus = "" + data.isActive == "true" ? true : false;
 			updateStatus();
-		});
+		}, "json");
 	});
 	$("#vpns_deactivateButton").click(function() {
 		$("#vpns_deactivateButton").addClass("disabled");
 		$("#vpns_activateButton").addClass("disabled");
 
 		$.post("vpn/actions/do_disable_vpn.php", {}, function(data) {
-			activeStatus = data.isActive == "true" ? true : false;
+			activeStatus = "" + data.isActive == "true" ? true : false;
 			updateStatus();
-		});
+		}, "json");
 	});
 });
 </script>
