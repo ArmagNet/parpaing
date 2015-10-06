@@ -50,7 +50,7 @@ class VpnBo {
 			file_put_contents($this->config["incron"]["path"] . "/openvpn.activate", "1");
 		}
 
-		sleep(1);
+		sleep(5);
 	}
 
 	function deactivate() {

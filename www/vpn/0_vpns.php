@@ -48,12 +48,12 @@ $(function() {
 
 function updateStatus() {
 	if (activeStatus) {
-		$("#vpns_deactivateButton").removeClass("disabled");
-		$("#vpns_activateButton").addClass("disabled");
-	}
-	else {
 		$("#vpns_deactivateButton").addClass("disabled");
 		$("#vpns_activateButton").removeClass("disabled");
+	}
+	else {
+		$("#vpns_deactivateButton").removeClass("disabled");
+		$("#vpns_activateButton").addClass("disabled");
 	}
 }
 
@@ -65,6 +65,9 @@ function deleteVpn(configurationId) {
 }
 
 function activateVpn(configurationId) {
+	$("#vpns_deactivateButton").addClass("disabled");
+	$("#vpns_activateButton").addClass("disabled");
+
 	var myForm = { "vpn_id" : configurationId };
 	$.post("vpn/actions/do_activate_vpn.php", myForm, function(data) {
 		updateAvailableConfigurations(data.configurations);

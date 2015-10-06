@@ -29,6 +29,6 @@ foreach($configurations as $configuration) {
 
 $activeStatus = $vpnBo->isActive();
 
-echo json_encode(array("ok" => "ok", "isActive" => $activeStatus, "actions" => $actions, "configurations" => $configurationMap));
+echo json_encode(array("ok" => "ok", "isActive" => $activeStatus, "actions" => array(), "configurations" => $configurationMap));
 
 ?>
