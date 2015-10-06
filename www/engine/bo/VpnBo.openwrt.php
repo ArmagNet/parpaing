@@ -40,8 +40,6 @@ class VpnBo {
 			$this->setConfiguration($configuration);
 		}
 
-// TODO ajout du routing LAN => VPN
-// TODO retrait du routing LAN => WAN
 		VpnBo::sendCommand("/etc/init.d/openvpn enable");
 		VpnBo::sendCommand("/etc/init.d/openvpn restart");
 	}
@@ -49,9 +47,16 @@ class VpnBo {
 	function deactivate() {
 		VpnBo::sendCommand("/etc/init.d/openvpn stop");
 		VpnBo::sendCommand("/etc/init.d/openvpn disable");
+	}
 
-// TODO ajout du routing LAN => WAN
-// TODO retrait du routing LAN => VPN
+
+	function isActive() {
+		$activeStatus = VpnBo::sendCommand("/etc/init.d/openvpn status");
+
+		// TODO
+		$activeStatus = strpos($activeStatus, "not running") === false;
+
+		return $activeStatus;
 	}
 
 	static function sendCommand($cmd) {
