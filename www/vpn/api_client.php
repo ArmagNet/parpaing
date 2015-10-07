@@ -15,6 +15,15 @@ class ArmagnetVpnApiClient {
 		return $this->_post("authenticate", $fields);
 	}
 
+	function createAccount($account, $person) {
+		$fields = array(
+				'account' => urlencode(json_encode($account)),
+				'person' => urlencode(json_encode($person))
+		);
+
+		return $this->_post("createAccount", $fields);
+	}
+
 	function retrieveConfigurations($account) {
 		$fields = array(
 				'account' => urlencode(json_encode($account))
