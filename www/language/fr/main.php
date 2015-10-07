@@ -143,14 +143,6 @@ $lang["myaccount_button_testTwitter"] = "Tester";
 $lang["myaccount_add"] = "Ajouter ce compte";
 $lang["myaccount_save"] = "Sauver les paramètres";
 
-$lang["myrights_guide"] = "Une revue de vos droits.";
-$lang["myrights_scores_legend"] = "Mes validations possibles";
-$lang["myrights_scores_no_score"] = "Vous n'avez aucun pouvoir de validation";
-$lang["myrights_scores_my_score"] = "Votre pouvoir de validation";
-$lang["myrights_scores_validation_score"] = "Les points requis pour valider";
-$lang["myrights_administration_legend"] = "Mes comptes administrés";
-$lang["myrights_scores_no_adminstation"] = "Vous n'avez aucun droit d'administration";
-
 $lang["mypage_guide"] = "Ceci est une page compilant vos statistiques";
 $lang["mypage_tweets_legend"] = "Mes tweets";
 $lang["mypage_validations_legend"] = "Mes validations";
@@ -161,13 +153,6 @@ $lang["mypage_score_chart_axisY"] = "Score";
 $lang["mypage_tweet_and_validations_chart_axisX"] = "Date";
 $lang["mypage_tweet_and_validations_chart_formatDate"] = "DD/MM/YYYY";
 $lang["mypage_tweet_and_validations_chart_jsFormatDate"] = "(date.getDate() < 10 ? '0' : '') + date.getDate() + '/' + (date.getMonth() < 11 ? '0' : '') + (date.getMonth() + 1) + '/' + date.getFullYear()";
-
-$lang["property_tweet"] = "Tweet";
-$lang["property_author"] = "Auteur";
-$lang["property_date"] = "Date";
-$lang["property_validators"] = "Validateurs";
-$lang["property_validation"] = "Validation";
-$lang["property_actions"] = "Actions";
 
 $lang["register_guide"] = "Bienvenue sur la page d'enregistrement d'Parpaing";
 $lang["register_form_legend"] = "Configuration de votre accès";

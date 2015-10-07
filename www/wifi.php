@@ -34,7 +34,7 @@ $info = $wifiBo->getInfo();
 			<h3 class="panel-title">Paramètres WIFI</h3>
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal" id="createArmagnetVpnForm">
+			<form class="form-horizontal" id="wifiForm">
 				<fieldset>
 
 					<!-- Passphrase input-->
@@ -92,6 +92,10 @@ $info = $wifiBo->getInfo();
 				</fieldset>
 			</form>
 		</div>
+	</div>
+
+	<div class="container hidden padding-left-0" style="padding-right: 30px;">
+		<?php echo addAlertDialog("badWifiPasswordAlert", lang("wifi_badWifiPasswordAlert"), "danger"); ?>
 	</div>
 
 </div>
@@ -156,6 +160,16 @@ $(function() {
 
 	$("#commitButton").click(function(event) {
 		event.preventDefault();
+
+		var passwordInput = $("#wifiForm #passphraseInput:enabled");
+		if (passwordInput.length > 0 && (passwordInput.val().length < 8 || passwordInput.val().length > 63)) {
+			$("#badWifiPasswordAlert").parent(".container").removeClass("hidden");
+			$("#badWifiPasswordAlert").removeClass("hidden").show().delay(2000).fadeOut(1000, function() {
+				$(this).parent(".container").addClass("hidden");
+			});
+			return;
+		}
+
 		$("#enableButton").addClass("disabled");
 		$("#disableButton").addClass("disabled");
 		$("#commitButton").addClass("disabled");
