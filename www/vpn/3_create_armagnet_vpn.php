@@ -24,7 +24,7 @@
 						<label class="col-md-4 control-label" for="wishToBeMember"></label>
 						<div class="col-md-8">
 							<label class="checkbox-inline" for="wishToBeMember"> <input type="checkbox" name="wishToBeMember" id="wishToBeMember" value="1">Je souhaite devenir membre</label>
-							<span class="help-block">Vous permètra de participer à la construction de l'association</span>
+							<span class="help-block">Vous permettra de participer à la construction de l'association</span>
 							<span class="help-block">Vous avez lu et acceptez les statuts et le règlement intérieur d'ArmagNet</span>
 						</div>
 					</div>
@@ -116,6 +116,15 @@
 		</div>
 	</div>
 
+	<div class="container hidden padding-left-0" style="padding-right: 30px;">
+		<?php echo addAlertDialog("alreadyExistsAlert", lang("vpn_create_armagnet_alreadyExistsAlert"), "danger"); ?>
+		<?php echo addAlertDialog("badCredentialsAlert", lang("vpn_create_armagnet_badCredentialsAlert"), "danger"); ?>
+		<?php echo addAlertDialog("notSamePasswordsAlert", lang("vpn_create_armagnet_notSamePasswordsAlert"), "danger"); ?>
+		<?php echo addAlertDialog("mailMandatoryAlert", lang("vpn_create_armagnet_mailMandatoryAlert"), "danger"); ?>
+		<?php echo addAlertDialog("firstnameMandatoryAlert", lang("vpn_create_armagnet_firstnameMandatoryAlert"), "danger"); ?>
+		<?php echo addAlertDialog("lastnameMandatoryAlert", lang("vpn_create_armagnet_lastnameMandatoryAlert"), "danger"); ?>
+	</div>
+
 <script>
 
 function setMemberStatus() {
@@ -135,6 +144,16 @@ $(function() {
 
 		var myForm = $("#createArmagnetVpnForm");
 		$.post("vpn/actions/do_create_armagnet_vpn.php", myForm.serialize(), function(data) {
+			if (data.ko) {
+				var cAlert = $("#create_armagnet_vpn #" + data.message + "Alert");
+				cAlert.parent(".container").removeClass("hidden");
+				cAlert.removeClass("hidden").show().delay(2000).fadeOut(1000, function() {
+					$(this).parent(".container").addClass("hidden");
+				});
+				if (data.focus) {
+					$("#" + data.focus).focus();
+				}
+			}
 		}, "json");
 	});
 

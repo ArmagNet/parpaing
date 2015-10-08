@@ -20,10 +20,22 @@ $account["password"] = $_REQUEST["passwordInput"];
 
 if (isset($_REQUEST["isMember"]) && $_REQUEST["isMember"] == 1) {
 	$response = $apiClient->authenticate($account);
+
+	// If bad login, don't go further
+	if (isset($response["ko"])) {
+		echo json_encode(array("ko" => "ko", "message" => $response["message"]));
+		exit();
+	}
+
 	$person = $response["person"];
 }
 else {
 	$account["confirmPassword"] = $_REQUEST["confirmInput"];
+
+	if ($account["confirmPassword"] != $account["password"]) {
+		echo json_encode(array("ko" => "ko", "message" => "notSamePasswords", "focus" => "confirmInput"));
+		exit();
+	}
 
 	$person["mail"] = $_REQUEST["emailInput"];
 	$person["firstname"] = $_REQUEST["firstnameInput"];
@@ -33,7 +45,28 @@ else {
 	$person["zip_code"] = $_REQUEST["zipcodeInput"];
 	$person["city"] = $_REQUEST["cityInput"];
 
+	if (!$person["lastname"]) {
+		echo json_encode(array("ko" => "ko", "message" => "lastnameMandatory", "focus" => "lastnameInput"));
+		exit();
+	}
+
+	if (!$person["firstname"]) {
+		echo json_encode(array("ko" => "ko", "message" => "firstnameMandatory", "focus" => "firstnameInput"));
+		exit();
+	}
+
+	if (!$person["mail"]) {
+		echo json_encode(array("ko" => "ko", "message" => "mailMandatory", "focus" => "emailInput"));
+		exit();
+	}
+
+	// If already exists, don't go further
 	$response = $apiClient->createAccount($account, $person);
+
+	if (isset($response["ko"])) {
+		echo json_encode(array("ko" => "ko", "message" => $response["message"]));
+		exit();
+	}
 }
 
 $openSslConfig = array(
