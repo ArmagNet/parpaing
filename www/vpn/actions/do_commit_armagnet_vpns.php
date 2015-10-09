@@ -63,6 +63,13 @@ foreach($configurationIds as $configurationId) {
 				$actions["update"] = $actions["update"] + 1;
 			}
 			else {
+				if (!$configuration["key"]) {
+					$realVpnHash = substr($configuration["id"], 0, min(64, strlen($configuration["id"])));
+					$keyPath = $config["openvpn"]["config"] . $realVpnHash . ".key";
+
+					$configuration["key"] = file_get_contents($keyPath);
+				}
+
 				$vpnConfigurationBo->addConfiguration($configuration);
 				$actions["add"] = $actions["add"] + 1;
 			}

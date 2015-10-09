@@ -73,8 +73,7 @@
 
 					<!-- Button (Double) -->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="commitArmagnetVpnsButton"></label>
-						<div class="col-md-8">
+						<div class="col-md-12 text-center">
 							<button id="commitArmagnetVpnsButton" type="submit" name="commitArmagnetVpnsButton" class="btn btn-success"><?php echo lang("common_add");?></button>
 						</div>
 					</div>
