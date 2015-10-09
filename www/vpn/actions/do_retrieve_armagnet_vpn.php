@@ -32,8 +32,6 @@ $account["password"] = $_REQUEST["passwordInput"];
 // Make the api call
 
 //set POST variables
-//$url = 'https://www.armagnet.fr/vpn/api.php';
-//$url = 'http://127.0.0.1/vpn/api.php';
 $apiClient = new ArmagnetVpnApiClient($config["armagnet"]["api_url"]);
 $result = $apiClient->retrieveConfigurations($account);
 
@@ -47,7 +45,9 @@ foreach($result["configurations"] as $index => $configuration) {
 	unset($result["configurations"][$index]["key"]);
 	unset($result["configurations"][$index]["cacrt"]);
 	unset($result["configurations"][$index]["dh"]);
-//	unset($result["configurations"][$index]["key"]);
+	if ($result["configurations"][$index]["key"]) {
+		unset($result["configurations"][$index]["key"]);
+	}
 }
 
 echo json_encode($result);
