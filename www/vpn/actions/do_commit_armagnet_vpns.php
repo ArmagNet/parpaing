@@ -27,7 +27,17 @@ foreach($configurationIds as $configurationId) {
 				if ($previousConfiguration["active"]) {
 					$configuration["active"] = true;
 
-					// TODO re-activate this configuration for change
+					if (!$configuration["key"]) {
+						$configuration["key"] = $previousConfiguration["key"];
+					}
+					if (!$configuration["key"]) {
+						$realVpnHash = substr($configuration["id"], 0, min(64, strlen($configuration["id"])));
+						$keyPath = $config["openvpn"]["config"] . $realVpnHash . ".key";
+
+						$configuration["key"] = file_get_contents($keyPath);
+					}
+
+					// re-activate this configuration for change
 					$vpnBo->activate($configuration);
 					// TODO check the differences, if any, re-activate
 				}
