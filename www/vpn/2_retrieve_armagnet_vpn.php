@@ -86,7 +86,9 @@
 
 	<templates>
 		<li aria-template-id="template-armagnet-vpn-listitem" class="template list-group-item">
-			<input type="checkbox" value="${configurationId}" name="configuration_ids[]">${label}
+			<label for="configuration-${configurationId}"><input
+				type="checkbox" value="${configurationId}"
+				id="configuration-${configurationId}" name="configuration_ids[]">${label}</label>
 		</li>
 	</templates>
 

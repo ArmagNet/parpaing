@@ -36,7 +36,7 @@ $account = array();
 $account["login"] = $_REQUEST["loginInput"];
 $account["password"] = $_REQUEST["passwordInput"];
 
-if (isset($_REQUEST["isMember"]) && $_REQUEST["isMember"] == 1) {
+if (isset($_REQUEST["hasAccount"]) && $_REQUEST["hasAccount"] == 1) {
 	$response = $apiClient->authenticate($account);
 
 	// If bad login, don't go further
