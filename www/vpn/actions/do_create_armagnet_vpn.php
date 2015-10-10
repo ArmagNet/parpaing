@@ -18,6 +18,7 @@
 */
 $path = "../../";
 set_include_path(get_include_path() . PATH_SEPARATOR . $path);
+set_time_limit(0);
 
 require_once 'config/config.php';
 require_once 'vpn/api_client.php';

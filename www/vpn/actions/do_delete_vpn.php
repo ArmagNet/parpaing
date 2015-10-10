@@ -43,6 +43,8 @@ foreach($configurations as $configuration) {
 	$configurationMap[$configuration["id"]] = array("label" => $configuration["label"], "active" => $configuration["active"]);
 }
 
+$actions = array();
+
 echo json_encode(array("ok" => "ok", "actions" => $actions, "configurations" => $configurationMap));
 
 ?>

@@ -34,7 +34,7 @@ $configurationIds = $_POST["configuration_ids"];
 $actions = array("add" => 0, "update" => 0);
 
 foreach($configurationIds as $configurationId) {
-	error_log("Configuration id : " . $configurationId);
+//	error_log("Configuration id : " . $configurationId);
 
 	foreach($configurations as $index => $configuration) {
 		if ($configuration["id"] == $configurationId) {
@@ -49,7 +49,7 @@ foreach($configurationIds as $configurationId) {
 					}
 					if (!$configuration["key"]) {
 						$realVpnHash = substr($configuration["id"], 0, min(64, strlen($configuration["id"])));
-						$keyPath = $config["openvpn"]["config"] . $realVpnHash . ".key";
+						$keyPath = $config["openvpn"]["config"] . "_$realVpnHash" . ".key";
 
 						$configuration["key"] = file_get_contents($keyPath);
 					}
@@ -65,7 +65,7 @@ foreach($configurationIds as $configurationId) {
 			else {
 				if (!$configuration["key"]) {
 					$realVpnHash = substr($configuration["id"], 0, min(64, strlen($configuration["id"])));
-					$keyPath = $config["openvpn"]["config"] . $realVpnHash . ".key";
+					$keyPath = $config["openvpn"]["config"] . "_$realVpnHash" . ".key";
 
 					$configuration["key"] = file_get_contents($keyPath);
 				}
