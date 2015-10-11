@@ -123,6 +123,6 @@ file_put_contents($keyPath . ".pkey", $privKey);
 shell_exec("openssl pkey -in $keyPath" . ".pkey -passin pass:$defaultPassword -out $keyPath" . ".key");
 unlink("$keyPath" . ".pkey");
 
-echo json_encode(array("ok" => "ok"));
+echo json_encode(array("ok" => "ok", "vpnHash" => $vpnHash));
 
 ?>

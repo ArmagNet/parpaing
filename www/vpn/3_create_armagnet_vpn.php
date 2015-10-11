@@ -210,9 +210,11 @@ function testOrderButton() {
 	}
 }
 
-function showOrderForm() {
+function showOrderForm(vpnHash) {
 	var form = $("<form method='post' ></form>");
 	form.attr("action", "<?php echo $config["armagnet"]["order_url"]; ?>");
+
+	form.append("<input type='hidden' name='vpnId' value='" + vpnHash + "'>");
 
 	if ($("#products #membership-button.list-group-item-success").length) {
 		form.append("<input type='hidden' name='askMembership' value='1'>");
@@ -238,6 +240,9 @@ $(function() {
 		event.preventDefault();
 		event.stopPropagation();
 
+		showOrderForm();
+		return;
+
 		$("#orderButton").addClass("disabled");
 
 		var myForm = $("#createArmagnetVpnForm");
@@ -254,7 +259,7 @@ $(function() {
 				testOrderButton();
 			}
 			else {
-				showOrderForm();
+				showOrderForm(data.vpnHash);
 			}
 		}, "json");
 	});
