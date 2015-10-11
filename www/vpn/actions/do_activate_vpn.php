@@ -36,6 +36,7 @@ if (!$configuration["active"]) {
 	$vpnBo->deactivate();
 	$vpnConfigurationBo->activate($configuration);
 	$vpnBo->activate($configuration);
+	$vpnBo->activate($configuration);
 }
 
 $configurations = $vpnConfigurationBo->getConfigurations();
