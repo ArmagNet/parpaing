@@ -107,7 +107,7 @@ $dn = array(
 		"countryName" => "FR",
 		"stateOrProvinceName" => "France",
 		"organizationName" => "Armagnet",
-		"commonName" => $serial . " " . $person["firstname"] . " " . $person["lastname"],
+		"commonName" => $person["firstname"] . " " . $person["lastname"] . " - " . $serial,
 		"emailAddress" => $person["mail"]
 );
 
