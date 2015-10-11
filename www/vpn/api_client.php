@@ -32,6 +32,14 @@ class ArmagnetVpnApiClient {
 		return $this->_post("authenticate", $fields);
 	}
 
+	function getSerial($account) {
+		$fields = array(
+				'account' => urlencode(json_encode($account))
+		);
+
+		return $this->_post("getSerial", $fields);
+	}
+
 	function createAccount($account, $person) {
 		$fields = array(
 				'account' => urlencode(json_encode($account)),
@@ -49,10 +57,10 @@ class ArmagnetVpnApiClient {
 		return $this->_post("retrieveConfigurations", $fields);
 	}
 
-	function postCsr($account, $csr) {
+	function postCsr($account, $serial, $csr) {
 		$fields = array(
 				'account' => urlencode(json_encode($account)),
-				//		'user' => urlencode(json_encode($user)),
+				'serial' => $serial,
 				'csr' => urlencode($csr)
 		);
 

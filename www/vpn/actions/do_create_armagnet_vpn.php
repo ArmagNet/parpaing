@@ -87,6 +87,13 @@ else {
 	}
 }
 
+$response = $apiClient->getSerial($account);
+if (isset($response["ko"])) {
+	echo json_encode(array("ko" => "ko", "message" => $response["message"]));
+	exit();
+}
+$serial = $response["serial"];
+
 $openSslConfig = array(
 		"digest_alg" => "sha512",
 		"private_key_bits" => 4096,
@@ -100,14 +107,14 @@ $dn = array(
 		"countryName" => "FR",
 		"stateOrProvinceName" => "France",
 		"organizationName" => "Armagnet",
-		"commonName" => $person["firstname"] . " " . $person["lastname"],
+		"commonName" => $serial . " " . $person["firstname"] . " " . $person["lastname"],
 		"emailAddress" => $person["mail"]
 );
 
 // Create the Certificate Signature Request
 $csr = openssl_csr_new($dn, $res);
 openssl_csr_export($csr, $csrout);
-$result = $apiClient->postCsr($account, $csrout);
+$result = $apiClient->postCsr($account, $serial, $csrout);
 
 $vpnHash = $result["vpn_id"];
 $keyPath = $config["openvpn"]["config"] . "_$vpnHash";
