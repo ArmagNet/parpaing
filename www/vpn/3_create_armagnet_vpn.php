@@ -240,9 +240,6 @@ $(function() {
 		event.preventDefault();
 		event.stopPropagation();
 
-		showOrderForm();
-		return;
-
 		$("#orderButton").addClass("disabled");
 
 		var myForm = $("#createArmagnetVpnForm");
