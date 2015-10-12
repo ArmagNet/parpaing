@@ -29,7 +29,7 @@
 		<div class="panel-body">
 			<form class="form-horizontal" id="createArmagnetVpnForm">
 				<fieldset>
-					<legend><?php echo lang("vpn_create_armagnet_account_label"); ?></legend>
+					<legend><?php echo lang("vpn_create_armagnet_account_legend"); ?></legend>
 
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="hasAccount"></label>
@@ -61,88 +61,88 @@
 
 				</fieldset>
 				<fieldset class="toBeMember">
-					<legend><?php echo lang("vpn_create_armagnet_identity_label"); ?></legend>
+					<legend><?php echo lang("vpn_create_armagnet_identity_legend"); ?></legend>
 
 					<!-- Identité input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="lastnameInput">Identité</label>
+						<label class="col-md-4 control-label" for="lastnameInput"><?php echo lang("vpn_create_armagnet_identity_label"); ?></label>
 						<div class="col-md-4">
-							<input id="lastnameInput" name="lastnameInput" type="text" placeholder="votre nom" class="form-control input-md" required="">
+							<input id="lastnameInput" name="lastnameInput" type="text" placeholder="<?php echo lang("vpn_create_armagnet_identity_lastname_placeholder"); ?>" class="form-control input-md" required="">
 						</div>
 						<div class="col-md-4">
-							<input id="firstnameInput" name="firstnameInput" type="text" placeholder="votre prénom" class="form-control input-md" required="">
+							<input id="firstnameInput" name="firstnameInput" type="text" placeholder="<?php echo lang("vpn_create_armagnet_identity_firstname_placeholder"); ?>" class="form-control input-md" required="">
 						</div>
 					</div>
 
 					<!-- Email input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="emailInput">Adresse mail</label>
+						<label class="col-md-4 control-label" for="emailInput"><?php echo lang("vpn_create_armagnet_identity_email_label"); ?></label>
 						<div class="col-md-4">
-							<input id="emailInput" name="emailInput" type="text" placeholder="votre email" class="form-control input-md" required="">
+							<input id="emailInput" name="emailInput" type="text" placeholder="<?php echo lang("vpn_create_armagnet_identity_email_placeholder"); ?>" class="form-control input-md" required="">
 						</div>
 					</div>
 
 					<!-- Address input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="addressInput">Adresse</label>
+						<label class="col-md-4 control-label" for="addressInput"><?php echo lang("vpn_create_armagnet_identity_address_label"); ?></label>
 						<div class="col-md-8">
-							<input id="addressInput" name="addressInput" type="text" placeholder="votre adresse" class="form-control input-md" required="">
+							<input id="addressInput" name="addressInput" type="text" placeholder="<?php echo lang("vpn_create_armagnet_identity_address_placeholder"); ?>" class="form-control input-md" required="">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="address2Input"></label>
 						<div class="col-md-8">
-							<input id="address2Input" name="address2Input" type="text" placeholder="... suite ..." class="form-control input-md" required="">
+							<input id="address2Input" name="address2Input" type="text" placeholder="<?php echo lang("vpn_create_armagnet_identity_address2_placeholder"); ?>" class="form-control input-md" required="">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="zipcodeInput"></label>
 						<div class="col-md-3">
-							<input id="zipcodeInput" name="zipcodeInput" type="text" placeholder="votre code postal" class="form-control input-md" required="">
+							<input id="zipcodeInput" name="zipcodeInput" type="text" placeholder="<?php echo lang("vpn_create_armagnet_identity_zipcode_placeholder"); ?>" class="form-control input-md" required="">
 						</div>
 						<div class="col-md-5">
-							<input id="cityInput" name="cityInput" type="text" placeholder="votre ville" class="form-control input-md" required="">
+							<input id="cityInput" name="cityInput" type="text" placeholder="<?php echo lang("vpn_create_armagnet_identity_city_placeholder"); ?>" class="form-control input-md" required="">
 						</div>
 					</div>
 
 				</fieldset>
 				<fieldset>
-					<legend>Commande</legend>
+					<legend><?php echo lang("vpn_create_armagnet_order_legend"); ?></legend>
 
 					<div id="products" class="list-group">
 						<button id="membership-button"
 							data-price="24"
 							type="button" style="width: 100%;" class="list-group-item text-left">
-							Adhésion annuelle
+							<?php echo lang("vpn_create_armagnet_order_annual_membership"); ?>
 							<span class="badge">24&euro;</span>
 
 							<ul>
-								<li><span class="small">Vous permettra de participer à la construction de l'association</span></li>
-								<li><span class="small">Vous avez lu et acceptez les statuts et le règlement intérieur d'ArmagNet</span></li>
+								<li><span class="small"><?php echo lang("vpn_create_armagnet_order_annual_membership_goal1"); ?></span></li>
+								<li><span class="small"><?php echo lang("vpn_create_armagnet_order_annual_membership_goal2"); ?></span></li>
 							</ul>
 
 						</button>
 						<button id="vpn-membership-button"
 							data-price="12"
 							type="button" style="width: 100%;" class="list-group-item text-left ">
-							VPN pour un an (à partir de 12€, vous êtes libre de mettre plus)<span class="badge"><input id="vpn-member-price"
+							<?php echo lang("vpn_create_armagnet_order_vpn_membership"); ?><span class="badge"><input id="vpn-member-price"
 								class="text-right" style="width: 25px; color: black;"
 								value="12">&euro;</span>
 						</button>
 						<button id="vpn-year-button"
 							data-price="60"
 							type="button" style="width: 100%;" class="list-group-item text-left ">
-							VPN pour un an <span class="badge">60&euro;</span>
+							<?php echo lang("vpn_create_armagnet_order_vpn_year"); ?><span class="badge">60&euro;</span>
 						</button>
 						<button id="vpn-6months-button"
 							data-price="33"
 							type="button" style="width: 100%;" class="list-group-item text-left ">
-							VPN pour 6 mois <span class="badge">33&euro;</span>
+							<?php echo lang("vpn_create_armagnet_order_vpn_6months"); ?><span class="badge">33&euro;</span>
 						</button>
 					</div>
 
 					<div class="form-group">
-						<label class="col-md-6 control-label">Total :</label>
+						<label class="col-md-6 control-label"><?php echo lang("vpn_create_armagnet_order_total_label"); ?></label>
 						<label class="col-md-6 control-label" style="text-align: left;"
 							data-price="0" id="totalPrice">0€</label>
 					</div>
