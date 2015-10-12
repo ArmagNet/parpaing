@@ -31,6 +31,8 @@ $lang["common_reset"] = "Reset";
 $lang["common_connect"] = "Connecter";
 $lang["common_order"] = "Commander";
 $lang["common_update"] = "Mettre à jour";
+$lang["common_authenticate"] = "Identifier";
+$lang["common_change"] = "Changer";
 
 $lang["language_fr"] = "Français";
 $lang["language_en"] = "Anglais";
@@ -71,6 +73,13 @@ $lang["breadcrumb_upgrader"] = "Mise à jour";
 $lang["breadcrumb_about"] = "À Propos";
 
 $lang["index_guide"] = "Parpaing est l'interface de gestion simple de votre mini routeur VPN.";
+$lang["index_authentication_panel"] = "Identification";
+$lang["index_authentication_password"] = "Mot de passe";
+$lang["index_authentication_password_placeholder"] = "mot de passe du Parpaing";
+$lang["index_authentication_newpassword"] = "Nouveau mot de passe";
+$lang["index_authentication_newpassword_placeholder"] = "nouveau mot de passe du Parpaing";
+$lang["index_authentication_confirm"] = "Confirmation";
+$lang["index_authentication_confirm_placeholder"] = "confirmation du mot de passe du Parpaing";
 
 $lang["defaultPasswordAlert"] = "Mot de passe par défaut, à changer";
 $lang["notSameNewPasswordAlert"] = "Les nouveaux mots de passe indiqués ne sont pas identiques";

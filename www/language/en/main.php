@@ -31,6 +31,8 @@ $lang["common_reset"] = "Reset";
 $lang["common_connect"] = "Connect";
 $lang["common_order"] = "Order";
 $lang["common_update"] = "Update";
+$lang["common_authenticate"] = "Authenticate";
+$lang["common_change"] = "Change";
 
 $lang["language_fr"] = "French";
 $lang["language_en"] = "English";
@@ -71,6 +73,13 @@ $lang["breadcrumb_upgrader"] = "Upgrade";
 $lang["breadcrumb_about"] = "About";
 
 $lang["index_guide"] = "Parpaing is the a simple manager interface de gestion for your mini VPN routeur.";
+$lang["index_authentication_panel"] = "Authentication";
+$lang["index_authentication_password"] = "Password";
+$lang["index_authentication_password_placeholder"] = "password of the Parpaing";
+$lang["index_authentication_newpassword"] = "New password";
+$lang["index_authentication_newpassword_placeholder"] = "new password of the Parpaing";
+$lang["index_authentication_confirm"] = "Confirmation";
+$lang["index_authentication_confirm_placeholder"] = "confirmation of the new password of the Parpaing";
 
 $lang["defaultPasswordAlert"] = "Default password, to change";
 $lang["notSameNewPasswordAlert"] = "The new passwords are not the same";

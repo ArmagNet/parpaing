@@ -33,35 +33,35 @@ include_once("header.php");
 <div class="container theme-showcase" role="main">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<h3 class="panel-title">Identification</h3>
+			<h3 class="panel-title"><?php echo lang("index_authentication_panel"); ?></h3>
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal" id="loginForm">
 				<fieldset>
 					<div class="form-group">
-						<label class="col-md-2 control-label" for="passwordInput">Mot de passe</label>
+						<label class="col-md-2 control-label" for="passwordInput"><?php echo lang("index_authentication_password"); ?></label>
 						<div class="col-md-10">
-							<input id="passwordInput" name="passwordInput" type="password" placeholder="mot de passe du parpaing" class="form-control input-md" required="">
+							<input id="passwordInput" name="passwordInput" type="password" placeholder="<?php echo lang("index_authentication_password_placeholder"); ?>" class="form-control input-md" required="">
 						</div>
 					</div>
 					<div class="form-group hidden renew-password">
-						<label class="col-md-2 control-label" for="newPasswordInput">Nouveau mot de passe</label>
+						<label class="col-md-2 control-label" for="newPasswordInput"><?php echo lang("index_authentication_newpassword"); ?></label>
 						<div class="col-md-10">
-							<input id="newPasswordInput" name="newPasswordInput" type="password" placeholder="nouveau mot de passe du parpaing" class="form-control input-md">
+							<input id="newPasswordInput" name="newPasswordInput" type="password" placeholder="<?php echo lang("index_authentication_newpassword_placeholder"); ?>" class="form-control input-md">
 						</div>
 					</div>
 					<div class="form-group hidden renew-password">
-						<label class="col-md-2 control-label" for="confirmNewPasswordInput">Confirmation</label>
+						<label class="col-md-2 control-label" for="confirmNewPasswordInput"><?php echo lang("index_authentication_confirm"); ?></label>
 						<div class="col-md-10">
-							<input id="confirmNewPasswordInput" name="confirmNewPasswordInput" type="password" placeholder="confirmation du mot de passe du parpaing" class="form-control input-md">
+							<input id="confirmNewPasswordInput" name="confirmNewPasswordInput" type="password" placeholder="<?php echo lang("index_authentication_confirm_placeholder"); ?>" class="form-control input-md">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-12 text-center">
-							<button id="loginButton" type="submit" name="loginButton" class="btn btn-primary">Identifier</button>
-							<button id="renewButton" type="button" name="renewButton" class="btn btn-default">Changer</button>
-							<button id="resetButton" type="reset" name="resetButton" class="btn btn-inverse">Reset</button>
+							<button id="loginButton" type="submit" name="loginButton" class="btn btn-primary"><?php echo lang("common_authenticate"); ?></button>
+							<button id="renewButton" type="button" name="renewButton" class="btn btn-default"><?php echo lang("common_change"); ?></button>
+							<button id="resetButton" type="reset" name="resetButton" class="btn btn-inverse"><?php echo lang("common_reset"); ?></button>
 						</div>
 					</div>
 				</fieldset>
@@ -78,7 +78,6 @@ include_once("header.php");
 </div>
 
 	<?php }?>
-
 
 <script type="text/javascript">
 var userLanguage = '<?php echo SessionUtils::getLanguage($_SESSION); ?>';
