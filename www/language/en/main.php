@@ -30,6 +30,7 @@ $lang["common_modify"] = "Modify";
 $lang["common_reset"] = "Reset";
 $lang["common_connect"] = "Connect";
 $lang["common_order"] = "Order";
+$lang["common_update"] = "Update";
 
 $lang["language_fr"] = "French";
 $lang["language_en"] = "English";

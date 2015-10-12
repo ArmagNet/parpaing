@@ -31,17 +31,16 @@ $info = $wifiBo->getInfo();
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">Paramètres WIFI</h3>
+			<h3 class="panel-title"><?php echo lang("wifi_panel_label"); ?>Paramètres WIFI</h3>
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal" id="wifiForm">
 				<fieldset>
 
-					<!-- Passphrase input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="ssidInput">Wifi</label>
+						<label class="col-md-4 control-label" for="ssidInput"><?php echo lang("wifi_wifi_label"); ?></label>
 						<div class="col-md-6">
-							<input id="ssidInput" name="ssidInput" type="text" placeholder="SSID" class="form-control input-md" required="">
+							<input id="ssidInput" name="ssidInput" type="text" placeholder="<?php echo lang("wifi_wifi_placeholder"); ?>SSID" class="form-control input-md" required="">
 						</div>
 						<div class="col-md-2">
 							<select id="channelInput" name="channelInput" class="form-control">
@@ -61,12 +60,11 @@ $info = $wifiBo->getInfo();
 						</div>
 					</div>
 
-					<!-- Passphrase input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="passphraseInput">Chiffrement</label>
+						<label class="col-md-4 control-label" for="passphraseInput"><?php echo lang("wifi_encryption_label"); ?>Chiffrement</label>
 						<div class="col-md-2">
 							<select id="encryptionInput" name="encryptionInput" class="form-control">
-								<option value="none">Aucun</option>
+								<option value="none"><?php echo lang("wifi_encryption_select_none"); ?></option>
 								<!--
 								<option value="wep">WEP</option>
 								 -->
@@ -76,17 +74,16 @@ $info = $wifiBo->getInfo();
 							</select>
 						</div>
 						<div class="col-md-6">
-							<input id="passphraseInput" name="passphraseInput" type="text" placeholder="la phrase de passe du wifi" class="form-control input-md" required="">
+							<input id="passphraseInput" name="passphraseInput" type="text" placeholder="<?php echo lang("wifi_encryption_passphrase_placeholder"); ?>la phrase de passe du wifi" class="form-control input-md" required="">
 						</div>
 					</div>
 
-					<!-- Button (Double) -->
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="commitButton"></label>
 						<div class="col-md-8">
 							<button id="enableButton" type="submit" name="enableButton" class="btn btn-success disabled"><?php echo lang("common_activate"); ?></button>
 							<button id="disableButton" type="submit" name="disableButton" class="btn btn-danger disabled"><?php echo lang("common_deactivate"); ?></button>
-							<button id="commitButton" type="submit" name="commitButton" class="btn btn-primary disabled">Mettre à jour</button>
+							<button id="commitButton" type="submit" name="commitButton" class="btn btn-primary disabled"><?php echo lang("common_update"); ?></button>
 						</div>
 					</div>
 				</fieldset>
