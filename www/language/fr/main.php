@@ -29,6 +29,7 @@ $lang["common_add"] = "Ajouter";
 $lang["common_modify"] = "Modifier";
 $lang["common_reset"] = "Reset";
 $lang["common_connect"] = "Connecter";
+$lang["common_order"] = "Commander";
 
 $lang["language_fr"] = "Français";
 $lang["language_en"] = "Anglais";

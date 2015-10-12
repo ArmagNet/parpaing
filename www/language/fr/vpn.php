@@ -46,17 +46,4 @@ $lang["vpn_addvpn_remoteport_placeholder"] = "Port du serveur VPN";
 $lang["vpn_addvpn_remotecerttls"] = "remote cert tls";
 $lang["vpn_addvpn_remotecerttls_placeholder"] = "Nom du certificat du serveur";
 
-$lang["vpn_retrieveArmagnet_panel"] = "Récuperation des configurations OpenVPN de votre compte ArmagNet";
-$lang["vpn_retrieveArmagnetConfiguration_panel"] = "Configurations à ajouter";
-$lang["vpn_retrieveArmagnet_login"] = "Identifiant";
-$lang["vpn_retrieveArmagnet_login_placeholder"] = "Votre identifiant Armagnet";
-$lang["vpn_retrieveArmagnet_password"] = "Mot de passe";
-$lang["vpn_retrieveArmagnet_password_placeholder"] = "Votre mot de passe Armagnet";
-
-$lang["vpn_create_armagnet_alreadyExistsAlert"] = "Ce compte existe déjà";
-$lang["vpn_create_armagnet_badCredentialsAlert"] = "Vos identifiants ne sont pas corrects";
-$lang["vpn_create_armagnet_notSamePasswordsAlert"] = "Vos mots de passe ne sont pas identiques";
-$lang["vpn_create_armagnet_mailMandatoryAlert"] = "Votre champ mail est vide ou incorrect";
-$lang["vpn_create_armagnet_firstnameMandatoryAlert"] = "Votre champ prénom est vide";
-$lang["vpn_create_armagnet_lastnameMandatoryAlert"] = "Votre champ nom est vide";
 ?>

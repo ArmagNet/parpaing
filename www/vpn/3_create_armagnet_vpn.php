@@ -29,42 +29,39 @@
 		<div class="panel-body">
 			<form class="form-horizontal" id="createArmagnetVpnForm">
 				<fieldset>
-					<legend>Compte</legend>
+					<legend><?php echo lang("vpn_create_armagnet_account_label"); ?></legend>
 
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="hasAccount"></label>
 						<div class="col-md-4">
-							<label class="checkbox-inline" for="hasAccount"> <input type="checkbox" name="hasAccount" id="hasAccount" value="1">J'ai un compte</label>
+							<label class="checkbox-inline" for="hasAccount"> <input type="checkbox" name="hasAccount" id="hasAccount" value="1"><?php echo lang("vpn_create_armagnet_account_hasOne"); ?></label>
 						</div>
 					</div>
 
-					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="loginInput">Identifiant</label>
+						<label class="col-md-4 control-label" for="loginInput"><?php echo lang("vpn_create_armagnet_account_login"); ?></label>
 						<div class="col-md-5">
-							<input id="loginInput" name="loginInput" type="text" placeholder="votre login" class="form-control input-md" required="">
+							<input id="loginInput" name="loginInput" type="text" placeholder="<?php echo lang("vpn_create_armagnet_account_login_placeholder"); ?>" class="form-control input-md" required="">
 						</div>
 					</div>
 
-					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="passwordInput">Mot de passe</label>
+						<label class="col-md-4 control-label" for="passwordInput"><?php echo lang("vpn_create_armagnet_account_password"); ?></label>
 						<div class="col-md-5">
-							<input id="passwordInput" name="passwordInput" type="password" placeholder="votre mot de passe" class="form-control input-md" required="">
+							<input id="passwordInput" name="passwordInput" type="password" placeholder="<?php echo lang("vpn_create_armagnet_account_password_placeholder"); ?>" class="form-control input-md" required="">
 						</div>
 					</div>
 
-					<!-- Text input-->
 					<div class="form-group toBeMember">
-						<label class="col-md-4 control-label" for="passwordInput">Confirmation</label>
+						<label class="col-md-4 control-label" for="passwordInput"><?php echo lang("vpn_create_armagnet_account_confirmation"); ?></label>
 						<div class="col-md-5">
-							<input id="confirmInput" name="confirmInput" type="password" placeholder="confirmation de votre mot de passe" class="form-control input-md" required="">
+							<input id="confirmInput" name="confirmInput" type="password" placeholder="<?php echo lang("vpn_create_armagnet_account_confirmation_placeholder"); ?>" class="form-control input-md" required="">
 						</div>
 					</div>
 
 				</fieldset>
 				<fieldset class="toBeMember">
-					<legend>Identité</legend>
+					<legend><?php echo lang("vpn_create_armagnet_identity_label"); ?></legend>
 
 					<!-- Identité input-->
 					<div class="form-group">
@@ -152,8 +149,8 @@
 
 					<div class="form-group">
 						<div class="col-md-12 text-center">
-							<button id="orderButton" type="submit" name="orderButton" class="btn btn-primary disabled">Commander</button>
-							<button id="resetButton" type="reset" name="resetButton" class="btn btn-inverse">Reset</button>
+							<button id="orderButton" type="submit" name="orderButton" class="btn btn-primary disabled"><?php echo lang("common_order"); ?></button>
+							<button id="resetButton" type="reset" name="resetButton" class="btn btn-inverse"><?php echo lang("common_reset"); ?></button>
 						</div>
 					</div>
 
