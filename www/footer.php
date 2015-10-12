@@ -23,7 +23,7 @@
 		<li <?php if ($page == "about") echo 'class="active"'; ?>><a href="about.php"><?php echo lang("about_footer"); ?></a></li>
 		<li><a href="https://flattr.com/submit/auto?user_id=armagnet_fai&url=https%3A%2F%2Fwww.Parpaing.net%2F" target="_blank"><img src="//api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a></li>
 	</ul>
-	<p class="navbar-text pull-right"><?php echo lang("Parpaing_footer"); ?></p>
+	<p class="navbar-text pull-right"><?php echo lang("parpaing_footer"); ?></p>
 </nav>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
