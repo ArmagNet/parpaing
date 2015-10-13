@@ -110,7 +110,7 @@
 					<legend><?php echo lang("vpn_create_armagnet_order_legend"); ?></legend>
 
 					<div id="products" class="list-group">
-						<button id="membership-button"
+						<a href="#" id="membership-button"
 							data-price="24"
 							type="button" style="width: 100%;" class="list-group-item text-left">
 							<?php echo lang("vpn_create_armagnet_order_annual_membership"); ?>
@@ -121,24 +121,24 @@
 								<li><span class="small"><?php echo lang("vpn_create_armagnet_order_annual_membership_goal2"); ?></span></li>
 							</ul>
 
-						</button>
-						<button id="vpn-membership-button"
+						</a>
+						<a href="#" id="vpn-membership-button"
 							data-price="12"
 							type="button" style="width: 100%;" class="list-group-item text-left ">
 							<?php echo lang("vpn_create_armagnet_order_vpn_membership"); ?><span class="badge"><input id="vpn-member-price"
 								class="text-right" style="width: 25px; color: black;"
 								value="12">&euro;</span>
-						</button>
-						<button id="vpn-year-button"
+						</a>
+						<a href="#" id="vpn-year-button"
 							data-price="60"
 							type="button" style="width: 100%;" class="list-group-item text-left ">
 							<?php echo lang("vpn_create_armagnet_order_vpn_year"); ?><span class="badge">60&euro;</span>
-						</button>
-						<button id="vpn-6months-button"
+						</a>
+						<a href="#" id="vpn-6months-button"
 							data-price="33"
 							type="button" style="width: 100%;" class="list-group-item text-left ">
 							<?php echo lang("vpn_create_armagnet_order_vpn_6months"); ?><span class="badge">33&euro;</span>
-						</button>
+						</a>
 					</div>
 
 					<div class="form-group">
@@ -177,7 +177,7 @@ function setAccountStatus() {
 
 function computeTotal() {
 	var total = 0;
-	$("button.list-group-item-success").each(function() {
+	$("#createArmagnetVpnForm a.list-group-item-success").each(function() {
 		total -= -$(this).data("price");
 	});
 
@@ -258,7 +258,7 @@ $(function() {
 		}, "json");
 	});
 
-	$("#createArmagnetVpnForm input").change(function() {
+	$("#createArmagnetVpnForm input, #createArmagnetVpnForm select, #createArmagnetVpnForm textarea").change(function() {
 		testOrderButton();
 	});
 
@@ -274,26 +274,31 @@ $(function() {
 			$(this).val(memberPrice);
 		}
 
-		$(this).parents("button").data("price", memberPrice);
+		$(this).parents("a").data("price", memberPrice);
 		computeTotal();
 	});
 
 	$("#products #membership-button, #products #vpn-membership-button").click(function(event) {
-		$("#products button").removeClass("list-group-item-success");
+		$("#products a").removeClass("list-group-item-success");
 		$("#products #membership-button, #products #vpn-membership-button").addClass("list-group-item-success");
 		computeTotal();
 	});
 
 	$("#products #vpn-year-button").click(function(event) {
-		$("#products button").removeClass("list-group-item-success");
+		$("#products a").removeClass("list-group-item-success");
 		$("#products #vpn-year-button").addClass("list-group-item-success");
 		computeTotal();
 	});
 
 	$("#products #vpn-6months-button").click(function(event) {
-		$("#products button").removeClass("list-group-item-success");
+		$("#products a").removeClass("list-group-item-success");
 		$("#products #vpn-6months-button").addClass("list-group-item-success");
 		computeTotal();
+	});
+
+	$("a.list-group-item").click(function(event) {
+		event.stopPropagation();
+		event.preventDefault();
 	});
 
 	setAccountStatus();
