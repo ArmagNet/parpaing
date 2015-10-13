@@ -96,7 +96,10 @@ $configurations = $vpnConfigurationBo->getConfigurations();
 $configurationMap = array();
 
 foreach($configurations as $configuration) {
-	$configurationMap[$configuration["id"]] = array("label" => $configuration["label"], "active" => $configuration["active"]);
+	$configurationMap[$configuration["id"]] = array("label" => $configuration["label"], "active" => $configuration["active"], "hasKey" => false);
+	if (isset($configuration["key"]) && $configuration["key"]) {
+		$configurationMap[$configuration["id"]]["hasKey"] = true;
+	}
 }
 
 echo json_encode(array("ok" => "ok", "actions" => $actions, "configurations" => $configurationMap));
