@@ -42,12 +42,12 @@ $result = $apiClient->retrieveConfigurations($account);
 $_SESSION["VPN_CONFIGURATIONS"] = json_encode($result["configurations"]);
 
 foreach($result["configurations"] as $index => $configuration) {
-	$result["configurations"]["hasKey"] = false;
+	$result["configurations"][$index]["hasKey"] = false;
 	unset($result["configurations"][$index]["key"]);
 	unset($result["configurations"][$index]["cacrt"]);
 	unset($result["configurations"][$index]["dh"]);
 	if ($result["configurations"][$index]["key"]) {
-		$result["configurations"]["hasKey"] = true;
+		$result["configurations"][$index]["hasKey"] = true;
 		unset($result["configurations"][$index]["key"]);
 	}
 }
