@@ -107,7 +107,7 @@
 			});
 
 			if (configuration.hasKey) {
-				configurationLi.append($('<span class="badge"><span class="glyphicon glyphicon-certificate"></span></span>'));
+				configurationLi.append($('<span class="glyphicon glyphicon-certificate pull-right" title="has key"></span>'));
 			}
 
 			$("#configurationsPanel .list-group").append($(configurationLi));

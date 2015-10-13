@@ -43,13 +43,14 @@ $_SESSION["VPN_CONFIGURATIONS"] = json_encode($result["configurations"]);
 
 foreach($result["configurations"] as $index => $configuration) {
 	$result["configurations"][$index]["hasKey"] = false;
-	unset($result["configurations"][$index]["key"]);
-	unset($result["configurations"][$index]["cacrt"]);
-	unset($result["configurations"][$index]["dh"]);
 	if ($result["configurations"][$index]["key"]) {
 		$result["configurations"][$index]["hasKey"] = true;
-		unset($result["configurations"][$index]["key"]);
 	}
+
+	unset($result["configurations"][$index]["cert"]);
+	unset($result["configurations"][$index]["cacrt"]);
+	unset($result["configurations"][$index]["dh"]);
+	unset($result["configurations"][$index]["key"]);
 }
 
 echo json_encode($result);
