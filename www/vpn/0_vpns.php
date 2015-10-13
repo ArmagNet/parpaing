@@ -134,7 +134,7 @@ function updateAvailableConfigurations(configurations) {
 						"active" : configuration.active ? "list-group-item-success" : ""}
 		});
 		if (configuration.hasKey) {
-			li.append($('<span class="glyphicon glyphicon-certificate pull-right" title="has key"></span>'));
+			li.append($('<span class="glyphicon glyphicon-certificate pull-right text-success" title="has key"></span>'));
 		}
 		list.append(li);
 	}
