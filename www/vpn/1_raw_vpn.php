@@ -123,11 +123,13 @@
 					</div>
 
 				</fieldset>
-				<fieldset>
+				<fieldset id="opvnFieldset">
 					<legend></legend>
 
 					<div class="form-group">
-						<label class="col-md-8 control-label" for="ovpnLink"><?php echo lang("vpn_configuration_ovpn");?> :</label>
+						<label class="col-md-8 control-label"
+							style="padding-top: 0px;"
+							for="ovpnLink"><?php echo lang("vpn_configuration_ovpn");?> :</label>
 						<div class="col-md-4">
 							<a id="ovpnLink" href="vpn/actions/do_retrieveKey.php?type=ovpn"><?php echo lang("vpn_configuration_retrievefile"); ?></a>
 						</div>
@@ -217,7 +219,7 @@
 			$("#commitVpnForm #keyButton + a").hide();
 			$("#commitVpnForm #certButton + a").hide();
 			$("#commitVpnForm #caButton + a").hide();
-			$("#commitVpnForm a#ovpnLink").hide();
+			$("#commitVpnForm #opvnFieldset").hide();
 
 			$("#raw_vpn #resetButton").click();
 		});
@@ -225,7 +227,7 @@
 		$("#commitVpnForm #keyButton + a").hide();
 		$("#commitVpnForm #certButton + a").hide();
 		$("#commitVpnForm #caButton + a").hide();
-		$("#commitVpnForm a#ovpnLink").hide();
+		$("#commitVpnForm #opvnFieldset").hide();
 	});
 
 	</script>
