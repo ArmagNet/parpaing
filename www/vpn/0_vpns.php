@@ -109,6 +109,18 @@ function modifyVpn(configurationId) {
 			form.find("#cipherInput").val(data.configuration.json.cipher);
 			form.find("#remoteCertTlsInput").val(data.configuration.json.remote_cert_tls);
 
+			var keyButtonFunction = data.configuration.hasKey ? "show" : "hide";
+			form.find("#keyButton + a")[keyButtonFunction]();
+			form.find("#keyButton + a").data("configuration-id", data.configuration.id);
+
+			var certButtonFunction = data.configuration.hasCert ? "show" : "hide";
+			form.find("#certButton + a")[certButtonFunction]();
+			form.find("#certButton + a").data("configuration-id", data.configuration.id);
+
+			var caButtonFunction = data.configuration.hasCacert ? "show" : "hide";
+			form.find("#caButton + a")[caButtonFunction]();
+			form.find("#caButton + a").data("configuration-id", data.configuration.id);
+
 			var remote = data.configuration.json.remote;
 			remote = remote.split(" ");
 

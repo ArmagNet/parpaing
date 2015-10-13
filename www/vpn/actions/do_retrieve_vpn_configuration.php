@@ -29,9 +29,31 @@ $vpnId = $_REQUEST["vpn_id"];
 
 $configuration = $vpnConfigurationBo->getConfigurationById($vpnId);
 
+$configuration["hasKey"] = false;
+$configuration["hasCert"] = false;
+$configuration["hasCacert"] = false;
+$configuration["hasDh"] = false;
+
+if ($configuration["key"]) {
+	$configuration["hasKey"] = true;
+}
+
+if ($configuration["crt"]) {
+	$configuration["hasCert"] = true;
+}
+
+if ($configuration["cacrt"]) {
+	$configuration["hasCacert"] = true;
+}
+
+if ($configuration["dh"]) {
+	$configuration["hasDh"] = true;
+}
+
 unset($configuration["key"]);
 unset($configuration["crt"]);
 unset($configuration["cacrt"]);
+unset($configuration["dh"]);
 
 echo json_encode(array("ok" => "ok", "configuration" => $configuration));
 

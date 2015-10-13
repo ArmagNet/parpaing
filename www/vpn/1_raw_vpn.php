@@ -32,7 +32,6 @@
 
 				<fieldset>
 
-					<!-- Text input-->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="labelInput"><?php echo lang("vpn_addvpn_label");?></label>
 						<div class="col-md-10">
@@ -40,37 +39,27 @@
 						</div>
 					</div>
 
-					<!-- File Button -->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="keyButton"><?php echo lang("vpn_addvpn_key");?></label>
 						<div class="col-md-4">
 							<input id="keyButton" name="keyButton" class="input-file" type="file">
+							<a href="vpn/actions/do_retrieveKey.php?type=key"><?php echo lang("vpn_configuration_retrievefile"); ?></a>
 						</div>
 						<label class="col-md-2 control-label" for="certButton"><?php echo lang("vpn_addvpn_cert");?></label>
 						<div class="col-md-4">
 							<input id="certButton" name="certButton" class="input-file" type="file">
+							<a href="vpn/actions/do_retrieveKey.php?type=cert"><?php echo lang("vpn_configuration_retrievefile"); ?></a>
 						</div>
 					</div>
 
-					<!-- File Button -->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="caButton"><?php echo lang("vpn_addvpn_cacert");?></label>
 						<div class="col-md-4">
 							<input id="caButton" name="caButton" class="input-file" type="file">
+							<a href="vpn/actions/do_retrieveKey.php?type=cacert"><?php echo lang("vpn_configuration_retrievefile"); ?></a>
 						</div>
 					</div>
 
-					<!-- File Button -->
-					<!--
-					<div class="form-group">
-						<label class="col-md-2 control-label" for="openvpnButton">OpenVPN configuration</label>
-						<div class="col-md-4">
-							<input id="openvpnButton" name="openvpnButton" class="input-file" type="file">
-						</div>
-					</div>
-					-->
-
-					<!-- Select -->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="devInput"><?php echo lang("vpn_addvpn_dev");?></label>
 						<div class="col-md-4">
@@ -88,7 +77,6 @@
 						</div>
 					</div>
 
-					<!-- Select -->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="cipherInput"><?php echo lang("vpn_addvpn_cipher");?></label>
 						<div class="col-md-4">
@@ -116,7 +104,6 @@
 						</div>
 					</div>
 
-					<!-- Text input-->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="remoteIpInput"><?php echo lang("vpn_addvpn_remoteip");?></label>
 						<div class="col-md-4">
@@ -128,7 +115,6 @@
 						</div>
 					</div>
 
-					<!-- Text input-->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="remoteCertTlsInput"><?php echo lang("vpn_addvpn_remotecerttls");?></label>
 						<div class="col-md-4">
@@ -136,7 +122,6 @@
 						</div>
 					</div>
 
-					<!-- Button (Double) -->
 					<div class="form-group">
 						<div class="col-md-12 text-center">
 							<button id="commitVpnButton" type="submit" name="commitVpnButton" class="btn btn-primary"><?php echo lang("common_add");?></button>
@@ -207,10 +192,24 @@
 			commitVpn();
 		});
 
+		$("#commitVpnForm a").click(function(event) {
+			event.preventDefault();
+			event.stopPropagation();
+
+			window.location.href = $(this).attr("href") + "&vpnId=" + $(this).data("configuration-id");
+		});
+
 		$("#raw_vpn_tab a").click(function(event) {
+			$("#commitVpnForm #keyButton + a").hide();
+			$("#commitVpnForm #certButton + a").hide();
+			$("#commitVpnForm #caButton + a").hide();
+
 			$("#raw_vpn #resetButton").click();
 		});
 
+		$("#commitVpnForm #keyButton + a").hide();
+		$("#commitVpnForm #certButton + a").hide();
+		$("#commitVpnForm #caButton + a").hide();
 	});
 
 	</script>
