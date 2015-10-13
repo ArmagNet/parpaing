@@ -106,6 +106,10 @@
 								"configurationId" : configuration.id}
 			});
 
+			if (configuration.hasKey) {
+				configurationLi.append($('<span class="badge"><span class="glyphicon glyphicon-certificate"></span></span>'));
+			}
+
 			$("#configurationsPanel .list-group").append($(configurationLi));
 		}
 
