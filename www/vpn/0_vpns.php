@@ -126,11 +126,12 @@ function updateAvailableConfigurations(configurations) {
 	list.children().remove();
 
 	for(var configurationId in configurations) {
+		var configuration =  configurations[configurationId];
 		var li = $("*[aria-template-id=template-vpn-listitem]").template(
 			"use", {
-				data: {	"label" : configurations[configurationId].label,
+				data: {	"label" : configuration.label,
 						"configurationId" : configurationId,
-						"active" : configurations[configurationId].active ? "list-group-item-success" : ""}
+						"active" : configuration.active ? "list-group-item-success" : ""}
 		});
 		if (configuration.hasKey) {
 			configurationLi.append($('<span class="glyphicon glyphicon-certificate pull-right" title="has key"></span>'));
