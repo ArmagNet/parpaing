@@ -201,7 +201,22 @@ function testOrderButton() {
 	}
 
 	if (!$("#hasAccount").prop("checked") &&
-			(!$("#createArmagnetVpnForm #confirmInput").val() || ($("#createArmagnetVpnForm #confirmInput").val() == $("#createArmagnetVpnForm #passwordInput").val()))) {
+			(!$("#createArmagnetVpnForm #confirmInput").val() || ($("#createArmagnetVpnForm #confirmInput").val() != $("#createArmagnetVpnForm #passwordInput").val()))) {
+		$("#orderButton").addClass("disabled");
+		return;
+	}
+
+	if (!$("#hasAccount").prop("checked") && !$("#createArmagnetVpnForm #emailInput").val()) {
+		$("#orderButton").addClass("disabled");
+		return;
+	}
+
+	if (!$("#hasAccount").prop("checked") && !$("#createArmagnetVpnForm #firstnameInput").val()) {
+		$("#orderButton").addClass("disabled");
+		return;
+	}
+
+	if (!$("#hasAccount").prop("checked") && !$("#createArmagnetVpnForm #lastnameInput").val()) {
 		$("#orderButton").addClass("disabled");
 		return;
 	}
