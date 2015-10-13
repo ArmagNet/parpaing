@@ -122,6 +122,20 @@
 						</div>
 					</div>
 
+				</fieldset>
+				<fieldset>
+					<legend></legend>
+
+					<div class="form-group">
+						<label class="col-md-8 control-label" for="ovpnLink"><?php echo lang("vpn_configuration_ovpn");?> :</label>
+						<div class="col-md-4">
+							<a id="ovpnLink" href="vpn/actions/do_retrieveKey.php?type=ovpn"><?php echo lang("vpn_configuration_retrievefile"); ?></a>
+						</div>
+					</div>
+
+				</fieldset>
+				<fieldset>
+
 					<div class="form-group">
 						<div class="col-md-12 text-center">
 							<button id="commitVpnButton" type="submit" name="commitVpnButton" class="btn btn-primary"><?php echo lang("common_add");?></button>
@@ -203,6 +217,7 @@
 			$("#commitVpnForm #keyButton + a").hide();
 			$("#commitVpnForm #certButton + a").hide();
 			$("#commitVpnForm #caButton + a").hide();
+			$("#commitVpnForm a#ovpnLink").hide();
 
 			$("#raw_vpn #resetButton").click();
 		});
@@ -210,6 +225,7 @@
 		$("#commitVpnForm #keyButton + a").hide();
 		$("#commitVpnForm #certButton + a").hide();
 		$("#commitVpnForm #caButton + a").hide();
+		$("#commitVpnForm a#ovpnLink").hide();
 	});
 
 	</script>

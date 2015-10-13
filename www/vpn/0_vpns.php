@@ -121,6 +121,9 @@ function modifyVpn(configurationId) {
 			form.find("#caButton + a")[caButtonFunction]();
 			form.find("#caButton + a").data("configuration-id", data.configuration.id);
 
+			form.find("a#ovpnLink").show();
+			form.find("a#ovpnLink").data("configuration-id", data.configuration.id);
+
 			var remote = data.configuration.json.remote;
 			remote = remote.split(" ");
 

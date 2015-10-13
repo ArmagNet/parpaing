@@ -47,5 +47,6 @@ $lang["vpn_addvpn_remotecerttls"] = "remote cert tls";
 $lang["vpn_addvpn_remotecerttls_placeholder"] = "Nom du certificat du serveur";
 
 $lang["vpn_configuration_retrievefile"] = "Récupérer le fichier";
+$lang["vpn_configuration_ovpn"] = "Fchier de configuration OpenVpn";
 
 ?>

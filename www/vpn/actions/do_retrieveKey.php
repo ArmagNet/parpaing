@@ -28,6 +28,26 @@ require_once('engine/bo/VpnConfigurationBo.php');
 if (!isset($_SERVER["HTTP_REFERER"])) exit();
 if (!SessionUtils::isConnected($_SESSION)) exit();
 
+function getOvpn($configuration) {
+
+	$ovpn = "";
+
+	$ovpn .= "dev " . $configuration["dev"] . "\n";
+	$ovpn .= "proto " . $configuration["proto"] . "\n";
+	$ovpn .= "log /my/log//path/openvpn.log\n";
+	$ovpn .= "verb 3\n";
+	$ovpn .= "ca " . $configuration["id"] . ".cert\n";
+	$ovpn .= "cert " . $configuration["label"] . ".crt\n";
+	$ovpn .= "key " . $configuration["label"] . ".key" . "\n";
+	$ovpn .= "client 1\n";
+	$ovpn .= "remote-cert-tls " . $configuration["remote_cert_tls"] . "\n";
+	$ovpn .= "remote " . $configuration["remote"] . "\n";
+	$ovpn .= "cipher " . $configuration["cipher"] . "\n";
+	$ovpn .= "comp-lzo " . $configuration["lzo"] . "\n";
+
+	return $ovpn;
+}
+
 $vpnConfigurationBo = VpnConfigurationBo::newInstance($config);
 $vpnId = $_REQUEST["vpnId"];
 
