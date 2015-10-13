@@ -73,8 +73,7 @@ switch($_REQUEST["type"]) {
 		$filename = $configuration["id"] . ".pem";
 		break;
 	case "ovpn":
-		// TODO
-		$content = null;
+		$content = getOvpn($configuration);
 		$filename = $configuration["id"] . ".ovpn";
 		break;
 }
