@@ -31,13 +31,13 @@ $vpnId = $_REQUEST["vpn_id"];
 
 $configuration = $vpnConfigurationBo->getConfigurationById($vpnId);
 
-if (!$configuration["active"]) {
+//if (!$configuration["active"]) {
 	// ACTIVATE
 	$vpnBo->deactivate();
 	$vpnConfigurationBo->activate($configuration);
 	$vpnBo->activate($configuration);
 	$vpnBo->activate($configuration);
-}
+//}
 
 $configurations = $vpnConfigurationBo->getConfigurations();
 $configurationMap = array();

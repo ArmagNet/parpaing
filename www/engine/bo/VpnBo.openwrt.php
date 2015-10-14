@@ -60,6 +60,8 @@ class VpnBo {
 
 		VpnBo::sendCommand("/etc/init.d/openvpn enable");
 		VpnBo::sendCommand("/etc/init.d/openvpn restart");
+
+		sleep(10);
 	}
 
 	function deactivate() {
