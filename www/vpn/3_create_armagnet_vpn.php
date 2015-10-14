@@ -239,6 +239,8 @@ function showOrderForm(vpnHash) {
 		form.append("<input type='hidden' name='vpnCode' value='vpn_6months'>");
 	}
 
+	$("body").append(form);
+
 	form.submit();
 }
 
