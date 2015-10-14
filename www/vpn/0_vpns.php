@@ -44,6 +44,9 @@
 					title="<?php echo lang("common_delete"); ?>"
 					class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="bottom"></span></a>
 			</span>
+			<span title="<?php echo lang("vpn_has_key"); ?>"
+				class="octicon octicon-key pull-right text-success"
+				data-toggle="tooltip" data-placement="bottom"></span>
 		</li>
 		<span aria-template-id="template-vpn-activate" class="template"><?php echo lang("vpn_activateVpn_question"); ?></span>
 		<span aria-template-id="template-vpn-delete" class="template"><?php echo lang("vpn_deleteVpn_question"); ?></span>
@@ -148,9 +151,11 @@ function updateAvailableConfigurations(configurations) {
 						"configurationId" : configurationId,
 						"active" : configuration.active ? "list-group-item-success" : ""}
 		});
-		if (configuration.hasKey) {
-			li.append($('<span class="glyphicon glyphicon-certificate pull-right text-success" title="has key"></span>'));
+
+		if (!configuration.hasKey) {
+			li.find(".octicon-key").remove();
 		}
+
 		list.append(li);
 	}
 

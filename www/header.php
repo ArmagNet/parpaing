@@ -68,6 +68,7 @@ $language = SessionUtils::getLanguage($_SESSION);
 <link href="css/parpaing.css" rel="stylesheet" />
 <link href="css/flags.css" rel="stylesheet" />
 <link href="css/social.css" rel="stylesheet" />
+<link href="css/octicons.css" rel="stylesheet" />
 <link href="css/jquery.template.css" rel="stylesheet" />
     <!--link href="css/fileinput.min.css" rel="stylesheet" /-->
 

@@ -89,6 +89,9 @@
 			<label for="configuration-${configurationId}"><input
 				type="checkbox" value="${configurationId}"
 				id="configuration-${configurationId}" name="configuration_ids[]">${label}</label>
+			<span title="<?php echo lang("vpn_has_key"); ?>"
+				class="octicon octicon-key pull-right text-success"
+				data-toggle="tooltip" data-placement="bottom"></span>
 		</li>
 	</templates>
 
@@ -106,8 +109,8 @@
 								"configurationId" : configuration.id}
 			});
 
-			if (configuration.hasKey) {
-				configurationLi.append($('<span class="glyphicon glyphicon-certificate pull-right text-success" title="has key"></span>'));
+			if (!configuration.hasKey) {
+				configurationLi.find(".octicon-key").remove();
 			}
 
 			$("#configurationsPanel .list-group").append($(configurationLi));

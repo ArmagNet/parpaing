@@ -49,4 +49,6 @@ $lang["vpn_addvpn_remotecerttls_placeholder"] = "server certificate name";
 $lang["vpn_configuration_retrievefile"] = "Retrieve file";
 $lang["vpn_configuration_ovpn"] = "OpenVpn configuration file";
 
+$lang["vpn_has_key"] = "Configuration with a private key";
+
 ?>

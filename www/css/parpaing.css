@@ -65,15 +65,24 @@ html,body {
 }
 
 .padding-left-0 {
-	padding-left: 0;
+	padding-left: 0 !important;
 }
 
 .margin-bottom-0 {
-	margin-bottom: 0;
+	margin-bottom: 0 !important;
 }
 
 .labelForCheckbox {
 	border: 0;
 	box-shadow: none;
 	-webkit-box-shadow: none;
+}
+
+.octicon-grey {
+    background-color: #777;
+    color: #fff;
+    border-radius: 3px;
+    padding: 3px 3px 3px 4px;
+    font-size: 18px !important;
+    margin: 0 5px 0 0;
 }
