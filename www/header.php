@@ -39,7 +39,7 @@ if (SessionUtils::isConnected($_SESSION)) {
 else {
 	SessionUtils::setLanguage($user["language"], $_SESSION);
 
-	if ($page != "index") {
+	if ($page != "index" && $page != "about") {
 		header("Location: index.php");
 		exit();
 	}
