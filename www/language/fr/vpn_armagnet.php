@@ -24,6 +24,7 @@ $lang["vpn_retrieveArmagnet_login_placeholder"] = "Votre identifiant Armagnet";
 $lang["vpn_retrieveArmagnet_password"] = "Mot de passe";
 $lang["vpn_retrieveArmagnet_password_placeholder"] = "Votre mot de passe Armagnet";
 
+$lang["vpn_create_armagnet_account_panel"] = "Ouvrir un compte ArmagNet avec un accès VPN";
 $lang["vpn_create_armagnet_account_legend"] = "Compte";
 $lang["vpn_create_armagnet_account_hasOne"] = "J'ai un compte";
 $lang["vpn_create_armagnet_account_login"] = "Identifiant";
