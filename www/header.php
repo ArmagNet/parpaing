@@ -119,7 +119,8 @@ $language = SessionUtils::getLanguage($_SESSION);
 					</li>
 
 					<?php 	if ($isConnected) {?>
-					<li><a class="logoutLink" href="do_logout.php"><span class="glyphicon glyphicon-log-out" title="<?php echo lang("menu_logout"); ?>"></span><span class="sr-only">Logout</span> </a></li>
+					<li><a class="logoutLink" href="do_logout.php" title="<?php echo lang("menu_logout"); ?>"
+						data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-log-out" title="<?php echo lang("menu_logout"); ?>"></span><span class="sr-only">Logout</span> </a></li>
 					<?php 	}?>
 				</ul>
 			</div>
