@@ -89,6 +89,20 @@ html,body {
 
 div.channel-tv {
 	text-align: center;
+	border: black solid 1px;
+    width: calc(25% - 20px);
+/*	height: calc(attr(width)); */
+	height: 150px;
+    padding: 45px 0 45px 0;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: grey 5px 5px;
+}
+
+div.channel-tv:hover {
+    margin: 14px 6px 6px 14px;
+    box-shadow: grey 1px 1px;
+    background-color: #F8F8F8;
 }
 
 div.channel-tv img {

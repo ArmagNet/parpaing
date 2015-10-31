@@ -26,13 +26,22 @@ include_once("header.php");
 
 	<div class="col-md-12">
 
-		<div class="col-md-4 channel-tv">
-			<a href="http://pluzz.francetv.fr/" target="_blank"><img src="images/logos/logo_francepluzz.png" /></a>
-		</div>
+		<a href="http://www.tf1.fr/programmes-tv" target="_blank"><div class="col-md-3 channel-tv">
+			<img src="images/logos/logo_mytf1.png" />
+		</div></a>
 
-		<div class="col-md-4 channel-tv">
-			<a href="http://www.6play.fr/" target="_blank"><img src="images/logos/logo_6play.png" /></a>
-		</div>
+		<a href="http://pluzz.francetv.fr/" target="_blank"><div class="col-md-3 channel-tv">
+			<img src="images/logos/logo_francepluzz.png" />
+		</div></a>
+
+		<a href="http://www.6play.fr/" target="_blank"><div class="col-md-3 channel-tv">
+			<img src="images/logos/logo_6play.png" />
+		</div></a>
+
+		<a href="http://www.nrj12.fr/replay-4203/collectionvideo/" target="_blank"><div class="col-md-3 channel-tv">
+			<img src="images/logos/logo_nrj12.png" />
+		</div></a>
+
 
 	</div>
 </div>
