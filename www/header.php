@@ -97,8 +97,18 @@ $language = SessionUtils::getLanguage($_SESSION);
 					<?php if ($isConnected) {?>
 					<li <?php if ($page == "vpn") echo 'class="active"'; ?>><a href="vpn.php"><?php echo lang("menu_vpn"); ?><?php if ($page == "vpn") echo ' <span class="sr-only">(current)</span>'; ?></a></li>
 					<li <?php if ($page == "wifi") echo 'class="active"'; ?>><a href="wifi.php"><?php echo lang("menu_wifi"); ?><?php if ($page == "wifi") echo ' <span class="sr-only">(current)</span>'; ?></a></li>
+					<?php 	if (true) {?>
+					<li class="dropdown <?php if ($page == "replay" || $page == "tv") echo 'active'; ?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						<?php if ($page == "replay") { ?><?php echo lang("menu_replay"); ?><?php }?>
+						<?php if ($page == "tv" || $page != "replay") { ?><?php echo lang("menu_tv"); ?><?php }?>
+						<span class="caret"></span> </a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="tv.php"><?php echo lang("menu_tv"); ?></a></li>
+							<li><a href="replay.php"><?php echo lang("menu_replay"); ?></a></li>
+						</ul>
+					</li>
+					<?php 	}?>
 					<?php 	if (false) {?>
-					<li <?php if ($page == "tv") echo 'class="active"'; ?>><a href="tv.php"><?php echo lang("menu_tv"); ?><?php if ($page == "tv") echo ' <span class="sr-only">(current)</span>'; ?></a></li>
 					<li <?php if ($page == "telephone") echo 'class="active"'; ?>><a href="telephone.php"><?php echo lang("menu_telephone"); ?><?php if ($page == "telephone") echo ' <span class="sr-only">(current)</span>'; ?></a></li>
 					<?php 	}?>
 					<?php }?>
