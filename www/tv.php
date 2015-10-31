@@ -28,19 +28,19 @@ include_once("header.php");
 
 		<!-- FT Group -->
 
-		<a href="http://www.france2.fr/direct" target="_blank"><div class="col-md-3 channel-tv">
+		<a href="http://www.france2.fr/direct" data-frame="francetv" title="France 2"><div class="col-md-3 channel-tv">
 			<img src="images/logos/logo_france2.png" />
 		</div></a>
-		<a href="http://www.france3.fr/direct" target="_blank"><div class="col-md-3 channel-tv">
+		<a href="http://www.france3.fr/direct" data-frame="francetv" title="France 3"><div class="col-md-3 channel-tv">
 			<img src="images/logos/logo_france3.png" />
 		</div></a>
-		<a href="http://www.france4.fr/direct" target="_blank"><div class="col-md-3 channel-tv">
+		<a href="http://www.france4.fr/direct" data-frame="francetv" title="France 4"><div class="col-md-3 channel-tv">
 			<img src="images/logos/logo_france4.png" />
 		</div></a>
-		<a href="http://www.france5.fr/direct" target="_blank"><div class="col-md-3 channel-tv">
+		<a href="http://www.france5.fr/direct" data-frame="francetv" title="France 5"><div class="col-md-3 channel-tv">
 			<img src="images/logos/logo_france5.png" />
 		</div></a>
-		<a href="http://www.franceo.fr/direct" target="_blank"><div class="col-md-3 channel-tv">
+		<a href="http://www.franceo.fr/direct" data-frame="francetv" title="France Ô"><div class="col-md-3 channel-tv">
 			<img src="images/logos/logo_franceo.png" />
 		</div></a>
 
@@ -111,7 +111,44 @@ include_once("header.php");
 <div class="lastDiv"></div>
 
 <?php include("footer.php");?>
+<style>
+.francetv .modal-dialog {
+	width: 612px !important;
+}
+
+</style>
 <script>
+
+function francetv(channelUrl, channelTitle) {
+
+	var framebox = "<iframe src='"+channelUrl+"' style='width: 580px; height: 755px'></iframe>";
+	framebox = $(framebox);
+
+	bootbox.dialog({
+		className: "francetv",
+        title: channelTitle,
+        message: framebox
+    });
+}
+
+$(function() {
+
+	$("a").each(function() {
+		var frameFunction = $(this).data("frame");
+		if (frameFunction) {
+
+			frameFunction = eval(frameFunction);
+
+			$(this).click(function(event) {
+				event.stopPropagation();
+				event.preventDefault();
+
+				frameFunction($(this).attr("href"), $(this).attr("title"));
+			});
+		}
+	});
+
+});
 </script>
 </body>
 </html>
