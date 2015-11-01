@@ -102,8 +102,9 @@ include_once("header.php");
 			<img src="images/logos/logo_tmc.png" />
 		</div></a>
 
-
-
+		<a href="http://www.numero23.fr/direct/" target="_blank"><div class="col-md-3 channel-tv">
+			<img src="images/logos/logo_numero23.png" />
+		</div></a>
 
 	</div>
 </div>
