@@ -60,11 +60,11 @@ include_once("header.php");
 
 		<!-- BFM Group -->
 
-		<a href="tv/bfmtv.php" data-href="http://www.bfmtv.com/mediaplayer/live-video/" data-frame="bfmtv" title="BFM TV"><div class="col-md-3 channel-tv">
+		<a href="tv/bfmtv.php?channel=bfmtv" data-frame="bfmtv" title="BFM TV"><div class="col-md-3 channel-tv">
 			<img src="images/logos/logo_bfmtv.png" />
 		</div></a>
 
-		<a href="http://bfmbusiness.bfmtv.com/mediaplayer/live-video/" target="_blank"><div class="col-md-3 channel-tv">
+		<a href="tv/bfmtv.php?channel=bfmbusiness" data-frame="bfmbusiness" title="BFM Business"><div class="col-md-3 channel-tv">
 			<img src="images/logos/logo_bfmbusiness.png" />
 		</div></a>
 
@@ -120,6 +120,10 @@ include_once("header.php");
 	width: 660px !important;
 }
 
+.bfmbusiness .modal-dialog {
+	width: 981px !important;
+}
+
 </style>
 <script>
 
@@ -137,7 +141,7 @@ function francetv(channelUrl, channelTitle) {
 
 function bfmtv(channelUrl, channelTitle) {
 
-	var framebox = "<iframe id='bfmtv' src='"+channelUrl+"' style='width: 628px; height: 538px; overflow: hidden; '></iframe>";
+	var framebox = "<iframe id='bfmtv' src='"+channelUrl+"' style='width: 628px; height: 354px; overflow: hidden; '></iframe>";
 	framebox = $(framebox);
 
 	bootbox.dialog({
@@ -152,9 +156,11 @@ function bfmtv(channelUrl, channelTitle) {
 		body.find("body .header-fixed").hide();
 		body.find("body #wrap center").hide();
 		body.find("body #conteneurCookies").hide();
+		body.find("body #conteneurTextCookies").hide();
 		body.find("body footer").hide();
 		body.find("body").css({"overflow": "hidden"});
 		body.find("body").find(".bloc").css({"margin": "0"});
+		body.find("#bb5-site-wrapper").css({"margin-top": "-43px"});
 
 		var divs = body.find("body #wrap > div");
 		divs.hide();
@@ -169,6 +175,49 @@ function bfmtv(channelUrl, channelTitle) {
 			}
 			else {
 				$(this).css({"margin-left": "-10px"});
+			}
+		});
+	};
+
+	setTimeout(clearout, 2000);
+}
+
+function bfmbusiness(channelUrl, channelTitle) {
+
+	var framebox = "<iframe id='bfmtv' src='"+channelUrl+"' style='width: 949px; height: 537px; overflow: hidden; '></iframe>";
+	framebox = $(framebox);
+
+	bootbox.dialog({
+		className: "bfmbusiness",
+        title: channelTitle,
+        message: framebox
+    });
+
+	var clearout = function() {
+		var body = $("#bfmtv").contents();
+
+		body.find("body .header-fixed").hide();
+		body.find("body #wrap center").hide();
+		body.find("body #conteneurCookies").hide();
+		body.find("body #conteneurTextCookies").hide();
+		body.find("body footer").hide();
+		body.find("body").css({"overflow": "hidden"});
+		body.find("#bb5-site-wrapper").css({"margin-top": "-45px"});
+		//		body.find("body").find("*").css({"margin": "0", "padding": 0});
+
+		var divs = body.find("body #wrap > div");
+		divs.hide();
+		var firstDiv = divs.eq(0);
+		firstDiv.show();
+		firstDiv.css({padding : "0"});
+
+		divs = firstDiv.find(".row > div");
+		divs.each(function(index) {
+			if (index != 0) {
+				$(this).remove();
+			}
+			else {
+				$(this).css({"margin": "0", "padding": "0"});
 			}
 		});
 	};
