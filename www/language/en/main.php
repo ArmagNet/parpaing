@@ -83,6 +83,16 @@ $lang["index_authentication_newpassword_placeholder"] = "new password of the Par
 $lang["index_authentication_confirm"] = "Confirmation";
 $lang["index_authentication_confirm_placeholder"] = "confirmation of the new password of the Parpaing";
 
+$lang["index_status_panel"] = "Status";
+$lang["index_memory_legend"] = "Memory";
+$lang["index_memory_total_label"] = "Total memory :";
+$lang["index_memory_free_label"] = "Free memory :";
+$lang["index_swap_total_label"] = "Total swap :";
+$lang["index_swap_free_label"] = "Free swap :";
+$lang["index_disk_legend"] = "Disk";
+$lang["index_disk_total_label"] = "Total space :";
+$lang["index_disk_free_label"] = "Free space :";
+
 $lang["defaultPasswordAlert"] = "Default password, to change";
 $lang["notSameNewPasswordAlert"] = "The new passwords are not the same";
 $lang["badPasswordAlert"] = "Bad password";

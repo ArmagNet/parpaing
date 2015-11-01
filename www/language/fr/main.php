@@ -83,6 +83,16 @@ $lang["index_authentication_newpassword_placeholder"] = "nouveau mot de passe du
 $lang["index_authentication_confirm"] = "Confirmation";
 $lang["index_authentication_confirm_placeholder"] = "confirmation du mot de passe du Parpaing";
 
+$lang["index_status_panel"] = "Statut";
+$lang["index_memory_legend"] = "Mémoire";
+$lang["index_memory_total_label"] = "Memoire totale :";
+$lang["index_memory_free_label"] = "Memoire disponible :";
+$lang["index_swap_total_label"] = "Swap total :";
+$lang["index_swap_free_label"] = "Swap disponible :";
+$lang["index_disk_legend"] = "Disque";
+$lang["index_disk_total_label"] = "Taille totale :";
+$lang["index_disk_free_label"] = "Taille disponible :";
+
 $lang["defaultPasswordAlert"] = "Mot de passe par défaut, à changer";
 $lang["notSameNewPasswordAlert"] = "Les nouveaux mots de passe indiqués ne sont pas identiques";
 $lang["badPasswordAlert"] = "Mauvais mot de passe";
