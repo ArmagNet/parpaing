@@ -98,6 +98,9 @@ $lang["index_cpu_load_label"] = "Load :";
 $lang["index_cpu_nb_label"] = "Number of CPU :";
 $lang["index_cpu_0_label"] = "CPU :";
 $lang["index_cpu_x_label"] = "CPU {x} :";
+$lang["index_network_legend"] = "Network";
+$lang["index_network_download_label"] = "Download :";
+$lang["index_network_upload_label"] = "Upload :";
 
 $lang["defaultPasswordAlert"] = "Default password, to change";
 $lang["notSameNewPasswordAlert"] = "The new passwords are not the same";

@@ -18,9 +18,6 @@
 */
 include_once("header.php");
 
-$df = disk_free_space("/");
-$ds = disk_total_space("/");
-
 function humanFileSize($bytes, $si, $decimals = 0, $scale = 1) {
 	$thresh = $si ? 1000: 1024;
 	if(abs($bytes) < $thresh * $scale) {
@@ -40,8 +37,13 @@ function humanFileSize($bytes, $si, $decimals = 0, $scale = 1) {
 	return number_format($bytes, $decimals, ".", " ") . ' ' . $units[$u];
 }
 
-?>
-<?php
+// Disk
+
+$df = disk_free_space("/");
+$ds = disk_total_space("/");
+
+// Memory
+
 /*
 MemTotal: 3986168 kB
 MemFree: 118788 kB
@@ -75,6 +77,8 @@ while ($line = fgets($fh)) {
 	}
 }
 fclose($fh);
+
+// CPU
 
 $load = sys_getloadavg();
 
@@ -118,6 +122,20 @@ foreach($stat1 as $index => $line)
 	$cpus[] = $cpu;
 }
 
+// Network
+
+define('IFSTAT', '/usr/bin/ifstat');
+$output = shell_exec(IFSTAT . '  0.1 1');
+$output = preg_split("/\n/", $output);
+
+$interfaces = preg_split("/[\s]+/", trim($output[0]));
+$consumptions = preg_split("/[\s]+/", trim($output[2]));
+
+foreach($interfaces as $index => $interface) {
+	$interfaces[$index] = array("name" => $interface,
+								"in" => $consumptions[$index * 2] * 1024,
+								"out" => $consumptions[$index * 2 + 1] * 1024);
+}
 
 ?>
 
@@ -235,6 +253,21 @@ foreach($stat1 as $index => $line)
 						</div>
 					</div>
 				</div>
+				<?php }?>
+
+				<?php if (count($interfaces)) {?>
+				<legend><?php echo lang("index_network_legend"); ?></legend>
+				<?php 	foreach($interfaces as $interface) {?>
+				<div class="col-md-12">
+					<label class="col-md-3"><?php echo $interface["name"]; ?> :</label>
+					<label class="col-md-2"><?php echo lang("index_network_download_label"); ?></label>
+					<span class="col-md-1"><?php echo humanFileSize($interface["in"], false); ?>/s</span>
+					<label class="col-md-2"><?php echo lang("index_network_upload_label"); ?></label>
+					<span class="col-md-1"><?php echo humanFileSize($interface["out"], false); ?>/s</span>
+				</div>
+
+
+				<?php 	}?>
 				<?php }?>
 			</fieldset>
 		</div>

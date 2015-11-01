@@ -98,6 +98,9 @@ $lang["index_cpu_load_label"] = "Load :";
 $lang["index_cpu_nb_label"] = "Nombre de CPU :";
 $lang["index_cpu_0_label"] = "CPU :";
 $lang["index_cpu_x_label"] = "CPU {x} :";
+$lang["index_network_legend"] = "Réseau";
+$lang["index_network_download_label"] = "Download :";
+$lang["index_network_upload_label"] = "Upload :";
 
 $lang["defaultPasswordAlert"] = "Mot de passe par défaut, à changer";
 $lang["notSameNewPasswordAlert"] = "Les nouveaux mots de passe indiqués ne sont pas identiques";
