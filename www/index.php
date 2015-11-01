@@ -76,6 +76,49 @@ while ($line = fgets($fh)) {
 }
 fclose($fh);
 
+$load = sys_getloadavg();
+
+$stat1 = file('/proc/stat');
+//sleep(1);
+time_nanosleep(0, 500000000);
+$stat2 = file('/proc/stat');
+$cpus = array();
+
+foreach($stat1 as $index => $line)
+{
+//	echo "$line <br/>\n";
+	if (strpos($line, "cpu") === false) break;
+
+	$offset = "";
+	if ($index > 0) {
+		$offset = $index - 1;
+	}
+
+	$info1 = explode(" ", preg_replace("!cpu$offset +!", "", $stat1[$index]));
+	$info2 = explode(" ", preg_replace("!cpu$offset +!", "", $stat2[$index]));
+	$dif = array();
+	$dif['user'] = $info2[0] - $info1[0];
+	$dif['nice'] = $info2[1] - $info1[1];
+	$dif['sys'] = $info2[2] - $info1[2];
+	$dif['idle'] = $info2[3] - $info1[3];
+	$dif['iowait'] = $info2[4] - $info1[4];
+	$dif['irq'] = $info2[5] - $info1[5];
+	$dif['softirq'] = $info2[6] - $info1[6];
+	$dif['steal'] = $info2[7] - $info1[7];
+	$total = array_sum($dif);
+	$cpu = array();
+	foreach($dif as $x=>$y) {
+		$cpu[$x] = round($y / $total * 100, 1);
+	}
+	$cpu['usage'] = $cpu['user'] + $cpu['nice'] + $cpu['sys'] + $cpu['irq'] + $cpu['softirq'] + $cpu['steal'];
+	if ($cpu['usage'] > 100) $cpu['usage'] = 100; // Normalization
+//	print_r($cpu);
+//	echo "<br />\n";
+
+	$cpus[] = $cpu;
+}
+
+
 ?>
 
 	<?php if ($isConnected) {?>
@@ -122,12 +165,12 @@ fclose($fh);
 
 				<div class="col-md-12">
 					<div class="col-md-5"><label class="col-md-7"><?php echo lang("index_swap_total_label"); ?></label><span class="col-md-5"><?php echo humanFileSize($totalSwap, false, 0, 10); ?></span></div>
-					<div class="col-md-5"><label class="col-md-7"><?php echo lang("index_swap_free_label"); ?></label><span class="col-md-5"><?php echo humanFileSize($freeSwap, false, 0, 10); ?></span></div>
+					<div class="col-md-5"><label class="col-md-7"><?php echo lang("index_swap_used_label"); ?></label><span class="col-md-5"><?php echo humanFileSize($totalSwap - $freeSwap, false, 0, 10); ?></span></div>
 					<div class="col-md-2">
 						<div class="progress">
 							<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-								style="width: <?php echo number_format($freeSwap / $totalSwap * 100, 0) . "%"; ?>; text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;">
-								<span style="position: relative; left: 2px;"><?php echo number_format($freeSwap / $totalSwap * 100, 1) . "%"; ?></span>
+								style="width: <?php echo number_format(($totalSwap - $freeSwap) / $totalSwap * 100, 0) . "%"; ?>; text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;">
+								<span style="position: relative; left: 2px;"><?php echo number_format(($totalSwap - $freeSwap) / $totalSwap * 100, 1) . "%"; ?></span>
 							</div>
 						</div>
 					</div>
@@ -148,11 +191,59 @@ fclose($fh);
 					</div>
 				</div>
 
+				<legend><?php echo lang("index_cpu_legend"); ?></legend>
+
+				<div class="col-md-12">
+					<label class="col-md-3"><?php echo lang("index_cpu_load_label"); ?></label>
+					<span class="col-md-3"><?php echo $load[0]; ?></span>
+					<span class="col-md-3"><?php echo $load[1]; ?></span>
+					<span class="col-md-3"><?php echo $load[2]; ?></span>
+				</div>
+				<div class="col-md-12">
+					<label class="col-md-3"><?php echo lang("index_cpu_nb_label"); ?></label>
+					<span class="col-md-3"><?php echo count($cpus) - 1; ?></span>
+				</div>
+				<?php foreach($cpus as $cpuIndex => $cpu) {?>
+				<div class="col-md-12">
+					<label class="col-md-3"><?php
+						if ($cpuIndex) {
+							echo str_replace("{x}", $cpuIndex, lang("index_cpu_x_label"));
+						}
+						else {
+							echo lang("index_cpu_0_label");
+						}
+					?></label>
+					<div class="col-md-9">
+						<?php
+							$cpuBarClass = "";
+
+							if ($cpu["usage"] < 50) {
+								$cpuBarClass = "progress-bar-success";
+							}
+							else if ($cpu["usage"] < 75) {
+								$cpuBarClass = "progress-bar-warning";
+							}
+							else {
+								$cpuBarClass = "progress-bar-danger";
+							}
+						?>
+						<div class="progress">
+							<div class="progress-bar <?php echo $cpuBarClass; ?>" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+								style="width: <?php echo number_format($cpu["usage"], 0) . "%"; ?>; text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;">
+								<span style="position: relative; left: 2px;"><?php echo number_format($cpu["usage"], 1) . "%"; ?></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php }?>
 			</fieldset>
 		</div>
 	</div>
 
 </div>
+
+<div class="lastDiv"></div>
+
 	<?php } else {?>
 
 <div class="container theme-showcase" role="main">

@@ -89,9 +89,15 @@ $lang["index_memory_total_label"] = "Total memory :";
 $lang["index_memory_free_label"] = "Free memory :";
 $lang["index_swap_total_label"] = "Total swap :";
 $lang["index_swap_free_label"] = "Free swap :";
+$lang["index_swap_used_label"] = "Used swap :";
 $lang["index_disk_legend"] = "Disk";
 $lang["index_disk_total_label"] = "Total space :";
 $lang["index_disk_free_label"] = "Free space :";
+$lang["index_cpu_legend"] = "CPU";
+$lang["index_cpu_load_label"] = "Load :";
+$lang["index_cpu_nb_label"] = "Number of CPU :";
+$lang["index_cpu_0_label"] = "CPU :";
+$lang["index_cpu_x_label"] = "CPU {x} :";
 
 $lang["defaultPasswordAlert"] = "Default password, to change";
 $lang["notSameNewPasswordAlert"] = "The new passwords are not the same";

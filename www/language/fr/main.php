@@ -89,9 +89,15 @@ $lang["index_memory_total_label"] = "Memoire totale :";
 $lang["index_memory_free_label"] = "Memoire disponible :";
 $lang["index_swap_total_label"] = "Swap total :";
 $lang["index_swap_free_label"] = "Swap disponible :";
+$lang["index_swap_used_label"] = "Swap utilisé :";
 $lang["index_disk_legend"] = "Disque";
 $lang["index_disk_total_label"] = "Taille totale :";
 $lang["index_disk_free_label"] = "Taille disponible :";
+$lang["index_cpu_legend"] = "CPU";
+$lang["index_cpu_load_label"] = "Load :";
+$lang["index_cpu_nb_label"] = "Nombre de CPU :";
+$lang["index_cpu_0_label"] = "CPU :";
+$lang["index_cpu_x_label"] = "CPU {x} :";
 
 $lang["defaultPasswordAlert"] = "Mot de passe par défaut, à changer";
 $lang["notSameNewPasswordAlert"] = "Les nouveaux mots de passe indiqués ne sont pas identiques";
