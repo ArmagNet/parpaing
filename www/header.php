@@ -117,6 +117,40 @@ $language = SessionUtils::getLanguage($_SESSION);
 				<ul class="nav navbar-nav navbar-right">
 
 					<?php if ($isConnected) {?>
+					<li style="display: none;" id="memory-rate" class="rate">
+						<a href="#">
+							<span class="badge">
+								<span title="<?php echo lang("memory_rate"); ?>"
+									data-toggle="tooltip" data-placement="bottom"></span>
+							</span>
+						</a>
+					</li>
+					<li style="display: none;" id="disk-rate" class="rate">
+						<a href="#">
+							<span class="badge">
+								<span title="<?php echo lang("disk_rate"); ?>"
+									data-toggle="tooltip" data-placement="bottom"></span>
+							</span>
+						</a>
+					</li>
+					<li style="display: none;" id="cpu-rate" class="rate">
+						<a href="#">
+							<span class="badge">
+								<span title="<?php echo lang("cpu_rate"); ?>"
+									data-toggle="tooltip" data-placement="bottom"></span>
+							</span>
+						</a>
+					</li>
+					<li style="display: none;" id="network-rates" class="rate">
+						<a href="#">
+							<span class="badge">
+								<span id="download-rate" title="<?php echo lang("download_rate"); ?>"
+									data-toggle="tooltip" data-placement="bottom"></span> /
+								<span id="upload-rate" title="<?php echo lang("upload_rate"); ?>"
+									data-toggle="tooltip" data-placement="bottom"></span>
+							</span>
+						</a>
+					</li>
 					<li <?php if ($page == "upgrader") echo 'class="active"'; ?>><a href="upgrader.php"><?php echo lang("menu_upgrader"); ?><?php if ($page == "upgrader") echo ' <span class="sr-only">(current)</span>'; ?></a></li>
 					<?php }?>
 

@@ -30,10 +30,12 @@
 <script src="js/bootbox.min.js"></script>
 <script src="js/moment-with-locales.js"></script>
 <script src="js/bootstrap-datetimepicker.js"></script>
+<script src="js/jquery.timer.js"></script>
 <script src="js/jquery.template.js"></script>
 <script src="js/user.js"></script>
 <script src="js/window.js"></script>
 <script src="js/pagination.js"></script>
+<script src="js/croned.js"></script>
 <?php
 if (is_file("js/perpage/" . $page . ".js")) {
 	echo "<script src=\"js/perpage/" . $page . ".js\"></script>\n";
