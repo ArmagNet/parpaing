@@ -18,7 +18,7 @@
 */
 include_once("header.php");
 
-function humanFileSize($bytes, $si, $decimals = 0, $scale = 1) {
+function humanFileSize($bytes, $si, $decimals = 1, $scale = 1) {
 	$thresh = $si ? 1000: 1024;
 	if(abs($bytes) < $thresh * $scale) {
 		return number_format($bytes, $decimals) . ' B';

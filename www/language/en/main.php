@@ -102,6 +102,14 @@ $lang["index_network_legend"] = "Network";
 $lang["index_network_download_label"] = "Download :";
 $lang["index_network_upload_label"] = "Upload :";
 
+// Rates
+
+$lang["memory_rate"] = "Memory";
+$lang["disk_rate"] = "Disk";
+$lang["cpu_rate"] = "CPU";
+$lang["download_rate"] = "Download";
+$lang["upload_rate"] = "Upload";
+
 $lang["defaultPasswordAlert"] = "Default password, to change";
 $lang["notSameNewPasswordAlert"] = "The new passwords are not the same";
 $lang["badPasswordAlert"] = "Bad password";
