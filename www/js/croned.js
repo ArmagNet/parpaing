@@ -47,8 +47,8 @@ function copyInformations(fromPanel, toPanel) {
 	var fromDiskPanel = fromPanel.find("#disk");
 	var toDiskPanel = toPanel.find("#disk");
 
-	toDiskPanel.find(".total span").text(humanFileSize(fromDiskPanel.find(".total").data("size"), false, 0, 10));
-	toDiskPanel.find(".free span").text(humanFileSize(fromDiskPanel.find(".free").data("size"), false, 0, 10));
+	toDiskPanel.find(".total span").text(humanFileSize(fromDiskPanel.find(".total").data("size"), false, 2));
+	toDiskPanel.find(".free span").text(humanFileSize(fromDiskPanel.find(".free").data("size"), false, 2));
 
 	var progressSize = fromDiskPanel.find(".progress").data("available") * 1.;
 	toDiskPanel.find(".progress-bar").css({width: Math.round(progressSize) + "%"});

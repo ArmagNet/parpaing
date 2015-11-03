@@ -141,7 +141,7 @@ function getPermString($perms) {
 
 	<ul>
 	<?php
-		$files = glob($config["parpaing"]["root_directory"] . $path . "*");
+		$files = glob($config["parpaing"]["root_directory"] . str_replace("[", "\\[", str_replace("]", "\\]", $path)) . "*");
 
 		function orderFiles($a, $b) {
 			if ($a == $b) return 0;
