@@ -74,6 +74,8 @@ $isActive = $bittorrentBo->isActive();
 <script>
 
 function setActiveStatus(isActive) {
+	$("#bittorrent-active-button").bootstrapSwitch("disabled", true);
+
 	//	var isActive = $("#bittorrent-active-button").bootstrapSwitch("state");
 
 	// Call update;
@@ -81,12 +83,15 @@ function setActiveStatus(isActive) {
 	var action = "bittorrent/actions/" + (isActive ? "do_enable_bittorrent.php" : "do_disable_bittorrent.php");
 
 	$.get(action, {}, function(data) {
+		$("#bittorrent-active-button").bootstrapSwitch("disabled", false);
 		updateActiveStatus(data.isActive);
 	}, "json");
 }
 
 function updateActiveStatus(isActive) {
-	$("#bittorrent-active-button").bootstrapSwitch("state", isActive);
+	if (!$("#bittorrent-active-button").bootstrapSwitch("disabled")) {
+		$("#bittorrent-active-button").bootstrapSwitch("state", isActive);
+	}
 }
 
 function updateTorrentHandler(torrents) {
@@ -148,7 +153,7 @@ $(function() {
 	});
 
 	var bittorrentTimer = $.timer(updateTorrents);
-	bittorrentTimer.set({ time : 10000, autostart : true });
+	bittorrentTimer.set({ time : 2000, autostart : true });
 
 	updateTorrents();
 	// Add click on bittorrent-active-button
