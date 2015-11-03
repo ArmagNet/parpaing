@@ -146,10 +146,14 @@ $(function() {
 	$('input[type="checkbox"], input[type="radio"]').not("[data-switch-no-init]").bootstrapSwitch();
 
 	$("#bittorrent-active-button").on('switchChange.bootstrapSwitch', function(event, state) {
-		  console.log(this); // DOM element
-		  console.log(event); // jQuery event
-		  console.log(state); // true | false
-		  setActiveStatus(state);
+//		console.log(this); // DOM element
+//		console.log(event); // jQuery event
+//		console.log(state); // true | false
+
+		event.stopPropagation();
+		event.preventDefault();
+
+		setActiveStatus(state);
 	});
 
 	var bittorrentTimer = $.timer(updateTorrents);
