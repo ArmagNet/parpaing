@@ -83,7 +83,6 @@ function setActiveStatus() {
 	$.get(action, {}, function(data) {
 		updateActiveStatus(data.isActive);
 	}, "json");
-
 }
 
 function updateActiveStatus(isActive) {
@@ -91,10 +90,10 @@ function updateActiveStatus(isActive) {
 }
 
 function updateTorrentHandler(torrents) {
+	$("#bittorrent .list-group a").hide();
+
 	for(var index = 0; index < torrents.length; ++index) {
 		var torrent = torrents[index];
-
-		$("#bittorrent .list-group a").hide();
 
 		var item = $("#bittorrent .list-group *[id='" + torrent.name + "']");
 		if (item.length == 0) {
@@ -140,6 +139,7 @@ function updateTorrents() {
 
 $(function() {
 	$('input[type="checkbox"], input[type="radio"]').not("[data-switch-no-init]").bootstrapSwitch();
+	$("#bittorrent-active-button").click(setActiveStatus);
 
 	var bittorrentTimer = $.timer(updateTorrents);
 	bittorrentTimer.set({ time : 10000, autostart : true });
