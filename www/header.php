@@ -111,6 +111,11 @@ $language = SessionUtils::getLanguage($_SESSION);
 					<?php 	if (false) {?>
 					<li <?php if ($page == "telephone") echo 'class="active"'; ?>><a href="telephone.php"><?php echo lang("menu_telephone"); ?><?php if ($page == "telephone") echo ' <span class="sr-only">(current)</span>'; ?></a></li>
 					<?php 	}?>
+
+					<?php 	if (isset($config["parpaing"]["root_directory"]) && $config["parpaing"]["root_directory"]) {?>
+					<li <?php if ($page == "explorer") echo 'class="active"'; ?>><a href="explorer.php"><?php echo lang("menu_explorer"); ?><?php if ($page == "explorer") echo ' <span class="sr-only">(current)</span>'; ?></a></li>
+					<?php 	}?>
+
 					<?php }?>
 				</ul>
 

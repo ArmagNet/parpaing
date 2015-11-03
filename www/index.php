@@ -163,17 +163,17 @@ foreach($interfaces as $index => $interface) {
 						<?php
 							$availableMemory = $freeMemory / $totalMemory;
 							if ($availableMemory > .2) {
-								$classBarMemory = "progress-bar-success";
+								$memoryBarClass = "progress-bar-success";
 							}
 							else if ($availableMemory > .1) {
-								$classBarMemory = "progress-bar-warning";
+								$memoryBarClass = "progress-bar-warning";
 							}
 							else {
-								$classBarMemory = "progress-bar-danger";
+								$memoryBarClass = "progress-bar-danger";
 							}
 						?>
-						<div class="progress">
-							<div class="progress-bar <?php echo $classBarMemory; ?>" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+						<div class="progress" data-class="<?php echo $memoryBarClass; ?>" data-available="<?php echo $availableMemory * 100; ?>">
+							<div class="progress-bar <?php echo $memoryBarClass; ?>" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
 								style="width: <?php echo number_format($availableMemory * 100, 0) . "%"; ?>; text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;">
 								<span style="position: relative; left: 2px;"><?php echo number_format($availableMemory * 100, 1) . "%"; ?></span>
 							</div>
@@ -182,10 +182,10 @@ foreach($interfaces as $index => $interface) {
 				</div>
 
 				<div class="col-md-12" id="swap">
-					<div class="col-md-5 total"><label class="col-md-7"><?php echo lang("index_swap_total_label"); ?></label><span class="col-md-5"><?php echo humanFileSize($totalSwap, false, 0, 10); ?></span></div>
-					<div class="col-md-5 used"><label class="col-md-7"><?php echo lang("index_swap_used_label"); ?></label><span class="col-md-5"><?php echo humanFileSize($totalSwap - $freeSwap, false, 0, 10); ?></span></div>
+					<div class="col-md-5 total" data-size="<?php echo $totalSwap; ?>"><label class="col-md-7"><?php echo lang("index_swap_total_label"); ?></label><span class="col-md-5"><?php echo humanFileSize($totalSwap, false, 0, 10); ?></span></div>
+					<div class="col-md-5 used" data-size="<?php echo $totalSwap - $freeSwap; ?>"><label class="col-md-7"><?php echo lang("index_swap_used_label"); ?></label><span class="col-md-5"><?php echo humanFileSize($totalSwap - $freeSwap, false, 0, 10); ?></span></div>
 					<div class="col-md-2">
-						<div class="progress">
+						<div class="progress" data-used="<?php echo ($totalSwap - $freeSwap) / $totalSwap * 100; ?>">
 							<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
 								style="width: <?php echo number_format(($totalSwap - $freeSwap) / $totalSwap * 100, 0) . "%"; ?>; text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;">
 								<span style="position: relative; left: 2px;"><?php echo number_format(($totalSwap - $freeSwap) / $totalSwap * 100, 1) . "%"; ?></span>
@@ -200,7 +200,7 @@ foreach($interfaces as $index => $interface) {
 					<div class="col-md-5 total" data-size="<?php echo $ds; ?>"><label class="col-md-7"><?php echo lang("index_disk_total_label"); ?></label><span class="col-md-5"><?php echo humanFileSize($ds, false, 2); ?></span></div>
 					<div class="col-md-5 free" data-size="<?php echo $df; ?>"><label class="col-md-7"><?php echo lang("index_disk_free_label"); ?></label><span class="col-md-5"><?php echo humanFileSize($df, false, 2); ?></span></div>
 					<div class="col-md-2">
-						<div class="progress">
+						<div class="progress" data-available="<?php echo $df / $ds * 100; ?>">
 							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
 								style="width: <?php echo number_format($df / $ds * 100, 0) . "%"; ?>; text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;">
 								<span style="position: relative; left: 2px;"><?php echo number_format($df / $ds * 100, 1) . "%"; ?></span>
@@ -213,16 +213,16 @@ foreach($interfaces as $index => $interface) {
 
 				<div class="col-md-12">
 					<label class="col-md-3"><?php echo lang("index_cpu_load_label"); ?></label>
-					<span class="col-md-3"><?php echo $load[0]; ?></span>
-					<span class="col-md-3"><?php echo $load[1]; ?></span>
-					<span class="col-md-3"><?php echo $load[2]; ?></span>
+					<span class="col-md-3 load"><?php echo $load[0]; ?></span>
+					<span class="col-md-3 load"><?php echo $load[1]; ?></span>
+					<span class="col-md-3 load"><?php echo $load[2]; ?></span>
 				</div>
-				<div class="col-md-12">
+				<div class="col-md-12" id="number-of-cpus" data-cpus="<?php echo count($cpus) - 1; ?>">
 					<label class="col-md-3"><?php echo lang("index_cpu_nb_label"); ?></label>
 					<span class="col-md-3"><?php echo count($cpus) - 1; ?></span>
 				</div>
 				<?php foreach($cpus as $cpuIndex => $cpu) {?>
-				<div class="col-md-12" id="cpu<?php echo $cpuIndex; ?>" data-usage="<?php echo number_format($cpu["usage"], 1) . "%"; ?>">
+				<div class="col-md-12" id="cpu<?php echo $cpuIndex; ?>">
 					<label class="col-md-3"><?php
 						if ($cpuIndex) {
 							echo str_replace("{x}", $cpuIndex, lang("index_cpu_x_label"));
@@ -245,7 +245,7 @@ foreach($interfaces as $index => $interface) {
 								$cpuBarClass = "progress-bar-danger";
 							}
 						?>
-						<div class="progress">
+						<div class="progress" data-class="<?php echo $cpuBarClass; ?>" data-usage="<?php echo number_format($cpu["usage"], 1); ?>">
 							<div class="progress-bar <?php echo $cpuBarClass; ?>" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
 								style="width: <?php echo number_format($cpu["usage"], 0) . "%"; ?>; text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;">
 								<span style="position: relative; left: 2px;"><?php echo number_format($cpu["usage"], 1) . "%"; ?></span>
@@ -258,7 +258,7 @@ foreach($interfaces as $index => $interface) {
 				<?php if (count($interfaces)) {?>
 				<legend><?php echo lang("index_network_legend"); ?></legend>
 				<?php 	foreach($interfaces as $interface) {?>
-				<div class="col-md-12" id="interface-<?php echo $interface["name"]; ?>">
+				<div class="col-md-12 interface" id="interface-<?php echo $interface["name"]; ?>">
 					<label class="col-md-3"><?php echo $interface["name"]; ?> :</label>
 					<label class="col-md-2"><?php echo lang("index_network_download_label"); ?></label>
 					<span class="col-md-2 download" data-size="<?php echo $interface["in"]; ?>"><?php echo humanFileSize($interface["in"], false); ?>/s</span>
