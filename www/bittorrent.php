@@ -50,7 +50,7 @@ $isActive = $bittorrentBo->isActive();
 		<h4 class="list-group-item-heading"></h4>
 		<div class="list-group-item-text">
 			<div class="progress">
-				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+				<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
 					style="width: 0%; text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;">
 					<span style="position: relative; left: 2px;">0%</span>
 				</div>
@@ -77,6 +77,13 @@ function setActiveStatus() {
 	var isActive = $("#bittorrent-active-button").bootstrapSwitch("state");
 
 	// Call update;
+
+	var action = "bittorrent/actions/" + (isActive ? "do_enable_bittorrent.php" : "do_disable_bittorrent.php");
+
+	$.get(action, {}, function(data) {
+		updateActiveStatus(data.isActive);
+	}, "json");
+
 }
 
 function updateActiveStatus(isActive) {
@@ -86,6 +93,8 @@ function updateActiveStatus(isActive) {
 function updateTorrentHandler(torrents) {
 	for(var index = 0; index < torrents.length; ++index) {
 		var torrent = torrents[index];
+
+		$("#bittorrent .list-group a").hide();
 
 		var item = $("#bittorrent .list-group *[id='" + torrent.name + "']");
 		if (item.length == 0) {
@@ -100,6 +109,12 @@ function updateTorrentHandler(torrents) {
 		}
 
 		item.find(".list-group-item-heading").text(torrent.name);
+		if (torrent.done == "100%") {
+			item.find(".progress-bar").addClass("progress-bar-success").removeClass("progress-bar-info");
+		}
+		else {
+			item.find(".progress-bar").addClass("progress-bar-info").removeClass("progress-bar-success");
+		}
 		item.find(".progress-bar").css({width: torrent.done});
 		item.find(".progress-bar span").text(torrent.done);
 
@@ -109,6 +124,10 @@ function updateTorrentHandler(torrents) {
 		item.find(".status").text(torrent.status);
 		item.find(".downloaded").text(torrent.have + (torrent.have_unit ? torrent.have_unit : ""));
 		item.find(".eta").text(torrent.eta + (torrent.eta_unit ? torrent.eta_unit : ""));
+
+		item.data("torrentId", torrent.id);
+
+		item.show();
 	}
 }
 
