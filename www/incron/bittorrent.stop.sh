@@ -1,3 +1,3 @@
 #!/bin/bash
 
-/etc/init.d/transmission_daemon stop
+/etc/init.d/transmission-daemon stop

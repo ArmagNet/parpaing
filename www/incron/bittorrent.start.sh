@@ -1,3 +1,3 @@
 #!/bin/bash
 
-/etc/init.d/transmission_daemon start
+/etc/init.d/transmission-daemon start

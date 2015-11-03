@@ -73,8 +73,8 @@ $isActive = $bittorrentBo->isActive();
 <?php include("footer.php");?>
 <script>
 
-function setActiveStatus() {
-	var isActive = $("#bittorrent-active-button").bootstrapSwitch("state");
+function setActiveStatus(isActive) {
+	//	var isActive = $("#bittorrent-active-button").bootstrapSwitch("state");
 
 	// Call update;
 
