@@ -28,6 +28,7 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootbox.min.js"></script>
+<script src="js/bootstrap-switch.min.js"></script>
 <script src="js/moment-with-locales.js"></script>
 <script src="js/bootstrap-datetimepicker.js"></script>
 <script src="js/jquery.timer.js"></script>

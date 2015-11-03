@@ -141,3 +141,7 @@ div.channel-tv img {
 	width: 80px;
 	text-align: right;
 }
+
+div.breadcrumb {
+	padding: 8px 15px 6px 15px;
+}

@@ -48,6 +48,7 @@ $lang["menu_replay"] = "Replay";
 $lang["menu_telephone"] = "Téléphone";
 $lang["menu_wifi"] = "Wifi";
 $lang["menu_explorer"] = "Explorateur";
+$lang["menu_bittorrent"] = "BitTorrent";
 $lang["menu_upgrader"] = "Mise à jour";
 $lang["menu_logout"] = "Se déconnecter";
 
@@ -73,6 +74,7 @@ $lang["breadcrumb_replay"] = "Replay";
 $lang["breadcrumb_telephone"] = "Telephone";
 $lang["breadcrumb_wifi"] = "Wifi";
 $lang["breadcrumb_explorer"] = "Explorateur";
+$lang["breadcrumb_bittorrent"] = "BitTorrent";
 $lang["breadcrumb_upgrader"] = "Mise à jour";
 $lang["breadcrumb_about"] = "À Propos";
 

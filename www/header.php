@@ -59,6 +59,7 @@ $language = SessionUtils::getLanguage($_SESSION);
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link href="css/bootstrap-switch.min.css" rel="stylesheet">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -113,7 +114,17 @@ $language = SessionUtils::getLanguage($_SESSION);
 					<?php 	}?>
 
 					<?php 	if (isset($config["parpaing"]["root_directory"]) && $config["parpaing"]["root_directory"]) {?>
-					<li <?php if ($page == "explorer") echo 'class="active"'; ?>><a href="explorer.php"><?php echo lang("menu_explorer"); ?><?php if ($page == "explorer") echo ' <span class="sr-only">(current)</span>'; ?></a></li>
+
+					<li class="dropdown <?php if ($page == "explorer" || $page == "bittorrent") echo 'active'; ?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						<?php if ($page == "explorer" || $page != "bittorrent") { ?><?php echo lang("menu_explorer"); ?><?php }?>
+						<?php if ($page == "bittorrent") { ?><?php echo lang("menu_bittorrent"); ?><?php }?>
+						<span class="caret"></span> </a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="explorer.php"><?php echo lang("menu_explorer"); ?></a></li>
+							<li><a href="bittorrent.php"><?php echo lang("menu_bittorrent"); ?></a></li>
+						</ul>
+					</li>
+
 					<?php 	}?>
 
 					<?php }?>
