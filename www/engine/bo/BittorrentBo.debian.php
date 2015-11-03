@@ -32,6 +32,7 @@ class BittorrentBo {
 		$activeStatus = BittorrentBo::sendCommand("/etc/init.d/transmission-daemon status");
 
 		$activeStatus = strpos($activeStatus, "not running") === false;
+//		$activeStatus = true;
 
 		return $activeStatus;
 	}
@@ -50,6 +51,20 @@ class BittorrentBo {
 
 	function getTorrents() {
 		$auth = $this->config["bittorrent"]["user"] . ":" . $this->config["bittorrent"]["user"];
+
+		$result = "ID     Done       Have  ETA           Up    Down  Ratio  Status       Name
+1   100%   320.5 MB  Done         0.0     0.0    0.0  Seeding      xxx.yyy
+2   100%   396.2 MB  Done         0.0     0.0    0.0  Idle         lorem.ipsum
+3   100%   298.1 MB  Done         0.0     0.0    0.0  Idle         doloris.est
+4   100%   257.3 MB  Done         0.0     0.0    0.0  Idle         zzz.txt
+5     0%       None  Unknown      0.0     0.0   None  Idle         titi[huhu]
+6     0%   65.54 kB  10 hrs       0.0    44.0    0.0  Downloading  big.file.zip
+7     1%    4.89 MB  18 min       0.0  1244.0    0.0  Downloading  big.file.zip
+8     7%   24.96 MB  5 min        0.0  1354.0    0.0  Downloading  big.file.zip
+9    82%   284.9 MB  45 sec       0.0  1725.0    0.0  Downloading  big.file.zip
+Sum:        1.27 GB               0.0     0.0
+";
+
 		$result = BittorrentBo::sendCommand("transmission-remote --auth $auth -l");
 
 		$result = preg_split("/\n/", $result);
@@ -57,14 +72,9 @@ class BittorrentBo {
 		$torrents = array();
 
 		foreach($result as $index => $line) {
-			if (!$index) continue;
-			if ($index == count($result) - 1) continue;
-
-// 			echo $line;
-// 			echo "\n";
-// 			echo "\t";
-
 			$data = preg_split("/[\s]+/", trim($line));
+
+			if (!is_numeric($data[0])) continue;
 
 // 			print_r($data);
 

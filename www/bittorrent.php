@@ -37,11 +37,38 @@ $isActive = $bittorrentBo->isActive();
 
 	<div class="col-md-12" id="bittorrent">
 
+		<div class="list-group">
+		</div>
 
 	</div>
 </div>
 
 <div class="lastDiv"></div>
+
+<templates>
+	<a href="#" aria-template-id="template-torrent" class="template list-group-item">
+		<h4 class="list-group-item-heading"></h4>
+		<div class="list-group-item-text">
+			<div class="progress">
+				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+					style="width: 0%; text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;">
+					<span style="position: relative; left: 2px;">0%</span>
+				</div>
+			</div>
+			<div>
+				<small>
+					<span class="status"></span>
+					<span class="downloaded"></span>
+					<span class="eta"></span>
+					<span class="glyphicon glyphicon-arrow-down"></span>
+					<span class="download-rate"></span>
+					<span class="glyphicon glyphicon-arrow-up"></span>
+					<span class="upload-rate"></span>
+				</small>
+			</div>
+		</div>
+	</a>
+</templates>
 
 <?php include("footer.php");?>
 <script>
@@ -56,9 +83,39 @@ function updateActiveStatus(isActive) {
 	$("#bittorrent-active-button").bootstrapSwitch("state", isActive);
 }
 
+function updateTorrentHandler(torrents) {
+	for(var index = 0; index < torrents.length; ++index) {
+		var torrent = torrents[index];
+
+		var item = $("#bittorrent .list-group *[id='" + torrent.name + "']");
+		if (item.length == 0) {
+			item = $("*[aria-template-id=template-torrent]").template(
+					"use", {
+						data: {}
+				});
+
+			item.attr("id", torrent.name);
+
+			$("#bittorrent .list-group").append(item);
+		}
+
+		item.find(".list-group-item-heading").text(torrent.name);
+		item.find(".progress-bar").css({width: torrent.done});
+		item.find(".progress-bar span").text(torrent.done);
+
+		item.find(".download-rate").text(humanFileSize(torrent.down, false) + "/s");
+		item.find(".upload-rate").text(humanFileSize(torrent.up, false) + "/s");
+
+		item.find(".status").text(torrent.status);
+		item.find(".downloaded").text(torrent.have + (torrent.have_unit ? torrent.have_unit : ""));
+		item.find(".eta").text(torrent.eta + (torrent.eta_unit ? torrent.eta_unit : ""));
+	}
+}
+
 function updateTorrents() {
 	$.get("bittorrent/actions/do_get_torrents.php", {}, function(data) {
 		updateActiveStatus(data.isActive);
+		updateTorrentHandler(data.torrents);
 	}, "json");
 }
 
