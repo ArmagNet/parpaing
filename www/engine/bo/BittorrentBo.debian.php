@@ -46,7 +46,10 @@ class BittorrentBo {
 	function deactivate() {
 		file_put_contents($this->config["incron"]["path"] . "/bittorrent.stop", "1");
 
-		sleep(10);
+		do {
+			sleep(1);
+		}
+		while ($this->isActive());
 	}
 
 	function getTorrents() {
