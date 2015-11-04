@@ -58,8 +58,8 @@ $isActive = $bittorrentBo->isActive();
 <div class="lastDiv"></div>
 
 <templates>
-	<template aria-template-id="template-remove-question"><?php echo lang("bittorrent_question_remove"); ?></template>
-	<template aria-template-id="template-trash-question"><?php echo lang("bittorrent_question_trash"); ?></template>
+	<span aria-template-id="template-remove-question"><?php echo lang("bittorrent_question_remove"); ?></span>
+	<span aria-template-id="template-trash-question"><?php echo lang("bittorrent_question_trash"); ?></span>
 	<a href="#" aria-template-id="template-torrent" class="template list-group-item torrent-item">
 		<h4 class="list-group-item-heading"></h4>
 		<div class="list-group-item-text">
