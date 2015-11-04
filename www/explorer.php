@@ -188,6 +188,7 @@ function getPermString($perms) {
 			$label = substr($file, strrpos($file, "/") + 1);
 
 			$mimetype = finfo_file($finfo, $file);
+			$external = false;
 			switch($mimetype) {
 				case "directory":
 					$type = "directory";
@@ -204,6 +205,13 @@ function getPermString($perms) {
 					$icon = "glyphicon-picture";
 //					$toolpath = "viewImage.php";
 					$toolpath = "do_downloadFile.php";
+					break;
+				case "video/mp4":
+					$type = "file";
+					$icon = "glyphicon-film";
+//					$toolpath = "viewFilm.php";
+					$toolpath = "do_downloadFile.php";
+					$external = true;
 					break;
 				default:
 					$type = "file";
@@ -227,12 +235,18 @@ function getPermString($perms) {
 		<li
 			data-size="<?php echo $filesize; ?>"
 			data-mimetype="<?php echo $mimetype; ?>"
+			data-url="do_downloadFile.php?path=<?php echo $filepath; ?>"
 			class="<?php echo $type; ?> <?php if ($isHighlited) { echo "highlight"; }?>">
 				<span class="glyphicon <?php echo $icon; ?>"></span>
 
 				<code class="file-permissions"><?php echo $permissions; ?></code>
 
-				<span class="file-name"><a href="<?php echo $toolpath; ?>?path=<?php echo $filepath; ?>"><?php echo $label; ?></a></span>
+				<span class="file-name">
+					<a href="<?php echo $toolpath; ?>?path=<?php echo $filepath; ?>"><?php echo $label; ?></a>
+					<?php if ($external) {?>
+					<a data-external="true" href="<?php echo $toolpath; ?>?path=<?php echo $filepath; ?>"><span class="glyphicon glyphicon-new-window"></span></a>
+					<?php }?>
+				</span>
 
 				<code class="file-owner"><?php echo $owner["name"]; ?></code>
 				<code class="file-group"><?php echo $group["name"]; ?></code>
@@ -251,6 +265,43 @@ function getPermString($perms) {
 
 <div class="lastDiv"></div>
 
+<templates>
+	<div aria-template-id="template-video" align="center" class="embed-responsive embed-responsive-16by9">
+	    <video controls class="embed-responsive-item">
+	        <source src="${video_url}" type="${video_type}">
+	    </video>
+	</div>
+
+</templates>
+
 <?php include("footer.php");?>
+<script>
+
+$(function() {
+
+	$("li[data-mimetype*=video]").on("click", "a[data-external!=true]", function(event) {
+		event.preventDefault();
+		var li = $(this).parents("li");
+
+		var url = li.data("url");
+		var mimetype = li.data("mimetype");
+
+		var videoPlayer = 	$("*[aria-template-id=template-video]").template(
+								"use", {
+								data: {video_url : url, video_type: mimetype}
+							});
+
+		bootbox.dialog({
+            title: li.find(".file-name").text(),
+            message: videoPlayer,
+            buttons: {
+            }
+        });
+
+	});
+
+});
+
+</script>
 </body>
 </html>

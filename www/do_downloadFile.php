@@ -41,7 +41,8 @@ if (file_exists($fullpath) && is_file($fullpath)) {
 
 	header('Content-Type: application/octet-stream');
 	header("Content-Transfer-Encoding: Binary");
-	header("Content-disposition: attachment; filename=\"$filename\"");
+	header("Content-Disposition: attachment; filename=\"$filename\"");
+	header('Content-Length: ' . filesize($fullpath));
 
 	readfile($fullpath);
 
