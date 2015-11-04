@@ -116,6 +116,11 @@ function getPermString($perms) {
 				}
 			}
 
+			$highlight = "";
+			if (isset($_REQUEST["highlight"])) {
+				$highlight = $_REQUEST["highlight"];
+			}
+
 			$index = -1;
 			$previousIndex = -1;
 			$paths = array();
@@ -156,11 +161,28 @@ function getPermString($perms) {
 
 		usort($files, "orderFiles");
 
-//		print_r($files);
-
 		$finfo = finfo_open(FILEINFO_MIME_TYPE);
 
 		foreach($files as $file) {
+			$isHighlited = false;
+
+			if ($highlight) {
+				$matches = array();
+				$regexp = $highlight;
+				$regexp = str_replace("\\", "\\\\", $regexp);
+				$regexp = str_replace(".", "\.", $regexp);
+				$regexp = str_replace("[", "\[", $regexp);
+				$regexp = str_replace("]", "\]", $regexp);
+				$regexp = str_replace("(", "\(", $regexp);
+				$regexp = str_replace(")", "\)", $regexp);
+
+				preg_match_all("($regexp)", $file, $matches);
+
+				if (count($matches[0])) {
+					$isHighlited = true;
+				}
+			}
+
 			$filepath = str_replace($config["parpaing"]["root_directory"], "", $file);
 
 			$label = substr($file, strrpos($file, "/") + 1);
@@ -205,7 +227,7 @@ function getPermString($perms) {
 		<li
 			data-size="<?php echo $filesize; ?>"
 			data-mimetype="<?php echo $mimetype; ?>"
-			class="<?php echo $type; ?>">
+			class="<?php echo $type; ?> <?php if ($isHighlited) { echo "highlight"; }?>">
 				<span class="glyphicon <?php echo $icon; ?>"></span>
 
 				<code class="file-permissions"><?php echo $permissions; ?></code>

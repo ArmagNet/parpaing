@@ -159,3 +159,7 @@ span.disabled {
 #torrent {
 	margin-bottom: 10px;
 }
+
+.highlight {
+	background-color: #FFFFCD;
+}
