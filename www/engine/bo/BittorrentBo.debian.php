@@ -51,6 +51,27 @@ class BittorrentBo {
 		while ($this->isActive());
 	}
 
+	function action($action, $torrents) {
+		$auth = $this->config["bittorrent"]["user"] . ":" . $this->config["bittorrent"]["user"];
+
+		$argument = "--info";
+
+		switch($action) {
+			case "pause" :
+				$argument = "--stop";
+				break;
+			case "resume" :
+				$argument = "--start";
+				break;
+		}
+
+		$ids = implode(",", $torrents);
+
+		$result = BittorrentBo::sendCommand("transmission-remote --auth $auth --torrent \"".$ids."\" $argument");
+
+		return $result;
+	}
+
 	function addTorrent($torrent) {
 		$auth = $this->config["bittorrent"]["user"] . ":" . $this->config["bittorrent"]["user"];
 		$result = BittorrentBo::sendCommand("transmission-remote --auth $auth --add \"".$torrent."\"");

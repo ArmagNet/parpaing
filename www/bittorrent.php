@@ -49,7 +49,6 @@ $isActive = $bittorrentBo->isActive();
 			</span>
 		</div>
 
-
 		<div class="list-group">
 		</div>
 
@@ -59,7 +58,7 @@ $isActive = $bittorrentBo->isActive();
 <div class="lastDiv"></div>
 
 <templates>
-	<a href="#" aria-template-id="template-torrent" class="template list-group-item">
+	<a href="#" aria-template-id="template-torrent" class="template list-group-item torrent-item">
 		<h4 class="list-group-item-heading"></h4>
 		<div class="list-group-item-text">
 			<div class="progress">
@@ -94,7 +93,7 @@ $isActive = $bittorrentBo->isActive();
 <script>
 
 function addTorrentHandler() {
-	$url = $("#torrent-input").val();
+	var url = $("#torrent-input").val();
 	$("#add-torrent-button").attr("disabled", "disabled");
 
 	$.post("bittorrent/actions/do_add_torrent.php", {torrent : url}, function(data) {
@@ -179,6 +178,20 @@ function updateTorrents() {
 	}, "json");
 }
 
+function pauseTorrent(torrents) {
+	actionTorrent("pause", torrents);
+}
+
+function resumeTorrent(torrents) {
+	actionTorrent("resume", torrents);
+}
+
+function actionTorrent(action, torrents) {
+	$.post("do_action_torrents", {"torrents[]" : torrents, action: action}, function(data) {
+	}, "json");
+}
+
+
 $(function() {
 	$('input[type="checkbox"], input[type="radio"]').not("[data-switch-no-init]").bootstrapSwitch();
 
@@ -195,7 +208,30 @@ $(function() {
 	bittorrentTimer.set({ time : 2000, autostart : true });
 
 	updateTorrents();
-	// Add click on bittorrent-active-button
+
+	$("#bittorrent .list-group".on("click", ".torrent-item .glyphicon-pause", function(event) {
+		event.stopPropagation();
+		event.preventDefault();
+
+		if (!$(this).attr("disabled")) {
+			var item = $(this).parents(".torrent-item");
+			var torrentId = item.data("torrentId");
+
+			pauseTorrent([torrentId]);
+		}
+	});
+
+	$("#bittorrent .list-group".on("click", ".torrent-item .glyphicon-play", function(event) {
+		event.stopPropagation();
+		event.preventDefault();
+
+		if (!$(this).attr("disabled")) {
+			var item = $(this).parents(".torrent-item");
+			var torrentId = item.data("torrentId");
+
+			resumeTorrent([torrentId]);
+		}
+	});
 });
 </script>
 </body>

@@ -155,3 +155,7 @@ span.disabled {
   cursor: not-allowed;
 /*  background-color: #eee; */
 }
+
+#torrent {
+	margin-bottom: 10px;
+}
