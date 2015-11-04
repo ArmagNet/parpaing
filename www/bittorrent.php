@@ -280,6 +280,15 @@ $(function() {
 
 		trashTorrent([torrentId]);
 	});
+
+	$("#bittorrent .list-group").on("click", ".torrent-item .glyphicon-eye-open", function(event) {
+		event.stopPropagation();
+		event.preventDefault();
+
+		var item = $(this).parents(".torrent-item");
+
+		window.location.replace("explorer.php?highlight=" + item.attr("id"));
+	});
 });
 </script>
 </body>
