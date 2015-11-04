@@ -58,6 +58,8 @@ $isActive = $bittorrentBo->isActive();
 <div class="lastDiv"></div>
 
 <templates>
+	<template aria-template-id="template-remove-question"><?php echo lang("bittorrent_question_remove"); ?></template>
+	<template aria-template-id="template-trash-question"><?php echo lang("bittorrent_question_trash"); ?></template>
 	<a href="#" aria-template-id="template-torrent" class="template list-group-item torrent-item">
 		<h4 class="list-group-item-heading"></h4>
 		<div class="list-group-item-text">
@@ -69,8 +71,11 @@ $isActive = $bittorrentBo->isActive();
 			</div>
 			<div>
 				<small>
+					<span class="glyphicon glyphicon-cog"></span>
 					<span class="status"></span>
+					<span class="glyphicon glyphicon-file"></span>
 					<span class="downloaded"></span>
+					<span class="glyphicon glyphicon-time"></span>
 					<span class="eta"></span>
 					<span class="glyphicon glyphicon-arrow-down"></span>
 					<span class="download-rate"></span>
@@ -140,10 +145,10 @@ function updateTorrentHandler(torrents) {
 
 		item.find(".list-group-item-heading").text(torrent.name);
 		if (torrent.done == "100%") {
-			item.find(".progress-bar").addClass("progress-bar-success").removeClass("progress-bar-info");
+			item.find(".progress-bar").addClass("progress-bar-success").removeClass("progress-bar-info").removeClass("progress-bar-disabled");
 		}
 		else {
-			item.find(".progress-bar").addClass("progress-bar-info").removeClass("progress-bar-success");
+			item.find(".progress-bar").addClass("progress-bar-info").removeClass("progress-bar-success").removeClass("progress-bar-disabled");
 		}
 		item.find(".progress-bar").css({width: torrent.done});
 		item.find(".progress-bar span").text(torrent.done);
@@ -186,11 +191,34 @@ function resumeTorrent(torrents) {
 	actionTorrent("resume", torrents);
 }
 
-function actionTorrent(action, torrents) {
-	$.post("do_action_torrents", {"torrents[]" : torrents, action: action}, function(data) {
-	}, "json");
+function removeTorrent(torrents) {
+	bootbox.setLocale("fr");
+	var question = $("*[aria-template-id=template-remove-question]").template("use", {
+				data: {}
+		}).text();
+	bootbox.confirm(question, function(result) {
+		if (result) {
+			actionTorrent("remove", torrents);
+		}
+	});
 }
 
+function trashTorrent(torrents) {
+	bootbox.setLocale("fr");
+	var question = $("*[aria-template-id=template-trash-question]").template("use", {
+		data: {}
+	}).text();
+	bootbox.confirm(question, function(result) {
+		if (result) {
+			actionTorrent("trash", torrents);
+		}
+	});
+}
+
+function actionTorrent(action, torrents) {
+	$.post("bittorrent/actions/do_action_torrents.php", {"torrents[]" : torrents, action: action}, function(data) {
+	}, "json");
+}
 
 $(function() {
 	$('input[type="checkbox"], input[type="radio"]').not("[data-switch-no-init]").bootstrapSwitch();
@@ -209,7 +237,7 @@ $(function() {
 
 	updateTorrents();
 
-	$("#bittorrent .list-group".on("click", ".torrent-item .glyphicon-pause", function(event) {
+	$("#bittorrent .list-group").on("click", ".torrent-item .glyphicon-pause", function(event) {
 		event.stopPropagation();
 		event.preventDefault();
 
@@ -221,7 +249,7 @@ $(function() {
 		}
 	});
 
-	$("#bittorrent .list-group".on("click", ".torrent-item .glyphicon-play", function(event) {
+	$("#bittorrent .list-group").on("click", ".torrent-item .glyphicon-play", function(event) {
 		event.stopPropagation();
 		event.preventDefault();
 
@@ -231,6 +259,26 @@ $(function() {
 
 			resumeTorrent([torrentId]);
 		}
+	});
+
+	$("#bittorrent .list-group").on("click", ".torrent-item .glyphicon-remove", function(event) {
+		event.stopPropagation();
+		event.preventDefault();
+
+		var item = $(this).parents(".torrent-item");
+		var torrentId = item.data("torrentId");
+
+		removeTorrent([torrentId]);
+	});
+
+	$("#bittorrent .list-group").on("click", ".torrent-item .glyphicon-trash", function(event) {
+		event.stopPropagation();
+		event.preventDefault();
+
+		var item = $(this).parents(".torrent-item");
+		var torrentId = item.data("torrentId");
+
+		trashTorrent([torrentId]);
 	});
 });
 </script>

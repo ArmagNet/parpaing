@@ -107,6 +107,8 @@ $lang["index_network_download_label"] = "Download :";
 $lang["index_network_upload_label"] = "Upload :";
 
 $lang["bittorrent_url_label"] = "URL / Magnet :";
+$lang["bittorrent_question_remove"] = "Do you want to remove the torrent ?";
+$lang["bittorrent_question_trash"] = "Do you want to remove the torrent and associated files ?";
 
 // Rates
 

@@ -57,6 +57,12 @@ class BittorrentBo {
 		$argument = "--info";
 
 		switch($action) {
+			case "remove" :
+				$argument = "--remove";
+				break;
+			case "trash" :
+				$argument = "--remove-and-delete";
+				break;
 			case "pause" :
 				$argument = "--stop";
 				break;
