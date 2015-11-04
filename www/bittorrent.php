@@ -287,7 +287,7 @@ $(function() {
 
 		var item = $(this).parents(".torrent-item");
 
-		window.location.replace("explorer.php?highlight=" + item.attr("id"));
+		window.location.assign("explorer.php?highlight=" + item.attr("id"));
 	});
 });
 </script>
