@@ -37,6 +37,19 @@ $isActive = $bittorrentBo->isActive();
 
 	<div class="col-md-12" id="bittorrent">
 
+		<div id="torrent" class="input-group" style="display: none;">
+			<div class="input-group-btn">
+				<span class="btn btn-default disabled" style="color: black !important;">
+	 				<?php echo lang("bittorrent_url_label"); ?>
+				</span>
+			</div>
+			<input type="text" id="torrent-input" class="form-control" placeholder="" />
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button" id="add-torrent-button"><span class="glyphicon glyphicon-plus"></span></button>
+			</span>
+		</div>
+
+
 		<div class="list-group">
 		</div>
 
@@ -64,6 +77,13 @@ $isActive = $bittorrentBo->isActive();
 					<span class="download-rate"></span>
 					<span class="glyphicon glyphicon-arrow-up"></span>
 					<span class="upload-rate"></span>
+
+					<span class="glyphicon glyphicon-play text-success"></span>
+					<span class="glyphicon glyphicon-pause text-info"></span>
+					<span class="glyphicon glyphicon-remove text-danger"></span>
+					<span class="glyphicon glyphicon-trash text-danger"></span>
+					<span class="glyphicon glyphicon-eye-open text-success"></span>
+
 				</small>
 			</div>
 		</div>
@@ -73,12 +93,18 @@ $isActive = $bittorrentBo->isActive();
 <?php include("footer.php");?>
 <script>
 
+function addTorrentHandler() {
+	$url = $("#torrent-input").val();
+	$("#add-torrent-button").attr("disabled", "disabled");
+
+	$.post("bittorrent/actions/do_add_torrent.php", {torrent : url}, function(data) {
+		$("#torrent-input").val("");
+		$("#add-torrent-button").removeAttr("disabled");
+	}, "json");
+}
+
 function setActiveStatus(isActive) {
 	$("#bittorrent-active-button").bootstrapSwitch("disabled", true);
-
-	//	var isActive = $("#bittorrent-active-button").bootstrapSwitch("state");
-
-	// Call update;
 
 	var action = "bittorrent/actions/" + (isActive ? "do_enable_bittorrent.php" : "do_disable_bittorrent.php");
 
@@ -91,6 +117,7 @@ function setActiveStatus(isActive) {
 function updateActiveStatus(isActive) {
 	if (!$("#bittorrent-active-button").bootstrapSwitch("disabled")) {
 		$("#bittorrent-active-button").bootstrapSwitch("state", isActive);
+		$("#torrent")[isActive ? "show" : "hide"]();
 	}
 }
 
@@ -126,6 +153,16 @@ function updateTorrentHandler(torrents) {
 		item.find(".upload-rate").text(humanFileSize(torrent.up, false) + "/s");
 
 		item.find(".status").text(torrent.status);
+		if (torrent.status == "Stopped") {
+			item.find(".progress-bar").removeClass("progress-bar-info").removeClass("progress-bar-success").addClass("progress-bar-disabled");
+			item.find(".glyphicon-pause").addClass("disabled");
+			item.find(".glyphicon-play").removeClass("disabled");
+		}
+		else {
+			item.find(".glyphicon-pause").removeClass("disabled");
+			item.find(".glyphicon-play").addClass("disabled");
+		}
+
 		item.find(".downloaded").text(torrent.have + (torrent.have_unit ? torrent.have_unit : ""));
 		item.find(".eta").text(torrent.eta + (torrent.eta_unit ? torrent.eta_unit : ""));
 
@@ -146,15 +183,13 @@ $(function() {
 	$('input[type="checkbox"], input[type="radio"]').not("[data-switch-no-init]").bootstrapSwitch();
 
 	$("#bittorrent-active-button").on('switchChange.bootstrapSwitch', function(event, state) {
-//		console.log(this); // DOM element
-//		console.log(event); // jQuery event
-//		console.log(state); // true | false
-
 		event.stopPropagation();
 		event.preventDefault();
 
 		setActiveStatus(state);
 	});
+
+	$("#add-torrent-button").click(addTorrentHandler);
 
 	var bittorrentTimer = $.timer(updateTorrents);
 	bittorrentTimer.set({ time : 2000, autostart : true });

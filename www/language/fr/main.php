@@ -106,6 +106,8 @@ $lang["index_network_legend"] = "Réseau";
 $lang["index_network_download_label"] = "Download :";
 $lang["index_network_upload_label"] = "Upload :";
 
+$lang["bittorrent_url_label"] = "URL / Magnet :";
+
 // Rates
 
 $lang["memory_rate"] = "Mémoire";

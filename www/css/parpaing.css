@@ -145,3 +145,13 @@ div.channel-tv img {
 div.breadcrumb {
 	padding: 8px 15px 6px 15px;
 }
+
+.progress-bar-disabled {
+  background-color: #eee;
+}
+
+span.disabled {
+  color: #eee !important;
+  cursor: not-allowed;
+/*  background-color: #eee; */
+}
