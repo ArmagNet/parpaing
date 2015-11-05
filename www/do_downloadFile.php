@@ -44,7 +44,8 @@ if (file_exists($fullpath) && is_file($fullpath)) {
 	header("Content-Disposition: attachment; filename=\"$filename\"");
 	header('Content-Length: ' . filesize($fullpath));
 
-	readfile($fullpath);
+	set_time_limit(0);
 
+	readfile($fullpath);
 }
 ?>

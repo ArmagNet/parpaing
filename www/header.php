@@ -60,6 +60,7 @@ $language = SessionUtils::getLanguage($_SESSION);
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 <link href="css/bootstrap-switch.min.css" rel="stylesheet">
+<link href="css/ekko-lightbox.min.css" rel="stylesheet">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

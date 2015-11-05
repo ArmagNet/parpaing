@@ -31,6 +31,7 @@
 <script src="js/bootstrap-switch.min.js"></script>
 <script src="js/moment-with-locales.js"></script>
 <script src="js/bootstrap-datetimepicker.js"></script>
+<script src="js/ekko-lightbox.min.js"></script>
 <script src="js/jquery.timer.js"></script>
 <script src="js/jquery.template.js"></script>
 <script src="js/user.js"></script>
