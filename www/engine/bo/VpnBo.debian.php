@@ -74,7 +74,11 @@ class VpnBo {
 	function deactivate() {
 		file_put_contents($this->config["incron"]["path"] . "/openvpn.deactivate", "1");
 
-		sleep(1);
+
+		do {
+			sleep(1);
+		}
+		while ($this->isActive());
 	}
 
 	static function sendCommand($cmd) {

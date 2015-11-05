@@ -39,7 +39,10 @@ class BittorrentBo {
 	function activate() {
 		file_put_contents($this->config["incron"]["path"] . "/bittorrent.start", "1");
 
-		sleep(2);
+		do {
+			sleep(1);
+		}
+		while (!$this->isActive());
 	}
 
 	function deactivate() {

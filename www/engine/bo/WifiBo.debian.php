@@ -33,21 +33,22 @@ class WifiBo {
 		WifiBo::sendCommand("iwinfo radio0 assoclist");
 	}
 
+	function isActive() {
+		$activeStatus = WifiBo::sendCommand("/etc/init.d/hostapd status");
+
+		$activeStatus = strpos($activeStatus, "not running") === false;
+
+		return $activeStatus;
+	}
+
 	function getInfo() {
 		$info = WifiBo::sendCommand("cat /etc/hostapd/hostapd.conf");
 
 		$lines = explode("\n", $info);
 		$infos = array();
 
-		$infos["disabled"] = WifiBo::sendCommand("/etc/init.d/hostapd status");
+		$infos["disabled"] = $this->isActive() ? 0 : 1;
 		$infos["encryption"] = "none";
-
-		if (strpos($infos["disabled"], "not running") === false) {
-			$infos["disabled"] = 0;
-		}
-		else {
-			$infos["disabled"] = 1;
-		}
 
 		foreach($lines as $line) {
 			if (strlen($line) > 0 && substr($line, 0, 1) == "#") continue;
@@ -102,13 +103,20 @@ class WifiBo {
 
 	function activate() {
 		file_put_contents($this->config["incron"]["path"] . "/hostapd.activate", "1");
-		sleep(10);
 
+		do {
+			sleep(1);
+		}
+		while (!$this->isActive());
 	}
 
 	function deactivate() {
 		file_put_contents($this->config["incron"]["path"] . "/hostapd.deactivate", "1");
-		sleep(2);
+
+		do {
+			sleep(1);
+		}
+		while ($this->isActive());
 	}
 
 	function setConfiguration($configuration) {
