@@ -258,7 +258,7 @@ function getPermString($perms) {
 			data-mimetype="<?php echo $mimetype; ?>"
 			data-url="do_downloadFile.php?path=<?php echo $filepath; ?>"
 			class="<?php echo $type; ?> <?php if ($isHighlited) { echo "highlight"; }?>">
-				<span class="glyphicon <?php echo $icon; ?>"></span>
+				<span class="glyphicon <?php echo $icon; ?> file-icon"></span>
 
 				<code class="file-permissions"><?php echo $permissions; ?></code>
 
