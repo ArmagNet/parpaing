@@ -116,7 +116,8 @@ div.channel-tv img {
 .file-group,
 .file-creation,
 .file-modification,
-.file-size {
+.file-size,
+.file-external {
 	display: inline-block;
 /*	font-family: courrier; */
 }
@@ -132,9 +133,18 @@ div.channel-tv img {
 }
 
 .file-name {
-    width: 250px;
+    width: 286px;
     text-align: right;
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+    position: relative;
+    top: 5px;
+}
+
+.file-name.with-external {
+    width: 268px;
 }
 
 .file-size {

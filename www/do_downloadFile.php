@@ -47,6 +47,9 @@ if (file_exists($fullpath) && is_file($fullpath)) {
 
 	ignore_user_abort(true);
 	$fh = fopen($fullpath, "r");
+	if (!$fh) {
+		exit();
+	}
 	$currentPosition = 0;
 
 // 	if (isset($_REQUEST["streaming"])) {

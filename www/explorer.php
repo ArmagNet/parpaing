@@ -262,12 +262,14 @@ function getPermString($perms) {
 
 				<code class="file-permissions"><?php echo $permissions; ?></code>
 
-				<span class="file-name">
+				<span class="file-name <?php if ($external) {?>with-external<?php }?>" title="<?php echo $label; ?>">
 					<a href="<?php echo $toolpath; ?>?path=<?php echo $filepath; ?>"><?php echo $label; ?></a>
-					<?php if ($external) {?>
-					<a data-external="true" href="<?php echo $toolpath; ?>?path=<?php echo $filepath; ?>"><span class="glyphicon glyphicon-save-file"></span></a>
-					<?php }?>
 				</span>
+				<?php if ($external) {?>
+				<span class="file-external">
+					<a data-external="true" href="<?php echo $toolpath; ?>?path=<?php echo $filepath; ?>"><span class="glyphicon glyphicon-save-file"></span></a>
+				</span>
+				<?php }?>
 
 				<code class="file-owner"><?php echo $owner["name"]; ?></code>
 				<code class="file-group"><?php echo $group["name"]; ?></code>
