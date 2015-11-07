@@ -49,12 +49,12 @@ if (file_exists($fullpath) && is_file($fullpath)) {
 	$fh = fopen($fullpath, "r");
 	$currentPosition = 0;
 
-	if (isset($_REQUEST["streaming"])) {
-		$speed = 200 * 1024 / 5;
-	}
-	else {
+// 	if (isset($_REQUEST["streaming"])) {
+// 		$speed = 200 * 1024 / 5;
+// 	}
+// 	else {
 		$speed = 20000 * 1024 / 5;
-	}
+// 	}
 	$gap = 1000000000 / 5;
 
 	$currentSpeed = 0;
@@ -67,7 +67,7 @@ if (file_exists($fullpath) && is_file($fullpath)) {
 
 		echo $contents;
 
-		if ($currentSpeed > $speed) {
+		if ($currentSpeed >= $speed) {
 
 			$diff = microtime(true) - $currentTime;
 			$diff * 1000000000;
