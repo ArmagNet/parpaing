@@ -1,6 +1,21 @@
 $(function() {
 
-	$("li[data-mimetype*=video]").on("click", "a[data-external!=true]", function(event) {
+	$("#explorer").on("click", "#add-file-button", function(event) {
+		alert("add-file-button");
+	});
+	$("#explorer").on("click", "#add-directory-button", function(event) {
+		alert("add-directory-button");
+	});
+
+	$("#explorer").on("click", "li.directory a", function(event) {
+		event.preventDefault();
+		$.get($(this).attr("href"), {}, function(data) {
+			$("#explorer").children().remove();
+			$("#explorer").append($(data).find("#explorer").children());
+		}, "html");
+	});
+
+	$("#explorer").on("click", "li[data-mimetype*=video] a[data-external!=true]", function(event) {
 		event.preventDefault();
 		var li = $(this).parents("li");
 
@@ -19,9 +34,11 @@ $(function() {
             buttons: {
             }
         });
+		var zIndex = $(".modal-backdrop").css("z-index");
+		$(".modal-dialog").css({"z-index": zIndex});
 	});
 
-	$("li[data-mimetype*=audio]").on("click", "a[data-external!=true]", function(event) {
+	$("#explorer").on("click", "li[data-mimetype*=audio] a[data-external!=true]", function(event) {
 		event.preventDefault();
 		var li = $(this).parents("li");
 
@@ -40,10 +57,14 @@ $(function() {
             buttons: {
             }
         });
+		var zIndex = $(".modal-backdrop").css("z-index");
+		$(".modal-dialog").css({"z-index": zIndex});
 	});
 
-	$("li[data-mimetype*=image]").on("click", "a[data-external!=true]", function(event) {
+	$("#explorer").on("click", "li[data-mimetype*=image] a[data-external!=true]", function(event) {
 		event.preventDefault();
 		$(this).ekkoLightbox();
+		var zIndex = $(".modal-backdrop").css("z-index");
+		$(".modal-dialog").css({"z-index": zIndex});
 	});
 });

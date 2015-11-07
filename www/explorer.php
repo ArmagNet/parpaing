@@ -104,45 +104,53 @@ function getPermString($perms) {
 
 	<div class="col-md-12" id="explorer">
 
-	<ol class="breadcrumb">
-		<?php
-			$path = "/";
+	<div>
+		<div class="pull-right breadcrumb">
+		<!--
+			<button id="add-file-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-open-file" style="margin-right: -2px;"></span></button>
+			<button id="add-directory-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-folder-close" style="margin-right: -1px; margin-left: -1px;"></span></button>
+		 -->
+		</div>
+		<ol class="breadcrumb">
+			<?php
+				$path = "/";
 
-			if (isset($_REQUEST["path"])) {
-				$path = $_REQUEST["path"];
+				if (isset($_REQUEST["path"])) {
+					$path = $_REQUEST["path"];
 
-				if (strpos($path, "..") !== false) {
-					$path = "/";
-				}
-			}
-
-			$highlight = "";
-			if (isset($_REQUEST["highlight"])) {
-				$highlight = $_REQUEST["highlight"];
-			}
-
-			$index = -1;
-			$previousIndex = -1;
-			$paths = array();
-			while(($index = strpos($path, "/", $index + 1)) !== false) {
-				$pathPart = array("path" => substr($path, 0, $index + 1));
-				$pathPart["label"] = substr($path, $previousIndex + 1, $index - $previousIndex - 1);
-				if (!$pathPart["label"]) {
-					$pathPart["label"] = "ROOT";
+					if (strpos($path, "..") !== false) {
+						$path = "/";
+					}
 				}
 
-				$paths[] = $pathPart;
+				$highlight = "";
+				if (isset($_REQUEST["highlight"])) {
+					$highlight = $_REQUEST["highlight"];
+				}
 
-				$previousIndex = $index;
-			}
-			foreach($paths as $index => $pathPart) {
-				if ($index == count($paths) - 1) {?>
-		<li class="active"><?php echo $pathPart["label"] ?></li>
-		<?php 	} else {?>
-		<li><a href="?path=<?php echo $pathPart["path"] ?>" class="directory"><?php echo $pathPart["label"] ?></a></li>
-		<?php 	}
-			}?>
-	</ol>
+				$index = -1;
+				$previousIndex = -1;
+				$paths = array();
+				while(($index = strpos($path, "/", $index + 1)) !== false) {
+					$pathPart = array("path" => substr($path, 0, $index + 1));
+					$pathPart["label"] = substr($path, $previousIndex + 1, $index - $previousIndex - 1);
+					if (!$pathPart["label"]) {
+						$pathPart["label"] = "ROOT";
+					}
+
+					$paths[] = $pathPart;
+
+					$previousIndex = $index;
+				}
+				foreach($paths as $index => $pathPart) {
+					if ($index == count($paths) - 1) {?>
+			<li class="active"><?php echo $pathPart["label"] ?></li>
+			<?php 	} else {?>
+			<li class="directory"><a href="?path=<?php echo $pathPart["path"] ?>"><?php echo $pathPart["label"] ?></a></li>
+			<?php 	}
+				}?>
+		</ol>
+	</div>
 
 	<ul>
 	<?php
@@ -257,7 +265,7 @@ function getPermString($perms) {
 				<span class="file-name">
 					<a href="<?php echo $toolpath; ?>?path=<?php echo $filepath; ?>"><?php echo $label; ?></a>
 					<?php if ($external) {?>
-					<a data-external="true" href="<?php echo $toolpath; ?>?path=<?php echo $filepath; ?>"><span class="glyphicon glyphicon-new-window"></span></a>
+					<a data-external="true" href="<?php echo $toolpath; ?>?path=<?php echo $filepath; ?>"><span class="glyphicon glyphicon-save-file"></span></a>
 					<?php }?>
 				</span>
 
@@ -281,13 +289,13 @@ function getPermString($perms) {
 <templates>
 	<div aria-template-id="template-video" align="center" class="embed-responsive embed-responsive-16by9">
 	    <video controls class="embed-responsive-item">
-	        <source src="${video_url}" type="${video_type}">
+	        <source src="${video_url}&streaming=" type="${video_type}">
 	        <a href="${video_url}">${video_name}</a>
 	    </video>
 	</div>
 	<div aria-template-id="template-audio" align="center" class="embed-responsive embed-responsive-16by9">
 	    <audio controls class="embed-responsive-item">
-	        <source src="${audio_url}" type="${audio_type}">
+	        <source src="${audio_url}&streaming=" type="${audio_type}">
 	        <a href="${audio_url}">${audio_name}</a>
 	    </audio>
 	</div>

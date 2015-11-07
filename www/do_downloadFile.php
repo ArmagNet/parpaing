@@ -38,7 +38,6 @@ $fullpath = $config["parpaing"]["root_directory"] . $path;
 $filename = substr($fullpath, strrpos($fullpath, "/") + 1);
 
 if (file_exists($fullpath) && is_file($fullpath)) {
-
 	header('Content-Type: application/octet-stream');
 	header("Content-Transfer-Encoding: Binary");
 	header("Content-Disposition: attachment; filename=\"$filename\"");
@@ -46,6 +45,61 @@ if (file_exists($fullpath) && is_file($fullpath)) {
 
 	set_time_limit(0);
 
-	readfile($fullpath);
+	ignore_user_abort(true);
+	$fh = fopen($fullpath, "r");
+	$currentPosition = 0;
+
+	if (isset($_REQUEST["streaming"])) {
+		$speed = 200 * 1024 / 5;
+	}
+	else {
+		$speed = 20000 * 1024 / 5;
+	}
+	$gap = 1000000000 / 5;
+
+	$currentSpeed = 0;
+	$currentTime = microtime(true);
+
+	while (!feof($fh)) {
+		$contents = fread($fh, 8192);
+		$currentPosition += strlen($contents);
+		$currentSpeed += strlen($contents);
+
+		echo $contents;
+
+		if ($currentSpeed > $speed) {
+
+			$diff = microtime(true) - $currentTime;
+			$diff * 1000000000;
+			$diff = floor($diff);
+
+			error_log("$currentSpeed vs $speed on " . number_format($diff) . " vs " . number_format($gap) . "");
+
+			if ($diff < $gap) {
+				$nanosleep = $gap - $diff;
+				time_nanosleep(0, $nanosleep);
+			}
+
+			$currentSpeed = 0;
+			$currentTime = microtime(true);
+		}
+
+		if(connection_status() != CONNECTION_NORMAL)
+		{
+			fclose($fh);
+			error_log("End of connection");
+			exit();
+		}
+
+		error_log("Connection status : " . connection_status() . " @ " . $currentPosition);
+	}
+
+	fclose($fh);
+
+	error_log("End");
+	//	readfile($fullpath);
 }
+
+exit();
+
 ?>
