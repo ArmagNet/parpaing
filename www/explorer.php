@@ -108,8 +108,8 @@ function getPermString($perms) {
 		<div class="pull-right breadcrumb">
 		<!--
 			<button id="add-file-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-open-file" style="margin-right: -2px;"></span></button>
-			<button id="add-directory-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-folder-close" style="margin-right: -1px; margin-left: -1px;"></span></button>
 		 -->
+			<button id="add-directory-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-folder-close" style="margin-right: -1px; margin-left: -1px;"></span></button>
 		</div>
 		<ol class="breadcrumb">
 			<?php
@@ -152,7 +152,7 @@ function getPermString($perms) {
 		</ol>
 	</div>
 
-	<ul>
+	<ul id="files" data-path="<?php echo $path; ?>">
 	<?php
 		$files = glob($config["parpaing"]["root_directory"] . str_replace("[", "\\[", str_replace("]", "\\]", $path)) . "*");
 
@@ -222,6 +222,12 @@ function getPermString($perms) {
 					$toolpath = "do_downloadFile.php";
 					$external = true;
 					break;
+				case "audio/mpeg":
+					$type = "file";
+					$toolpath = "do_downloadFile.php";
+					$icon = "glyphicon-music";
+					$external = true;
+					break;
 				case "application/octet-stream":
 					$type = "file";
 					$toolpath = "do_downloadFile.php";
@@ -289,13 +295,14 @@ function getPermString($perms) {
 <div class="lastDiv"></div>
 
 <templates>
+	<span aria-template-id="template-createFolder-prompt"><?php echo lang("explorer_prompt_createFolder"); ?></span>
 	<div aria-template-id="template-video" align="center" class="embed-responsive embed-responsive-16by9">
 	    <video controls class="embed-responsive-item">
 	        <source src="${video_url}&streaming=" type="${video_type}">
 	        <a href="${video_url}">${video_name}</a>
 	    </video>
 	</div>
-	<div aria-template-id="template-audio" align="center" class="embed-responsive embed-responsive-16by9">
+	<div aria-template-id="template-audio" align="center" class="embed-responsive embed-responsive-audio">
 	    <audio controls class="embed-responsive-item">
 	        <source src="${audio_url}&streaming=" type="${audio_type}">
 	        <a href="${audio_url}">${audio_name}</a>

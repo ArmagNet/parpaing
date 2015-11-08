@@ -110,6 +110,8 @@ $lang["bittorrent_url_label"] = "URL / Magnet :";
 $lang["bittorrent_question_remove"] = "Do you want to remove the torrent ?";
 $lang["bittorrent_question_trash"] = "Do you want to remove the torrent and associated files ?";
 
+$lang["explorer_prompt_createFolder"] = "Name of the new folder";
+
 // Rates
 
 $lang["memory_rate"] = "Memory";

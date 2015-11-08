@@ -4,14 +4,39 @@ $(function() {
 		alert("add-file-button");
 	});
 	$("#explorer").on("click", "#add-directory-button", function(event) {
-		alert("add-directory-button");
+		var prompt = $("*[aria-template-id=template-createFolder-prompt]").template("use", {
+			data: {}
+		}).text();
+
+		bootbox.prompt(prompt, function(result) {
+			if (result !== null) {
+
+				if (result.substr(result.length - 1, 1) != "/") {
+					result += "/";
+				}
+
+				var path = $("#explorer ul#files").data("path");
+
+				$.post("do_createFolder.php", {path: path + result}, function(data) {
+					$.get("explorer.php", {path: path + result}, function(data) {
+						$("#explorer").children().remove();
+						$("#explorer").append($(data).find("#explorer").children());
+						history.pushState('', document.title, '?path=' + path + result);
+					}, "html");
+				}, "json");
+			}
+		});
+		var zIndex = $(".modal-backdrop").css("z-index");
+		$(".modal-dialog").css({"z-index": zIndex});
 	});
 
 	$("#explorer").on("click", "li.directory a", function(event) {
 		event.preventDefault();
-		$.get($(this).attr("href"), {}, function(data) {
+		var url = $(this).attr("href");
+		$.get(url, {}, function(data) {
 			$("#explorer").children().remove();
 			$("#explorer").append($(data).find("#explorer").children());
+			history.pushState('', document.title, url);
 		}, "html");
 	});
 

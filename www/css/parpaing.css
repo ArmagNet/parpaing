@@ -173,3 +173,7 @@ span.disabled {
 .highlight {
 	background-color: #FFFFCD;
 }
+
+.embed-responsive-audio {
+  padding-bottom: 30px;
+}
