@@ -177,3 +177,42 @@ span.disabled {
 .embed-responsive-audio {
   padding-bottom: 30px;
 }
+
+.items ul#files, ul#files.items {
+    padding: 0;
+}
+
+.items ul#files li {
+    list-style: none;
+    display: inline-block;
+    width: calc(20% - 20px);
+    height: 198px;
+    border: 1px solid;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: grey 5px 5px;
+    float: left;
+}
+
+.items ul#files li:hover {
+    margin: 14px 6px 6px 14px;
+    box-shadow: grey 1px 1px;
+    background-color: #F8F8F8;
+}
+
+
+.items ul#files li code {
+	display: none;
+}
+
+.items ul#files li span.file-name {
+    width: 100%;
+    text-align: center;
+}
+
+.items ul#files li span.file-icon {
+    font-size: 100px;
+    line-height: 1;
+}

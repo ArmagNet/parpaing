@@ -1,9 +1,32 @@
+function normalizeButtonsState() {
+	if ($("#explorer").hasClass("items")) {
+		$("#explorer button#to-item-button").addClass("active");
+		$("#explorer button#to-list-button").removeClass("active");
+	}
+	else {
+		$("#explorer button#to-list-button").addClass("active");
+		$("#explorer button#to-item-button").removeClass("active");
+	}
+}
+
 $(function() {
 
-	$("#explorer").on("click", "#add-file-button", function(event) {
+	$("#explorer").on("click", "button#to-list-button", function(event) {
+		$("#explorer").removeClass("items");
+		$(this).addClass("active");
+		$("#explorer button#to-item-button").removeClass("active");
+	});
+
+	$("#explorer").on("click", "button#to-item-button", function(event) {
+		$("#explorer").addClass("items");
+		$(this).addClass("active");
+		$("#explorer button#to-list-button").removeClass("active");
+	});
+
+	$("#explorer").on("click", "button#add-file-button", function(event) {
 		alert("add-file-button");
 	});
-	$("#explorer").on("click", "#add-directory-button", function(event) {
+	$("#explorer").on("click", "button#add-directory-button", function(event) {
 		var prompt = $("*[aria-template-id=template-createFolder-prompt]").template("use", {
 			data: {}
 		}).text();
@@ -21,6 +44,7 @@ $(function() {
 					$.get("explorer.php", {path: path + result}, function(data) {
 						$("#explorer").children().remove();
 						$("#explorer").append($(data).find("#explorer").children());
+						normalizeButtonsState();
 						history.pushState('', document.title, '?path=' + path + result);
 					}, "html");
 				}, "json");
@@ -36,6 +60,7 @@ $(function() {
 		$.get(url, {}, function(data) {
 			$("#explorer").children().remove();
 			$("#explorer").append($(data).find("#explorer").children());
+			normalizeButtonsState();
 			history.pushState('', document.title, url);
 		}, "html");
 	});

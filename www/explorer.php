@@ -102,7 +102,7 @@ function getPermString($perms) {
 		<li class="active"><?php echo lang("breadcrumb_explorer"); ?></li>
 	</ol>
 
-	<div class="col-md-12" id="explorer">
+	<div class="col-md-12 items" id="explorer">
 
 	<div>
 		<div class="pull-right breadcrumb">
@@ -110,6 +110,12 @@ function getPermString($perms) {
 			<button id="add-file-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-open-file" style="margin-right: -2px;"></span></button>
 		 -->
 			<button id="add-directory-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-folder-close" style="margin-right: -1px; margin-left: -1px;"></span></button>
+		</div>
+		<div class="pull-right breadcrumb">
+			<div class="btn-group" role="group">
+				<button id="to-list-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-th-list"></span></button>
+				<button id="to-item-button" type="button" class="btn btn-default btn-xs active"><span class="glyphicon glyphicon-th-large"></span></button>
+			</div>
 		</div>
 		<ol class="breadcrumb">
 			<?php
@@ -264,7 +270,9 @@ function getPermString($perms) {
 			data-mimetype="<?php echo $mimetype; ?>"
 			data-url="do_downloadFile.php?path=<?php echo $filepath; ?>"
 			class="<?php echo $type; ?> <?php if ($isHighlited) { echo "highlight"; }?>">
-				<span class="glyphicon <?php echo $icon; ?> file-icon"></span>
+				<span class="file-icon">
+					<a href="<?php echo $toolpath; ?>?path=<?php echo $filepath; ?>"><span class="glyphicon <?php echo $icon; ?>"></span></a>
+				</span>
 
 				<code class="file-permissions"><?php echo $permissions; ?></code>
 
