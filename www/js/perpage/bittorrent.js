@@ -102,6 +102,8 @@ function removeTorrent(torrents) {
 			actionTorrent("remove", torrents);
 		}
 	});
+	var zIndex = $(".modal-backdrop").css("z-index");
+	$(".modal-dialog").css({"z-index": zIndex});
 }
 
 function trashTorrent(torrents) {
@@ -114,6 +116,8 @@ function trashTorrent(torrents) {
 			actionTorrent("trash", torrents);
 		}
 	});
+	var zIndex = $(".modal-backdrop").css("z-index");
+	$(".modal-dialog").css({"z-index": zIndex});
 }
 
 function actionTorrent(action, torrents) {
