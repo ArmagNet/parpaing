@@ -228,6 +228,7 @@ function getPermString($perms) {
 					$toolpath = "do_downloadFile.php";
 					$external = true;
 					break;
+				case "application/ogg":
 				case "audio/mpeg":
 					$type = "file";
 					$toolpath = "do_downloadFile.php";
@@ -304,14 +305,14 @@ function getPermString($perms) {
 
 <templates>
 	<span aria-template-id="template-createFolder-prompt"><?php echo lang("explorer_prompt_createFolder"); ?></span>
-	<div aria-template-id="template-video" align="center" class="embed-responsive embed-responsive-16by9">
-	    <video controls class="embed-responsive-item">
+	<div aria-template-id="template-video" class="embed-responsive embed-responsive-16by9 text-center">
+	    <video controls class="embed-responsive-item explorer-media">
 	        <source src="${video_url}&streaming=" type="${video_type}">
 	        <a href="${video_url}">${video_name}</a>
 	    </video>
 	</div>
-	<div aria-template-id="template-audio" align="center" class="embed-responsive embed-responsive-audio">
-	    <audio controls class="embed-responsive-item">
+	<div aria-template-id="template-audio" class="embed-responsive embed-responsive-audio text-center">
+	    <audio controls class="embed-responsive-item explorer-media">
 	        <source src="${audio_url}&streaming=" type="${audio_type}">
 	        <a href="${audio_url}">${audio_name}</a>
 	    </audio>

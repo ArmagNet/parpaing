@@ -34,6 +34,7 @@
 <script src="js/ekko-lightbox.min.js"></script>
 <script src="js/jquery.timer.js"></script>
 <script src="js/jquery.template.js"></script>
+<script src="js/jquery.cookie.js"></script>
 <script src="js/user.js"></script>
 <script src="js/window.js"></script>
 <script src="js/pagination.js"></script>

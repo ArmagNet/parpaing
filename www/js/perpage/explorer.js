@@ -9,6 +9,18 @@ function normalizeButtonsState() {
 	}
 }
 
+function setVolumeWorkaround(volumeCapable) {
+	var volume = $.cookie('explorer-media-volume');
+	if (volume || volume == "0") {
+		volumeCapable.volume = volume;
+	}
+	volumeCapable.onvolumechange = function() {
+		var volume = this.volume;
+		$.cookie('explorer-media-volume', volume, { expires: 365, path: '/' });
+	};
+}
+
+
 $(function() {
 
 	$("#explorer").on("click", "button#to-list-button", function(event) {
@@ -86,6 +98,8 @@ $(function() {
         });
 		var zIndex = $(".modal-backdrop").css("z-index");
 		$(".modal-dialog").css({"z-index": zIndex});
+
+		setVolumeWorkaround(videoPlayer.find(".explorer-media").get(0));
 	});
 
 	$("#explorer").on("click", "li[data-mimetype*=audio] a[data-external!=true]", function(event) {
@@ -109,6 +123,8 @@ $(function() {
         });
 		var zIndex = $(".modal-backdrop").css("z-index");
 		$(".modal-dialog").css({"z-index": zIndex});
+
+		setVolumeWorkaround(audioPlayer.find(".explorer-media").get(0));
 	});
 
 	$("#explorer").on("click", "li[data-mimetype*=image] a[data-external!=true]", function(event) {
@@ -117,4 +133,5 @@ $(function() {
 		var zIndex = $(".modal-backdrop").css("z-index");
 		$(".modal-dialog").css({"z-index": zIndex});
 	});
+
 });
