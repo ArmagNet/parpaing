@@ -36,9 +36,9 @@ function getOvpn($configuration) {
 	$ovpn .= "proto " . $configuration["json"]["proto"] . "\n";
 //	$ovpn .= "log /my/log/path/openvpn.log\n";
 	$ovpn .= "verb 4\n";
-	$ovpn .= "ca \"" . $configuration["json"]["id"] . ".cert\"\n";
-	$ovpn .= "cert \"" . $configuration["json"]["label"] . ".cert\"\n";
-	$ovpn .= "key \"" . $configuration["json"]["label"] . ".key\"\n";
+	$ovpn .= "ca \"" . $configuration["id"] . ".cert\"\n";
+	$ovpn .= "cert \"" . $configuration["label"] . ".cert\"\n";
+	$ovpn .= "key \"" . $configuration["label"] . ".key\"\n";
 	$ovpn .= "client 1\n";
 	$ovpn .= "remote-cert-tls " . $configuration["json"]["remote_cert_tls"] . "\n";
 	$ovpn .= "remote " . $configuration["json"]["remote"] . "\n";
