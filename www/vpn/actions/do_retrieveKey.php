@@ -32,18 +32,18 @@ function getOvpn($configuration) {
 
 	$ovpn = "";
 
-	$ovpn .= "dev " . $configuration["dev"] . "\n";
-	$ovpn .= "proto " . $configuration["proto"] . "\n";
+	$ovpn .= "dev " . $configuration["json"]["dev"] . "\n";
+	$ovpn .= "proto " . $configuration["json"]["proto"] . "\n";
 //	$ovpn .= "log /my/log/path/openvpn.log\n";
 	$ovpn .= "verb 4\n";
-	$ovpn .= "ca \"" . $configuration["id"] . ".cert\"\n";
-	$ovpn .= "cert \"" . $configuration["label"] . ".cert\"\n";
-	$ovpn .= "key \"" . $configuration["label"] . ".key\"\n";
+	$ovpn .= "ca \"" . $configuration["json"]["id"] . ".cert\"\n";
+	$ovpn .= "cert \"" . $configuration["json"]["label"] . ".cert\"\n";
+	$ovpn .= "key \"" . $configuration["json"]["label"] . ".key\"\n";
 	$ovpn .= "client 1\n";
-	$ovpn .= "remote-cert-tls " . $configuration["remote_cert_tls"] . "\n";
-	$ovpn .= "remote " . $configuration["remote"] . "\n";
-	$ovpn .= "cipher " . $configuration["cipher"] . "\n";
-	$ovpn .= "comp-lzo " . $configuration["lzo"] . "\n";
+	$ovpn .= "remote-cert-tls " . $configuration["json"]["remote_cert_tls"] . "\n";
+	$ovpn .= "remote " . $configuration["json"]["remote"] . "\n";
+	$ovpn .= "cipher " . $configuration["json"]["cipher"] . "\n";
+	$ovpn .= "comp-lzo " . $configuration["json"]["lzo"] . "\n";
 	$ovpn .= "resolv-retry infinite\n";
 	$ovpn .= "nobind\n";
 	$ovpn .= "persist-key\n";
