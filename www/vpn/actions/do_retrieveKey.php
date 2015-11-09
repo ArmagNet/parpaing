@@ -34,16 +34,28 @@ function getOvpn($configuration) {
 
 	$ovpn .= "dev " . $configuration["dev"] . "\n";
 	$ovpn .= "proto " . $configuration["proto"] . "\n";
-	$ovpn .= "log /my/log/path/openvpn.log\n";
-	$ovpn .= "verb 3\n";
+//	$ovpn .= "log /my/log/path/openvpn.log\n";
+	$ovpn .= "verb 4\n";
 	$ovpn .= "ca \"" . $configuration["id"] . ".cert\"\n";
-	$ovpn .= "cert \"" . $configuration["label"] . ".crt\"\n";
+	$ovpn .= "cert \"" . $configuration["label"] . ".cert\"\n";
 	$ovpn .= "key \"" . $configuration["label"] . ".key\"\n";
 	$ovpn .= "client 1\n";
 	$ovpn .= "remote-cert-tls " . $configuration["remote_cert_tls"] . "\n";
 	$ovpn .= "remote " . $configuration["remote"] . "\n";
 	$ovpn .= "cipher " . $configuration["cipher"] . "\n";
 	$ovpn .= "comp-lzo " . $configuration["lzo"] . "\n";
+	$ovpn .= "resolv-retry infinite\n";
+	$ovpn .= "nobind\n";
+	$ovpn .= "persist-key\n";
+	$ovpn .= "persist-tun\n";
+	$ovpn .= "\n";
+	$ovpn .= "dhcp-option DNS 80.67.169.12\n";
+	$ovpn .= "\n";
+	$ovpn .= "# Change default routes\n";
+	$ovpn .= "redirect-gateway def1\n";
+	$ovpn .= "\n";
+	$ovpn .= "#tun-ipv6\n";
+	$ovpn .= "#route-ipv6 2000::/3\n";
 
 	return $ovpn;
 }
