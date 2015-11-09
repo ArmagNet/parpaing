@@ -138,6 +138,8 @@ function francetv(channelUrl, channelTitle) {
         title: channelTitle,
         message: framebox
     });
+	var zIndex = $(".modal-backdrop").css("z-index");
+	$(".modal-dialog").css({"z-index": zIndex});
 }
 
 function bfmtv(channelUrl, channelTitle) {
@@ -179,6 +181,8 @@ function bfmtv(channelUrl, channelTitle) {
 			}
 		});
 	};
+	var zIndex = $(".modal-backdrop").css("z-index");
+	$(".modal-dialog").css({"z-index": zIndex});
 
 	setTimeout(clearout, 2000);
 }
@@ -222,6 +226,8 @@ function bfmbusiness(channelUrl, channelTitle) {
 			}
 		});
 	};
+	var zIndex = $(".modal-backdrop").css("z-index");
+	$(".modal-dialog").css({"z-index": zIndex});
 
 	setTimeout(clearout, 2000);
 }

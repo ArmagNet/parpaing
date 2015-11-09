@@ -106,9 +106,7 @@ function getPermString($perms) {
 
 	<div>
 		<div class="pull-right breadcrumb">
-		<!--
 			<button id="add-file-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-open-file" style="margin-right: -2px;"></span></button>
-		 -->
 			<button id="add-directory-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-folder-close" style="margin-right: -1px; margin-left: -1px;"></span></button>
 		</div>
 		<div class="pull-right breadcrumb">
@@ -304,7 +302,21 @@ function getPermString($perms) {
 <div class="lastDiv"></div>
 
 <templates>
+	<span aria-template-id="template-cancel"><?php echo lang("common_cancel"); ?></span>
+	<span aria-template-id="template-send"><?php echo lang("common_send"); ?></span>
 	<span aria-template-id="template-createFolder-prompt"><?php echo lang("explorer_prompt_createFolder"); ?></span>
+	<span aria-template-id="template-addFile-prompt"><?php echo lang("explorer_prompt_addFile"); ?></span>
+	<div aria-template-id="template-addFile-form" class="">
+		<form action="do_addFiles.php" method="post" enctype="multipart/form-data">
+			<input id="filesInput" name="files[]" multiple="multiple" type="file" />
+			<input id="pathInput" name="path" type="hidden" value="${path}"/>
+		</form>
+		<div class="progress" id="filesProgress" style="display: none;">
+			<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+		    	<span class="sr-only"></span>
+		  	</div>
+		</div>
+	</div>
 	<div aria-template-id="template-video" class="embed-responsive embed-responsive-16by9 text-center">
 	    <video controls class="embed-responsive-item explorer-media">
 	        <source src="${video_url}&streaming=" type="${video_type}">

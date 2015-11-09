@@ -33,6 +33,8 @@ $lang["common_order"] = "Commander";
 $lang["common_update"] = "Mettre à jour";
 $lang["common_authenticate"] = "Identifier";
 $lang["common_change"] = "Changer";
+$lang["common_send"] = "Envoyer";
+$lang["common_cancel"] = "Annuler";
 
 $lang["language_fr"] = "Français";
 $lang["language_en"] = "Anglais";
@@ -111,6 +113,7 @@ $lang["bittorrent_question_remove"] = "Voulez vous retirer le torrent ?";
 $lang["bittorrent_question_trash"] = "Voulez vous retirer le torrent ainsi que les fichiers associés ?";
 
 $lang["explorer_prompt_createFolder"] = "Nom du nouveau répertoire";
+$lang["explorer_prompt_addFile"] = "Fichiers à transférer";
 
 // Rates
 
