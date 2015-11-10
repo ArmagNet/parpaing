@@ -36,9 +36,15 @@ function getOvpn($configuration) {
 	$ovpn .= "proto " . $configuration["json"]["proto"] . "\n";
 //	$ovpn .= "log /my/log/path/openvpn.log\n";
 	$ovpn .= "verb 4\n";
-	$ovpn .= "ca \"" . $configuration["id"] . ".cert\"\n";
-	$ovpn .= "cert \"" . $configuration["label"] . ".cert\"\n";
-	$ovpn .= "key \"" . $configuration["label"] . ".key\"\n";
+	if (!isset($configuration["cacrt"])) {
+		$ovpn .= "ca \"" . $configuration["id"] . ".cert\"\n";
+	}
+	if (!isset($configuration["crt"])) {
+		$ovpn .= "cert \"" . $configuration["label"] . ".cert\"\n";
+	}
+	if (!isset($configuration["key"])) {
+		$ovpn .= "key \"" . $configuration["label"] . ".key\"\n";
+	}
 	$ovpn .= "client 1\n";
 	$ovpn .= "remote-cert-tls " . $configuration["json"]["remote_cert_tls"] . "\n";
 	$ovpn .= "remote " . $configuration["json"]["remote"] . "\n";
@@ -56,6 +62,24 @@ function getOvpn($configuration) {
 	$ovpn .= "\n";
 	$ovpn .= "#tun-ipv6\n";
 	$ovpn .= "#route-ipv6 2000::/3\n";
+
+	if (isset($configuration["cacrt"]) && $configuration["cacrt"]) {
+		$ovpn .= "\n<ca>\n";
+		$ovpn .= $configuration["cacrt"];
+		$ovpn .= "\n</ca>\n";
+	}
+
+	if (isset($configuration["crt"]) && $configuration["crt"]) {
+		$ovpn .= "\n<cert>\n";
+		$ovpn .= $configuration["crt"];
+		$ovpn .= "\n</cert>\n";
+	}
+
+	if (isset($configuration["key"]) && $configuration["key"]) {
+		$ovpn .= "\n<key>\n";
+		$ovpn .= $configuration["key"];
+		$ovpn .= "\n</key>\n";
+	}
 
 	return $ovpn;
 }
