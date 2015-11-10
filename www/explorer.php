@@ -105,6 +105,9 @@ function getPermString($perms) {
 	<div class="col-md-12 items" id="explorer">
 
 	<div>
+		<div class="pull-left breadcrumb">
+			<span class="glyphicon glyphicon-folder-open active"></span>
+		</div>
 		<div class="pull-right breadcrumb">
 			<button id="add-file-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-open-file" style="margin-right: -2px;"></span></button>
 			<button id="add-directory-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-folder-close" style="margin-right: -1px; margin-left: -1px;"></span></button>
@@ -118,6 +121,7 @@ function getPermString($perms) {
 		<ol class="breadcrumb">
 			<?php
 				$path = "/";
+				$previous = null;
 
 				if (isset($_REQUEST["path"])) {
 					$path = $_REQUEST["path"];
@@ -148,9 +152,10 @@ function getPermString($perms) {
 				}
 				foreach($paths as $index => $pathPart) {
 					if ($index == count($paths) - 1) {?>
-			<li class="active"><?php echo $pathPart["label"] ?></li>
-			<?php 	} else {?>
-			<li class="directory"><a href="?path=<?php echo $pathPart["path"] ?>"><?php echo $pathPart["label"] ?></a></li>
+			<li class="active"><?php echo $pathPart["label"]; ?></li>
+			<?php 	} else {
+						$previous = $config["parpaing"]["root_directory"] . $pathPart["path"]; ?>
+			<li class="directory"><a href="?path=<?php echo $pathPart["path"]; ?>"><?php echo $pathPart["label"]; ?></a></li>
 			<?php 	}
 				}?>
 		</ol>
@@ -173,9 +178,17 @@ function getPermString($perms) {
 
 		usort($files, "orderFiles");
 
+		if ($previous) {
+			$previous = substr($previous, 0, strlen($previous) - 1);
+			$files = array_reverse($files);
+			array_push($files, $previous);
+			$files = array_reverse($files);
+		}
+
 		$finfo = finfo_open(FILEINFO_MIME_TYPE);
 
-		foreach($files as $file) {
+		foreach($files as $index => $file) {
+
 			$isHighlited = false;
 
 			if ($highlight) {
@@ -198,15 +211,23 @@ function getPermString($perms) {
 			$filepath = str_replace($config["parpaing"]["root_directory"], "", $file);
 
 			$label = substr($file, strrpos($file, "/") + 1);
+			if ($previous && $index == 0) $label = "..";
 
 			$mimetype = finfo_file($finfo, $file);
 			$external = false;
 			switch($mimetype) {
 				case "directory":
 					$type = "directory";
-					$icon = "glyphicon-folder-close";
+					if ($label != "..") {
+						$icon = "glyphicon-folder-close";
+					}
+					else {
+						$icon = "glyphicon-level-up";
+					}
 					$filepath .= "/";
 					$toolpath = "";
+
+
 					break;
 				case "image/bmp":
 				case "image/tif":
