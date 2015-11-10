@@ -36,13 +36,13 @@ function getOvpn($configuration) {
 	$ovpn .= "proto " . $configuration["json"]["proto"] . "\n";
 //	$ovpn .= "log /my/log/path/openvpn.log\n";
 	$ovpn .= "verb 4\n";
-	if (!isset($configuration["cacrt"])) {
+	if (!isset($configuration["cacrt"]) || !$configuration["cacrt"]) {
 		$ovpn .= "ca \"" . $configuration["id"] . ".cert\"\n";
 	}
-	if (!isset($configuration["crt"])) {
+	if (!isset($configuration["crt"]) || !$configuration["crt"]) {
 		$ovpn .= "cert \"" . $configuration["label"] . ".cert\"\n";
 	}
-	if (!isset($configuration["key"])) {
+	if (!isset($configuration["key"]) || !$configuration["key"]) {
 		$ovpn .= "key \"" . $configuration["label"] . ".key\"\n";
 	}
 	$ovpn .= "client 1\n";
