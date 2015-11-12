@@ -114,6 +114,11 @@ $lang["bittorrent_question_trash"] = "Do you want to remove the torrent and asso
 
 $lang["explorer_prompt_createFolder"] = "Name of the new folder";
 $lang["explorer_prompt_addFile"] = "Files to transfer";
+$lang["explorer_tooltip_download"] = "Direct download";
+$lang["explorer_tooltip_list"] = "List";
+$lang["explorer_tooltip_icons"] = "Icons";
+$lang["explorer_tooltip_addFiles"] = "Add files";
+$lang["explorer_tooltip_createFolder"] = "Create folder";
 
 // Rates
 

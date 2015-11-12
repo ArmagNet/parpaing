@@ -109,13 +109,21 @@ function getPermString($perms) {
 			<span class="glyphicon glyphicon-folder-open active"></span>
 		</div>
 		<div class="pull-right breadcrumb">
-			<button id="add-file-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-open-file" style="margin-right: -2px;"></span></button>
-			<button id="add-directory-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-folder-close" style="margin-right: -1px; margin-left: -1px;"></span></button>
+			<button id="add-file-button" type="button"
+				data-toggle="tooltip" data-placement="bottom" title="<?php echo lang("explorer_tooltip_addFiles"); ?>"
+				class="btn btn-default btn-xs"><span class="glyphicon glyphicon-open-file" style="margin-right: -2px;"></span></button>
+			<button id="add-directory-button" type="button"
+				data-toggle="tooltip" data-placement="bottom" title="<?php echo lang("explorer_tooltip_createFolder"); ?>"
+				class="btn btn-default btn-xs"><span class="glyphicon glyphicon-folder-close" style="margin-right: -1px; margin-left: -1px;"></span></button>
 		</div>
 		<div class="pull-right breadcrumb">
 			<div class="btn-group" role="group">
-				<button id="to-list-button" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-th-list"></span></button>
-				<button id="to-item-button" type="button" class="btn btn-default btn-xs active"><span class="glyphicon glyphicon-th-large"></span></button>
+				<button id="to-list-button" type="button"
+					data-toggle="tooltip" data-placement="bottom" title="<?php echo lang("explorer_tooltip_list"); ?>"
+					class="btn btn-default btn-xs"><span class="glyphicon glyphicon-th-list"></span></button>
+				<button id="to-item-button" type="button"
+					data-toggle="tooltip" data-placement="bottom" title="<?php echo lang("explorer_tooltip_icons"); ?>"
+					class="btn btn-default btn-xs active"><span class="glyphicon glyphicon-th-large"></span></button>
 			</div>
 		</div>
 		<ol class="breadcrumb">
@@ -290,17 +298,19 @@ function getPermString($perms) {
 			data-mimetype="<?php echo $mimetype; ?>"
 			data-url="do_downloadFile.php?path=<?php echo $filepath; ?>"
 			class="<?php echo $type; ?> <?php if ($isHighlited) { echo "highlight"; }?>">
-				<span class="file-icon">
+				<span class="file-icon" data-toggle="tooltip" data-placement="bottom" title="<?php echo $label; ?>">
 					<a href="<?php echo $toolpath; ?>?path=<?php echo $filepath; ?>"><span class="glyphicon <?php echo $icon; ?>"></span></a>
 				</span>
 
 				<code class="file-permissions"><?php echo $permissions; ?></code>
 
-				<span class="file-name <?php if ($external) {?>with-external<?php }?>" title="<?php echo $label; ?>">
+				<span class="file-name <?php if ($external) {?>with-external<?php }?>"
+					data-toggle="tooltip" data-placement="bottom" title="<?php echo $label; ?>">
 					<a href="<?php echo $toolpath; ?>?path=<?php echo $filepath; ?>"><?php echo $label; ?></a>
 				</span>
 				<?php if ($external) {?>
-				<span class="file-external">
+				<span class="file-external"
+					data-toggle="tooltip" data-placement="bottom" title="<?php echo lang("explorer_tooltip_download"); ?>">
 					<a data-external="true" href="<?php echo $toolpath; ?>?path=<?php echo $filepath; ?>"><span class="glyphicon glyphicon-save-file"></span></a>
 				</span>
 				<?php }?>

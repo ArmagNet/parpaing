@@ -58,6 +58,8 @@ function normalizeButtonsState() {
 		$("#explorer button#to-list-button").addClass("active");
 		$("#explorer button#to-item-button").removeClass("active");
 	}
+
+	 $('#explorer [data-toggle="tooltip"]').tooltip({delay: {show: 500, hide: 0}});
 }
 
 function setVolumeWorkaround(volumeCapable) {

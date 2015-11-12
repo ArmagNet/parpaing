@@ -88,8 +88,7 @@ $language = SessionUtils::getLanguage($_SESSION);
 					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="index.php"><img src="images/logo.svg" style="position: relative; top: -14px; width: 48px; height: 48px; background-color: #ffffff;"
-					data-toggle="tooltip" data-placement="bottom"
-					title="Parpaing" /> </a>
+					data-toggle="tooltip" data-placement="bottom" title="Parpaing" /> </a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -181,7 +180,7 @@ $language = SessionUtils::getLanguage($_SESSION);
 
 					<?php 	if ($isConnected) {?>
 					<li><a class="logoutLink" href="do_logout.php" title="<?php echo lang("menu_logout"); ?>"
-						data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-log-out" title="<?php echo lang("menu_logout"); ?>"></span><span class="sr-only">Logout</span> </a></li>
+						data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-log-out"></span><span class="sr-only">Logout</span> </a></li>
 					<?php 	}?>
 				</ul>
 			</div>

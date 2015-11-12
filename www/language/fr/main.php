@@ -114,6 +114,11 @@ $lang["bittorrent_question_trash"] = "Voulez vous retirer le torrent ainsi que l
 
 $lang["explorer_prompt_createFolder"] = "Nom du nouveau répertoire";
 $lang["explorer_prompt_addFile"] = "Fichiers à transférer";
+$lang["explorer_tooltip_download"] = "Téléchargement direct";
+$lang["explorer_tooltip_list"] = "Liste";
+$lang["explorer_tooltip_icons"] = "Icônes";
+$lang["explorer_tooltip_addFiles"] = "Ajout de fichiers";
+$lang["explorer_tooltip_createFolder"] = "Création de répertoire";
 
 // Rates
 
