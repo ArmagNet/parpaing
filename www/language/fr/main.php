@@ -77,6 +77,7 @@ $lang["breadcrumb_telephone"] = "Telephone";
 $lang["breadcrumb_wifi"] = "Wifi";
 $lang["breadcrumb_explorer"] = "Explorateur";
 $lang["breadcrumb_bittorrent"] = "BitTorrent";
+$lang["breadcrumb_networks"] = "Réseaux";
 $lang["breadcrumb_upgrader"] = "Mise à jour";
 $lang["breadcrumb_about"] = "À Propos";
 

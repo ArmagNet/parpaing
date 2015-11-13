@@ -31,6 +31,9 @@ class NetworkBo {
 	function scan($network, $fromCache = false) {
 		$filepath = $this->config["incron"]["path"] . "/$network.nmap";
 
+//		error_log("Scan $network");
+
+		/*
 		if ($fromCache && !file_exists($filepath)) {
 			return array();
 		}
@@ -40,9 +43,12 @@ class NetworkBo {
 			file_put_contents($this->config["incron"]["path"] . "/nmap.su.ip", $network);
 
 			while(!file_exists($filepath) || strpos(file_get_contents($filepath), "done") === false) {
+//				error_log("Sleep $network");
+
 				sleep(1);
 			}
 		}
+		 */
 
 		$content = file_get_contents($filepath);
 //		if (strpos($content, "") === false)
@@ -55,9 +61,54 @@ class NetworkBo {
 
 // 		echo "# $result #\n";
 
-		$result = $content;
+		$re = "/^Nmap scan report for (.*)$/m";
+		preg_match_all($re, $content, $matches);
 
-		return $result;
+		//		print_r($matches);
+
+		$ips = array();
+
+		foreach($matches[1] as $ip_value) {
+			$ip = array();
+			$ip["ip"] = $ip_value;
+
+			$index = strpos($content, $ip_value);
+			$end = strpos($content, "Nmap scan report", $index);
+
+			if ($end !== false) {
+				$ip_part = substr($content, $index, $end - $index);
+			}
+			else {
+				$ip_part = substr($content, $index);
+			}
+
+			$re = "/^MAC Address: (.*) \\((.*)\\)$/m";
+			preg_match_all($re, $ip_part, $macMatches);
+
+			$ip["mac_address"] = $macMatches[1][0];
+			$ip["card_name"] = $macMatches[2][0];
+
+			$re = "/NetBIOS name: (.*?),/m";
+			preg_match_all($re, $ip_part, $netbiosMatches);
+
+			if (count($netbiosMatches[1])) {
+				$ip["netbios"] = $netbiosMatches[1][0];
+			}
+
+//			print_r($macMatches);
+
+//			echo $ip_part;
+
+//			print_r($ip);
+
+			$ips[] = $ip;
+
+//			echo "\n";
+		}
+
+//		$result = array($content);
+
+		return $ips;
 	}
 
 	static function sendCommand($cmd) {
