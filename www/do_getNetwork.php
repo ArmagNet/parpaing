@@ -31,6 +31,6 @@ $ip = $_REQUEST["ip"];
 
 $ips = $networkBo->scan($ip);
 
-json_encode(array("ok" => "ok", "ips" => $ips));
+echo json_encode(array("ok" => "ok", "ips" => $ips));
 
 ?>

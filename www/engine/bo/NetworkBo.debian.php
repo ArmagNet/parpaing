@@ -33,7 +33,7 @@ class NetworkBo {
 
 //		error_log("Scan $network");
 
-		/*
+
 		if ($fromCache && !file_exists($filepath)) {
 			return array();
 		}
@@ -48,7 +48,7 @@ class NetworkBo {
 				sleep(1);
 			}
 		}
-		 */
+
 
 		$content = file_get_contents($filepath);
 //		if (strpos($content, "") === false)
