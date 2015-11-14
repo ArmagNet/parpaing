@@ -219,8 +219,8 @@ span.disabled {
 
 .ip {
     display: inline-block;
-    width: calc(25% - 20px);
-    height: 107px;
+    width: calc(100% / 3 - 20px);
+    height: 149px;
     border: 1px solid;
     border-radius: 10px;
     margin: 10px;
@@ -235,4 +235,8 @@ span.disabled {
     margin: 14px 6px 6px 14px;
     box-shadow: grey 1px 1px;
     background-color: #F8F8F8;
+}
+
+.ip .material-icons {
+    font-size: 96px;
 }
