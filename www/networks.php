@@ -58,7 +58,9 @@ $safes = $networkBo->scan("192.168.1.1", true);
 			<div class="panel-body">
 <?php 	if (count($safes)) {
 			foreach($safes as $ip) {?>
+<div class="ip">
 				<?php echo $ip["ip"]; ?><br />
+</div>
 <?php 		}
 		}?>
 			</div>
