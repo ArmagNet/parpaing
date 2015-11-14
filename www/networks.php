@@ -42,7 +42,8 @@ $safes = $networkBo->scan("192.168.1.1", true);
 			foreach($unsafes as $ip) {?>
 
 <div class="ip">
-				<?php echo $ip["ip"]; ?><br />
+	<span class="material-icons">desktop_windows</span>
+	<?php echo $ip["ip"]; ?><br />
 </div>
 
 <?php 		}
@@ -59,7 +60,8 @@ $safes = $networkBo->scan("192.168.1.1", true);
 <?php 	if (count($safes)) {
 			foreach($safes as $ip) {?>
 <div class="ip">
-				<?php echo $ip["ip"]; ?><br />
+	<span class="material-icons">desktop_windows</span>
+	<?php echo $ip["ip"]; ?><br />
 </div>
 <?php 		}
 		}?>
