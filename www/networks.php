@@ -41,9 +41,18 @@ $safes = $networkBo->scan("192.168.1.1", true);
 <?php 	if (count($unsafes)) {
 			foreach($unsafes as $ip) {?>
 
-<div class="ip">
-	<a href="#"><span class="material-icons">desktop_windows</span></a>
+<div class="ip" data-ip="<?php echo str_replace("\"", "\\\"", json_encode($ip));?>">
+	<a href="#"><span class="material-icons"><?php
+		switch($ip["type"]) {
+			case "desktop":
+			default:
+				echo "desktop_windows";
+				break;
+		}
+	?></span></a>
 	<a href="#"><?php echo $ip["ip"]; ?></a>
+	<br/>
+	<a href="#"><?php echo $ip["label"] ? $ip["label"] : $ip["netbios"]; ?></a>
 </div>
 
 <?php 		}
@@ -59,9 +68,18 @@ $safes = $networkBo->scan("192.168.1.1", true);
 			<div class="panel-body">
 <?php 	if (count($safes)) {
 			foreach($safes as $ip) {?>
-<div class="ip">
-	<a href="#"><span class="material-icons">desktop_windows</span></a>
+<div class="ip" data-ip="<?php echo str_replace("\"", "\\\"", json_encode($ip));?>">
+	<a href="#"><span class="material-icons"><?php
+		switch($ip["type"]) {
+			case "desktop":
+			default:
+				echo "desktop_windows";
+				break;
+		}
+	?></span></a>
 	<a href="#"><?php echo $ip["ip"]; ?></a>
+	<br/>
+	<a href="#"><?php echo $ip["label"] ? $ip["label"] : $ip["netbios"]; ?></a>
 </div>
 <?php 		}
 		}?>

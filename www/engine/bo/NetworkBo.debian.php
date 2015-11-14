@@ -95,6 +95,11 @@ class NetworkBo {
 				$ip["netbios"] = $netbiosMatches[1][0];
 			}
 
+			if (true) {
+				$ip["type"] = "desktop";
+				$ip["label"] = "Desktop";
+			}
+
 //			print_r($macMatches);
 
 //			echo $ip_part;
