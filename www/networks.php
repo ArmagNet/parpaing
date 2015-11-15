@@ -41,7 +41,7 @@ $safes = $networkBo->scan("192.168.1.1", true);
 <?php 	if (count($unsafes)) {
 			foreach($unsafes as $ip) {?>
 
-<div class="ip" data-ip="<?php echo str_replace("\"", "\\\"", json_encode($ip));?>">
+<div class="ip" data-ip='<?php echo str_replace("'", "\\'", json_encode($ip));?>'>
 	<a href="#"><span class="material-icons"><?php
 		switch($ip["type"]) {
 			case "desktop":
@@ -68,7 +68,7 @@ $safes = $networkBo->scan("192.168.1.1", true);
 			<div class="panel-body">
 <?php 	if (count($safes)) {
 			foreach($safes as $ip) {?>
-<div class="ip" data-ip="<?php echo str_replace("\"", "\\\"", json_encode($ip));?>">
+<div class="ip" data-ip='<?php echo str_replace("\'", "\\'", json_encode($ip));?>'>
 	<a href="#"><span class="material-icons"><?php
 		switch($ip["type"]) {
 			case "desktop":
@@ -180,8 +180,8 @@ function showIpBox(ip) {
 		input.focus();
 
 		var buttons = "<div class=\"text-right\" style=\"display: inline-block;\">";
-		buttons += "<button class=\"btn btn-primary modify-button\" type=\"button\"><span class=\"glyphicon glyphicon-ok\"></span></button>";
-		buttons += " <button class=\"btn btn-default cancel-button\" type=\"button\"><span class=\"glyphicon glyphicon-remove\"></span></button>";
+		buttons += "<button class=\"btn btn-primary btn-xs modify-button\" type=\"button\"><span class=\"glyphicon glyphicon-ok\"></span></button>";
+		buttons += " <button class=\"btn btn-default btn-xs cancel-button\" type=\"button\"><span class=\"glyphicon glyphicon-remove\"></span></button>";
 		buttons += "</div>";
 		buttons = $(buttons);
 		content.before(buttons);
