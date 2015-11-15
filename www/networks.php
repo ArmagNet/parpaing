@@ -41,7 +41,9 @@ $safes = $networkBo->scan("192.168.1.1", true);
 <?php 	if (count($unsafes)) {
 			foreach($unsafes as $ip) {?>
 
-<div class="ip" data-ip='<?php echo str_replace("'", "\\'", json_encode($ip));?>'>
+<div class="ip"
+	data-mac='<?php echo $ip["mac_address"]; ?>'
+	data-ip='<?php echo str_replace("\'", "\\'", json_encode($ip));?>'>
 	<a href="#"><span class="material-icons"><?php
 		switch($ip["type"]) {
 			case "desktop":
@@ -52,7 +54,7 @@ $safes = $networkBo->scan("192.168.1.1", true);
 	?></span></a>
 	<a href="#"><?php echo $ip["ip"]; ?></a>
 	<br/>
-	<a href="#"><?php echo $ip["label"] ? $ip["label"] : $ip["netbios"]; ?></a>
+	<a href="#"><span class="ip-label"><?php echo $ip["label"] ? $ip["label"] : $ip["netbios"]; ?></span></a>
 </div>
 
 <?php 		}
@@ -68,7 +70,9 @@ $safes = $networkBo->scan("192.168.1.1", true);
 			<div class="panel-body">
 <?php 	if (count($safes)) {
 			foreach($safes as $ip) {?>
-<div class="ip" data-ip='<?php echo str_replace("\'", "\\'", json_encode($ip));?>'>
+<div class="ip"
+	data-mac='<?php echo $ip["mac_address"]; ?>'
+	data-ip='<?php echo str_replace("\'", "\\'", json_encode($ip));?>'>
 	<a href="#"><span class="material-icons"><?php
 		switch($ip["type"]) {
 			case "desktop":
@@ -79,7 +83,7 @@ $safes = $networkBo->scan("192.168.1.1", true);
 	?></span></a>
 	<a href="#"><?php echo $ip["ip"]; ?></a>
 	<br/>
-	<a href="#"><?php echo $ip["label"] ? $ip["label"] : $ip["netbios"]; ?></a>
+	<a href="#"><span class="ip-label"><?php echo $ip["label"] ? $ip["label"] : $ip["netbios"]; ?></span></a>
 </div>
 <?php 		}
 		}?>
@@ -112,7 +116,7 @@ $safes = $networkBo->scan("192.168.1.1", true);
 		<div>
 			<label class="col-md-3 text-right">Libellé :</label>
 			<div class="col-md-7">
-				<label class="ip-label text-left">${label}</label>
+				<label class="ip-label text-left" style="width: 100%; height: 20px;">${label}</label>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -207,9 +211,27 @@ function showIpBox(ip) {
 		var modifyButton = buttons.find(".modify-button");
 		modifyButton.click(function() {
 
-			content.show();
-			input.remove();
-			buttons.remove();
+			var macLabel = input.val();
+			$.post("do_setMacAddress_info.php", {label: macLabel}, function(data) {
+				if (data.ok) {
+					// Update data
+					ip.label = input.val();
+
+					content.text(ip.label);
+					$(".ip").each(function() {
+						if ($(this).data("mac") == ip.mac_address) {
+							$(this).data(ip, JSON.stringify(ip));
+							$(this).find("span.ip-label").text(ip.label);
+						}
+					});
+				}
+
+				content.show();
+				input.remove();
+				buttons.remove();
+
+			}, "json");
+
 		});
 
 		var cancelButton = buttons.find(".cancel-button");
