@@ -73,7 +73,6 @@ function setVolumeWorkaround(volumeCapable) {
 	};
 }
 
-
 $(function() {
 
 	$("#explorer").on("click", "button#to-list-button", function(event) {

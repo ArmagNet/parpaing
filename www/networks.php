@@ -91,8 +91,127 @@ $safes = $networkBo->scan("192.168.1.1", true);
 
 <div class="lastDiv"></div>
 
+<templates>
+	<span aria-template-id="template-modify"><?php echo lang("common_modify"); ?></span>
+	<span aria-template-id="template-cancel"><?php echo lang("common_cancel"); ?></span>
+	<div aria-template-id="template-ip-form" class="">
+		<span class="material-icons md-48 pull-left" style="height: 80px;">${icon_type}</span>
+		<div>
+			<label class="col-md-5 text-right">IP :</label>
+			<label class="col-md-5 text-left">${ip}</label>
+		</div>
+		<div>
+			<label class="col-md-5 text-right">Adresse MAC :</label>
+			<label class="col-md-5 text-left">${mac_address}</label>
+		</div>
+		<div>
+			<label class="col-md-5 text-right">Type :</label>
+			<label class="col-md-5 text-left">${type}</label>
+		</div>
+		<div>
+			<label class="col-md-5 text-right">Libellé :</label>
+			<div class="col-md-5">
+				<label class="ip-label text-left">${label}</label>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</templates>
+
 <?php include("footer.php");?>
 <script type="text/javascript">
+
+function getIconType(type) {
+	switch(type) {
+		case "desktop":
+		default:
+			return "desktop_windows";
+	}
+}
+
+// I18N this function
+function getType(type) {
+	switch(type) {
+		case "desktop":
+		default:
+			return "ordinateur";
+	}
+}
+
+function showIpBox(ip) {
+	var form = 	$("*[aria-template-id=template-ip-form]").template(
+			"use", {
+			data: {
+				icon_type: getIconType(ip.type),
+				ip: ip.ip,
+				mac_address: ip.mac_address,
+				type: getType(ip.type),
+				label: ip.label ? ip.label : ip.netbios
+			}
+		});
+
+	bootbox.dialog({
+		title: ip.ip,
+		message: form,
+		buttons: {
+			cancel: {
+			      label: $("*[aria-template-id=template-cancel]").text(),
+			      className: "btn-default",
+			      callback: function() {
+			      }
+			},
+			success: {
+			      label: $("*[aria-template-id=template-modify]").text(),
+			      className: "btn-primary",
+			      callback: function() {
+			      }
+			}
+		}
+	});
+	var zIndex = $(".modal-backdrop").css("z-index");
+	$(".modal-dialog").css({"z-index": zIndex});
+
+	$(form).find(".ip-label").click(function() {
+		var content = $(this);
+		var input = $("<input style=\"width: 110px; margin-right: 10px;\"></input>");
+		input.val(content.text().trim());
+
+		content.before(input);
+		input.focus();
+
+		var buttons = "<div class=\"text-right\" style=\"display: inline-block;\">";
+		buttons += "<button class=\"btn btn-primary modify-button\" type=\"button\"><span class=\"glyphicon glyphicon-ok\"></span></button>";
+		buttons += " <button class=\"btn btn-default cancel-button\" type=\"button\"><span class=\"glyphicon glyphicon-remove\"></span></button>";
+		buttons += "</div>";
+		buttons = $(buttons);
+		content.before(buttons);
+
+		content.hide();
+
+		input.blur(function() {
+			if (input.val() == input.text()) {
+				content.show();
+				input.remove();
+				buttons.remove();
+			}
+		});
+
+		var modifyButton = buttons.find(".modify-button");
+		modifyButton.click(function() {
+			content.show();
+			input.remove();
+			buttons.remove();
+		});
+
+		var cancelButton = buttons.find(".cancel-button");
+		cancelButton.click(function() {
+			content.show();
+			input.remove();
+			buttons.remove();
+		});
+	});
+}
+
 $(function() {
 	//get the ips from somewhere
 
@@ -104,7 +223,17 @@ $(function() {
 		$.get("do_getNetwork.php", {ip: "192.168.1.1"}, function(data) {
 			console.log(data);
 		}, "json");
-}, "json");
+	}, "json");
+
+	$(".container").on("click", "div.ip a", function(event) {
+		event.preventDefault();
+
+		var ip = $(this).parents(".ip").data("ip");
+//		console.log(ip);
+
+		showIpBox(ip);
+	});
+
 });
 </script>
 </body>
