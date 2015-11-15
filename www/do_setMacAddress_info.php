@@ -46,7 +46,7 @@ if (isset($_REQUEST["type"])) {
 
 $macs[$macAddress] = $mac;
 
-$networkBo->saveMacs($mac);
+$networkBo->saveMacs($macs);
 
 echo json_encode(array("ok" => "ok"));
 
