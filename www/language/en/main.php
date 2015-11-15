@@ -35,6 +35,7 @@ $lang["common_authenticate"] = "Authenticate";
 $lang["common_change"] = "Change";
 $lang["common_send"] = "Send";
 $lang["common_cancel"] = "Cancel";
+$lang["common_close"] = "Close";
 
 $lang["language_fr"] = "French";
 $lang["language_en"] = "English";

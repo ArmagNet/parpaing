@@ -94,23 +94,24 @@ $safes = $networkBo->scan("192.168.1.1", true);
 <templates>
 	<span aria-template-id="template-modify"><?php echo lang("common_modify"); ?></span>
 	<span aria-template-id="template-cancel"><?php echo lang("common_cancel"); ?></span>
+	<span aria-template-id="template-close"><?php echo lang("common_close"); ?></span>
 	<div aria-template-id="template-ip-form" class="">
-		<span class="material-icons md-48 pull-left" style="height: 80px;">${icon_type}</span>
+		<span class="material-icons pull-left" style="height: 80px; font-size: 80px;">${icon_type}</span>
 		<div>
-			<label class="col-md-5 text-right">IP :</label>
-			<label class="col-md-5 text-left">${ip}</label>
+			<label class="col-md-3 text-right">IP :</label>
+			<label class="col-md-7 text-left">${ip}</label>
 		</div>
 		<div>
-			<label class="col-md-5 text-right">Adresse MAC :</label>
-			<label class="col-md-5 text-left">${mac_address}</label>
+			<label class="col-md-3 text-right">Adresse MAC :</label>
+			<label class="col-md-7 text-left">${mac_address}</label>
 		</div>
 		<div>
-			<label class="col-md-5 text-right">Type :</label>
-			<label class="col-md-5 text-left">${type}</label>
+			<label class="col-md-3 text-right">Type :</label>
+			<label class="col-md-7 text-left">${type}</label>
 		</div>
 		<div>
-			<label class="col-md-5 text-right">Libellé :</label>
-			<div class="col-md-5">
+			<label class="col-md-3 text-right">Libellé :</label>
+			<div class="col-md-7">
 				<label class="ip-label text-left">${label}</label>
 			</div>
 		</div>
@@ -146,7 +147,7 @@ function showIpBox(ip) {
 				ip: ip.ip,
 				mac_address: ip.mac_address,
 				type: getType(ip.type),
-				label: ip.label ? ip.label : ip.netbios
+				label: ip.label ? ip.label : (ip.netbios ? ip.netbios : "")
 			}
 		});
 
@@ -154,18 +155,25 @@ function showIpBox(ip) {
 		title: ip.ip,
 		message: form,
 		buttons: {
-			cancel: {
+			close: {
+			      label: $("*[aria-template-id=template-close]").text(),
+			      className: "btn-default",
+			      callback: function() {
+			      }
+			}
+/*			cancel: {
 			      label: $("*[aria-template-id=template-cancel]").text(),
 			      className: "btn-default",
 			      callback: function() {
 			      }
-			},
+			}
+			,
 			success: {
 			      label: $("*[aria-template-id=template-modify]").text(),
 			      className: "btn-primary",
 			      callback: function() {
 			      }
-			}
+			}*/
 		}
 	});
 	var zIndex = $(".modal-backdrop").css("z-index");
@@ -189,7 +197,7 @@ function showIpBox(ip) {
 		content.hide();
 
 		input.blur(function() {
-			if (input.val() == input.text()) {
+			if (input.val() == content.text().trim()) {
 				content.show();
 				input.remove();
 				buttons.remove();
@@ -198,6 +206,7 @@ function showIpBox(ip) {
 
 		var modifyButton = buttons.find(".modify-button");
 		modifyButton.click(function() {
+
 			content.show();
 			input.remove();
 			buttons.remove();
