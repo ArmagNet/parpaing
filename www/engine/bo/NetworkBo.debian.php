@@ -68,6 +68,8 @@ class NetworkBo {
 
 		$ips = array();
 
+		$macs = $this->getMacs();
+
 		foreach($matches[1] as $ip_value) {
 			$ip = array();
 			$ip["ip"] = $ip_value;
@@ -95,9 +97,11 @@ class NetworkBo {
 				$ip["netbios"] = $netbiosMatches[1][0];
 			}
 
-			if (true) {
-				$ip["type"] = "desktop";
-				$ip["label"] = "Desktop";
+			if (isset($macs[$ip["mac_address"]])) {
+				$mac = $macs[$ip["mac_address"]];
+
+				$ip["type"] = $mac["type"];
+				$ip["label"] = $mac["label"];
 			}
 
 //			print_r($macMatches);
@@ -114,6 +118,28 @@ class NetworkBo {
 //		$result = array($content);
 
 		return $ips;
+	}
+
+
+	function _getFilePath() {
+		$path = $this->config["openvpn"]["path"];
+		return "$path/macs.json";
+	}
+
+	function getMacs() {
+		$macs = array();
+
+		if (file_exists($this->_getFilePath())) {
+			$content = file_get_contents($this->_getFilePath());
+			$macs = json_decode($content, true);
+		}
+
+		return $macs;
+	}
+
+	function saveMacs($configurations) {
+		$content = json_encode($configurations);
+		file_put_contents($this->_getFilePath(), $content);
 	}
 
 	static function sendCommand($cmd) {
