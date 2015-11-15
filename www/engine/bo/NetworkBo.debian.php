@@ -87,8 +87,14 @@ class NetworkBo {
 			$re = "/^MAC Address: (.*) \\((.*)\\)$/m";
 			preg_match_all($re, $ip_part, $macMatches);
 
+			if (count($macMatches[1])) {
 			$ip["mac_address"] = $macMatches[1][0];
 			$ip["card_name"] = $macMatches[2][0];
+			}
+			else {
+				$ip["mac_address"] = "";
+				$ip["card_name"] = "";
+			}
 
 			$re = "/NetBIOS name: (.*?),/m";
 			preg_match_all($re, $ip_part, $netbiosMatches);
