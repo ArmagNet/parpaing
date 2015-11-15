@@ -137,8 +137,8 @@ class NetworkBo {
 		return $macs;
 	}
 
-	function saveMacs($configurations) {
-		$content = json_encode($configurations);
+	function saveMacs($macs) {
+		$content = json_encode($macs);
 		file_put_contents($this->_getFilePath(), $content);
 	}
 

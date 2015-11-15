@@ -212,7 +212,7 @@ function showIpBox(ip) {
 		modifyButton.click(function() {
 
 			var macLabel = input.val();
-			$.post("do_setMacAddress_info.php", {label: macLabel}, function(data) {
+			$.post("do_setMacAddress_info.php", {label: macLabel, macAddress: ip.mac_address}, function(data) {
 				if (data.ok) {
 					// Update data
 					ip.label = input.val();
@@ -220,7 +220,7 @@ function showIpBox(ip) {
 					content.text(ip.label);
 					$(".ip").each(function() {
 						if ($(this).data("mac") == ip.mac_address) {
-							$(this).data(ip, JSON.stringify(ip));
+							$(this).data("ip", ip);
 							$(this).find("span.ip-label").text(ip.label);
 						}
 					});

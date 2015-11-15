@@ -27,6 +27,27 @@ if (!SessionUtils::isConnected($_SESSION)) {
 
 $networkBo = NetworkBo::newInstance($config);
 
+$macAddress = $_REQUEST["macAddress"];
+$macs = $networkBo->getMacs();
+if (isset($macs[$macAddress])) {
+	$mac = $macs[$macAddress];
+}
+else {
+	$mac = array("type" => "", "label" => "");
+}
+
+if (isset($_REQUEST["label"])) {
+	$mac["label"] = $_REQUEST["label"];
+}
+
+if (isset($_REQUEST["type"])) {
+	$mac["type"] = $_REQUEST["type"];
+}
+
+$macs[$macAddress] = $mac;
+
+$networkBo->saveMacs($mac);
+
 echo json_encode(array("ok" => "ok"));
 
 ?>
