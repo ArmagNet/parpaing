@@ -110,6 +110,10 @@ $safes = $networkBo->scan("192.168.1.1", true);
 			<label class="col-md-7 text-left">${mac_address}</label>
 		</div>
 		<div>
+			<label class="col-md-3 text-right">Constructeur :</label>
+			<label class="col-md-7 text-left">${card_name}</label>
+		</div>
+		<div>
 			<label class="col-md-3 text-right">Type :</label>
 			<label class="col-md-7 text-left">${type}</label>
 		</div>
@@ -149,7 +153,8 @@ function showIpBox(ip) {
 			data: {
 				icon_type: getIconType(ip.type),
 				ip: ip.ip,
-				mac_address: ip.mac_address,
+				mac_address: ip.mac_address ? ip.mac_address : "-",
+				card_name: ip.card_name ? ip.card_name : "-",
 				type: getType(ip.type),
 				label: ip.label ? ip.label : (ip.netbios ? ip.netbios : "")
 			}

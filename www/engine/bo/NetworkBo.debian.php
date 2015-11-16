@@ -88,8 +88,8 @@ class NetworkBo {
 			preg_match_all($re, $ip_part, $macMatches);
 
 			if (count($macMatches[1])) {
-			$ip["mac_address"] = $macMatches[1][0];
-			$ip["card_name"] = $macMatches[2][0];
+				$ip["mac_address"] = $macMatches[1][0];
+				$ip["card_name"] = $macMatches[2][0];
 			}
 			else {
 				$ip["mac_address"] = "";
