@@ -123,13 +123,16 @@ $safes = $networkBo->scan("192.168.1.1", true);
 						${type}<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdown-type">
-						<li><a href="#"><span class="material-icons md-18 pull-left">desktop_windows</span> <span class="label">Ordinateur</span></a></li>
-						<li><a href="#"><span class="material-icons md-18 pull-left">storage</span> <span class="label">Serveur</span></a></li>
-						<li><a href="#"><span class="material-icons md-18 pull-left">laptop</span> <span class="label">Portable</span></a></li>
-						<li><a href="#"><span class="material-icons md-18 pull-left">stay_primary_portrait</span> <span class="label">Mobile</span></a></li>
-						<li><a href="#"><span class="material-icons md-18 pull-left">tablet</span> <span class="label">Tablette</span></a></li>
-						<li><a href="#"><span class="material-icons md-18 pull-left">tv</span> <span class="label">TV</span></a></li>
-						<li><a href="#"><span class="material-icons md-18 pull-left">device_hub</span> <span class="label">Réseau</span></a></li>
+						<li class="dropdown-header">Matériel statique</li>
+						<li><a href="#" class="ip-type"><span class="material-icons md-18 pull-left">desktop_windows</span> <span class="label">Ordinateur</span></a></li>
+						<li><a href="#" class="ip-type"><span class="material-icons md-18 pull-left">tv</span> <span class="label">TV</span></a></li>
+						<li class="dropdown-header">Matériel mobile</li>
+						<li><a href="#" class="ip-type"><span class="material-icons md-18 pull-left">laptop</span> <span class="label">Portable</span></a></li>
+						<li><a href="#" class="ip-type"><span class="material-icons md-18 pull-left">stay_primary_portrait</span> <span class="label">Mobile</span></a></li>
+						<li><a href="#" class="ip-type"><span class="material-icons md-18 pull-left">tablet</span> <span class="label">Tablette</span></a></li>
+						<li class="dropdown-header">Matériel réseau</li>
+						<li><a href="#" class="ip-type"><span class="material-icons md-18 pull-left">storage</span> <span class="label">Serveur</span></a></li>
+						<li><a href="#" class="ip-type"><span class="material-icons md-18 pull-left">device_hub</span> <span class="label">Réseau</span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -204,6 +207,10 @@ function showIpBox(ip) {
 	});
 	var zIndex = $(".modal-backdrop").css("z-index");
 	$(".modal-dialog").css({"z-index": zIndex});
+
+	$(form).find(".ip-type").click(function(event) {
+		event.preventDefault();
+	});
 
 	$(form).find(".ip-label").click(function() {
 		var content = $(this);
