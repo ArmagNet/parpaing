@@ -115,7 +115,24 @@ $safes = $networkBo->scan("192.168.1.1", true);
 		</div>
 		<div>
 			<label class="col-md-3 text-right">Type :</label>
-			<label class="col-md-7 text-left">${type}</label>
+			<div class="col-md-7">
+				<div class="dropdown">
+					<button class="btn btn-default dropdown-toggle"
+						type="button" id="dropdown-type"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						${type}<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdown-type">
+						<li><a href="#"><span class="material-icons md-18 pull-left">desktop_windows</span> <span class="label">Ordinateur</span></a></li>
+						<li><a href="#"><span class="material-icons md-18 pull-left">storage</span> <span class="label">Serveur</span></a></li>
+						<li><a href="#"><span class="material-icons md-18 pull-left">laptop</span> <span class="label">Portable</span></a></li>
+						<li><a href="#"><span class="material-icons md-18 pull-left">stay_primary_portrait</span> <span class="label">Mobile</span></a></li>
+						<li><a href="#"><span class="material-icons md-18 pull-left">tablet</span> <span class="label">Tablette</span></a></li>
+						<li><a href="#"><span class="material-icons md-18 pull-left">tv</span> <span class="label">TV</span></a></li>
+						<li><a href="#"><span class="material-icons md-18 pull-left">device_hub</span> <span class="label">Réseau</span></a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 		<div>
 			<label class="col-md-3 text-right">Libellé :</label>
