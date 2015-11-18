@@ -46,6 +46,27 @@ $safes = $networkBo->scan("192.168.1.1", true);
 	data-ip='<?php echo str_replace("\'", "\\'", json_encode($ip));?>'>
 	<a href="#"><span class="material-icons"><?php
 		switch($ip["type"]) {
+			case "tv":
+				echo "tv";
+				break;
+			case "print":
+				echo "print";
+				break;
+			case "laptop":
+				echo "laptop";
+				break;
+			case "phone":
+				echo "stay_primary_portrait";
+				break;
+			case "tablet":
+				echo "tablet";
+				break;
+			case "server":
+				echo "storage";
+				break;
+			case "switch":
+				echo "device_hub";
+				break;
 			case "desktop":
 			default:
 				echo "desktop_windows";
@@ -75,6 +96,27 @@ $safes = $networkBo->scan("192.168.1.1", true);
 	data-ip='<?php echo str_replace("\'", "\\'", json_encode($ip));?>'>
 	<a href="#"><span class="material-icons"><?php
 		switch($ip["type"]) {
+			case "tv":
+				echo "tv";
+				break;
+			case "print":
+				echo "print";
+				break;
+			case "laptop":
+				echo "laptop";
+				break;
+			case "phone":
+				echo "stay_primary_portrait";
+				break;
+			case "tablet":
+				echo "tablet";
+				break;
+			case "server":
+				echo "storage";
+				break;
+			case "switch":
+				echo "device_hub";
+				break;
 			case "desktop":
 			default:
 				echo "desktop_windows";
@@ -115,24 +157,25 @@ $safes = $networkBo->scan("192.168.1.1", true);
 		</div>
 		<div>
 			<label class="col-md-3 text-right">Type :</label>
-			<div class="col-md-7">
+			<div class="col-md-7 ip-type">
 				<div class="dropdown">
 					<button class="btn btn-default dropdown-toggle"
 						type="button" id="dropdown-type"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						${type}<span class="caret"></span>
+						<span class="type-label">${type}</span><span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdown-type">
 						<li class="dropdown-header">Matériel statique</li>
-						<li><a href="#" class="ip-type" data-type="desktop"><span class="material-icons md-18 pull-left">desktop_windows</span> <span class="label">Ordinateur</span></a></li>
-						<li><a href="#" class="ip-type" data-type="tv"><span class="material-icons md-18 pull-left">tv</span> <span class="label">TV</span></a></li>
+						<li><a href="#" class="ip-type" data-type="desktop"><span class="material-icons md-18 pull-left">desktop_windows</span> <span class="type-label">Ordinateur</span></a></li>
+						<li><a href="#" class="ip-type" data-type="tv"><span class="material-icons md-18 pull-left">tv</span> <span class="type-label">TV</span></a></li>
+						<li><a href="#" class="ip-type" data-type="print"><span class="material-icons md-18 pull-left">print</span> <span class="type-label">Imprimante</span></a></li>
 						<li class="dropdown-header">Matériel mobile</li>
-						<li><a href="#" class="ip-type" data-type="laptop"><span class="material-icons md-18 pull-left">laptop</span> <span class="label">Portable</span></a></li>
-						<li><a href="#" class="ip-type" data-type="phone"><span class="material-icons md-18 pull-left">stay_primary_portrait</span> <span class="label">Mobile</span></a></li>
-						<li><a href="#" class="ip-type" data-type="tablet"><span class="material-icons md-18 pull-left">tablet</span> <span class="label">Tablette</span></a></li>
+						<li><a href="#" class="ip-type" data-type="laptop"><span class="material-icons md-18 pull-left">laptop</span> <span class="type-label">Portable</span></a></li>
+						<li><a href="#" class="ip-type" data-type="phone"><span class="material-icons md-18 pull-left">stay_primary_portrait</span> <span class="type-label">Mobile</span></a></li>
+						<li><a href="#" class="ip-type" data-type="tablet"><span class="material-icons md-18 pull-left">tablet</span> <span class="type-label">Tablette</span></a></li>
 						<li class="dropdown-header">Matériel réseau</li>
-						<li><a href="#" class="ip-type" data-type="server"><span class="material-icons md-18 pull-left">storage</span> <span class="label">Serveur</span></a></li>
-						<li><a href="#" class="ip-type" data-type="switch"><span class="material-icons md-18 pull-left">device_hub</span> <span class="label">Réseau</span></a></li>
+						<li><a href="#" class="ip-type" data-type="server"><span class="material-icons md-18 pull-left">storage</span> <span class="type-label">Serveur</span></a></li>
+						<li><a href="#" class="ip-type" data-type="switch"><span class="material-icons md-18 pull-left">device_hub</span> <span class="type-label">Réseau</span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -152,6 +195,20 @@ $safes = $networkBo->scan("192.168.1.1", true);
 
 function getIconType(type) {
 	switch(type) {
+		case "tv":
+			return "tv";
+		case "print":
+			return "print";
+		case "laptop":
+			return "laptop";
+		case "phone":
+			return "stay_primary_portrait";
+		case "tablet":
+			return "tablet";
+		case "server":
+			return "storage";
+		case "switch":
+			return "device_hub";
 		case "desktop":
 		default:
 			return "desktop_windows";
@@ -161,6 +218,20 @@ function getIconType(type) {
 // I18N this function
 function getType(type) {
 	switch(type) {
+		case "tv":
+			return "TV";
+		case "print":
+			return "Imprimante";
+		case "laptop":
+			return "Portable";
+		case "phone":
+			return "Mobile";
+		case "tablet":
+			return "Tablette";
+		case "server":
+			return "Serveur";
+		case "switch":
+			return "Réseau";
 		case "desktop":
 		default:
 			return "ordinateur";
@@ -214,6 +285,7 @@ function showIpBox(ip) {
 		var type = $(this).data("type");
 
 		link.parents(".ip-form").find(".ip-type-icon").text(getIconType(type));
+		link.parents(".ip-type").find(".type-label").text(getType(type));
 
 		$.post("do_setMacAddress_info.php", {type: type, macAddress: ip.mac_address}, function(data) {
 			if (data.ok) {
@@ -228,7 +300,6 @@ function showIpBox(ip) {
 				});
 			}
 
-			content.show();
 			input.remove();
 			buttons.remove();
 
