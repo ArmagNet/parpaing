@@ -99,8 +99,8 @@ $safes = $networkBo->scan("192.168.1.1", true);
 	<span aria-template-id="template-modify"><?php echo lang("common_modify"); ?></span>
 	<span aria-template-id="template-cancel"><?php echo lang("common_cancel"); ?></span>
 	<span aria-template-id="template-close"><?php echo lang("common_close"); ?></span>
-	<div aria-template-id="template-ip-form" class="">
-		<span class="material-icons pull-left" style="height: 80px; font-size: 80px;">${icon_type}</span>
+	<div aria-template-id="template-ip-form" class="ip-form">
+		<span class="material-icons pull-left ip-type-icon" style="height: 120px; font-size: 80px;">${icon_type}</span>
 		<div>
 			<label class="col-md-3 text-right">IP :</label>
 			<label class="col-md-7 text-left">${ip}</label>
@@ -124,15 +124,15 @@ $safes = $networkBo->scan("192.168.1.1", true);
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdown-type">
 						<li class="dropdown-header">Matériel statique</li>
-						<li><a href="#" class="ip-type"><span class="material-icons md-18 pull-left">desktop_windows</span> <span class="label">Ordinateur</span></a></li>
-						<li><a href="#" class="ip-type"><span class="material-icons md-18 pull-left">tv</span> <span class="label">TV</span></a></li>
+						<li><a href="#" class="ip-type" data-type="desktop"><span class="material-icons md-18 pull-left">desktop_windows</span> <span class="label">Ordinateur</span></a></li>
+						<li><a href="#" class="ip-type" data-type="tv"><span class="material-icons md-18 pull-left">tv</span> <span class="label">TV</span></a></li>
 						<li class="dropdown-header">Matériel mobile</li>
-						<li><a href="#" class="ip-type"><span class="material-icons md-18 pull-left">laptop</span> <span class="label">Portable</span></a></li>
-						<li><a href="#" class="ip-type"><span class="material-icons md-18 pull-left">stay_primary_portrait</span> <span class="label">Mobile</span></a></li>
-						<li><a href="#" class="ip-type"><span class="material-icons md-18 pull-left">tablet</span> <span class="label">Tablette</span></a></li>
+						<li><a href="#" class="ip-type" data-type="laptop"><span class="material-icons md-18 pull-left">laptop</span> <span class="label">Portable</span></a></li>
+						<li><a href="#" class="ip-type" data-type="phone"><span class="material-icons md-18 pull-left">stay_primary_portrait</span> <span class="label">Mobile</span></a></li>
+						<li><a href="#" class="ip-type" data-type="tablet"><span class="material-icons md-18 pull-left">tablet</span> <span class="label">Tablette</span></a></li>
 						<li class="dropdown-header">Matériel réseau</li>
-						<li><a href="#" class="ip-type"><span class="material-icons md-18 pull-left">storage</span> <span class="label">Serveur</span></a></li>
-						<li><a href="#" class="ip-type"><span class="material-icons md-18 pull-left">device_hub</span> <span class="label">Réseau</span></a></li>
+						<li><a href="#" class="ip-type" data-type="server"><span class="material-icons md-18 pull-left">storage</span> <span class="label">Serveur</span></a></li>
+						<li><a href="#" class="ip-type" data-type="switch"><span class="material-icons md-18 pull-left">device_hub</span> <span class="label">Réseau</span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -210,6 +210,30 @@ function showIpBox(ip) {
 
 	$(form).find(".ip-type").click(function(event) {
 		event.preventDefault();
+		var link = $(this);
+		var type = $(this).data("type");
+
+		link.parents(".ip-form").find(".ip-type-icon").text(getIconType(type));
+
+		$.post("do_setMacAddress_info.php", {type: type, macAddress: ip.mac_address}, function(data) {
+			if (data.ok) {
+				// Update data
+				ip.type = type;
+
+				$(".ip").each(function() {
+					if ($(this).data("mac") == ip.mac_address) {
+						$(this).data("ip", ip);
+						$(this).find(".material-icons").text(getIconType(ip.type));
+					}
+				});
+			}
+
+			content.show();
+			input.remove();
+			buttons.remove();
+
+		}, "json");
+
 	});
 
 	$(form).find(".ip-label").click(function() {
