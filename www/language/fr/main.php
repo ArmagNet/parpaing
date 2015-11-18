@@ -122,6 +122,18 @@ $lang["explorer_tooltip_icons"] = "Icônes";
 $lang["explorer_tooltip_addFiles"] = "Ajout de fichiers";
 $lang["explorer_tooltip_createFolder"] = "Création de répertoire";
 
+$lang["networks_mac_type_static"] = "Matériel statique";
+$lang["networks_mac_type_mobile"] = "Matériel mobile";
+$lang["networks_mac_type_network"] = "Matériel réseau";
+$lang["networks_mac_type_desktop"] = "Ordinateur";
+$lang["networks_mac_type_tv"] = "Téléviseur";
+$lang["networks_mac_type_print"] = "Imprimante";
+$lang["networks_mac_type_laptop"] = "Portable";
+$lang["networks_mac_type_phone"] = "Mobile";
+$lang["networks_mac_type_tablet"] = "Tablette";
+$lang["networks_mac_type_switch"] = "Réseau";
+$lang["networks_mac_type_server"] = "Serveur";
+
 // Rates
 
 $lang["memory_rate"] = "Mémoire";

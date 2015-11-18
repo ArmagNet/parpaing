@@ -25,6 +25,28 @@ $networkBo = NetworkBo::newInstance($config);
 $unsafes = $networkBo->scan("192.168.0.1", true);
 $safes = $networkBo->scan("192.168.1.1", true);
 
+function getIconType($type) {
+	switch($type) {
+		case "tv":
+			return "tv";
+		case "print":
+			return "print";
+		case "laptop":
+			return "laptop";
+		case "phone":
+			return "stay_primary_portrait";
+		case "tablet":
+			return "tablet";
+		case "server":
+			return "storage";
+		case "switch":
+			return "device_hub";
+		case "desktop":
+		default:
+			return "desktop_windows";
+	}
+}
+
 ?>
 <div class="container theme-showcase" role="main">
 	<ol class="breadcrumb">
@@ -45,33 +67,7 @@ $safes = $networkBo->scan("192.168.1.1", true);
 	data-mac='<?php echo $ip["mac_address"]; ?>'
 	data-ip='<?php echo str_replace("\'", "\\'", json_encode($ip));?>'>
 	<a href="#"><span class="material-icons"><?php
-		switch($ip["type"]) {
-			case "tv":
-				echo "tv";
-				break;
-			case "print":
-				echo "print";
-				break;
-			case "laptop":
-				echo "laptop";
-				break;
-			case "phone":
-				echo "stay_primary_portrait";
-				break;
-			case "tablet":
-				echo "tablet";
-				break;
-			case "server":
-				echo "storage";
-				break;
-			case "switch":
-				echo "device_hub";
-				break;
-			case "desktop":
-			default:
-				echo "desktop_windows";
-				break;
-		}
+		echo getIconType($ip["type"]);
 	?></span></a>
 	<a href="#"><?php echo $ip["ip"]; ?></a>
 	<br/>
@@ -95,33 +91,7 @@ $safes = $networkBo->scan("192.168.1.1", true);
 	data-mac='<?php echo $ip["mac_address"]; ?>'
 	data-ip='<?php echo str_replace("\'", "\\'", json_encode($ip));?>'>
 	<a href="#"><span class="material-icons"><?php
-		switch($ip["type"]) {
-			case "tv":
-				echo "tv";
-				break;
-			case "print":
-				echo "print";
-				break;
-			case "laptop":
-				echo "laptop";
-				break;
-			case "phone":
-				echo "stay_primary_portrait";
-				break;
-			case "tablet":
-				echo "tablet";
-				break;
-			case "server":
-				echo "storage";
-				break;
-			case "switch":
-				echo "device_hub";
-				break;
-			case "desktop":
-			default:
-				echo "desktop_windows";
-				break;
-		}
+		echo getIconType($ip["type"]);
 	?></span></a>
 	<a href="#"><?php echo $ip["ip"]; ?></a>
 	<br/>
@@ -165,17 +135,17 @@ $safes = $networkBo->scan("192.168.1.1", true);
 						<span class="type-label">${type}</span><span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdown-type">
-						<li class="dropdown-header">Matériel statique</li>
-						<li><a href="#" class="ip-type" data-type="desktop"><span class="material-icons md-18 pull-left">desktop_windows</span> <span class="type-label">Ordinateur</span></a></li>
-						<li><a href="#" class="ip-type" data-type="tv"><span class="material-icons md-18 pull-left">tv</span> <span class="type-label">TV</span></a></li>
-						<li><a href="#" class="ip-type" data-type="print"><span class="material-icons md-18 pull-left">print</span> <span class="type-label">Imprimante</span></a></li>
-						<li class="dropdown-header">Matériel mobile</li>
-						<li><a href="#" class="ip-type" data-type="laptop"><span class="material-icons md-18 pull-left">laptop</span> <span class="type-label">Portable</span></a></li>
-						<li><a href="#" class="ip-type" data-type="phone"><span class="material-icons md-18 pull-left">stay_primary_portrait</span> <span class="type-label">Mobile</span></a></li>
-						<li><a href="#" class="ip-type" data-type="tablet"><span class="material-icons md-18 pull-left">tablet</span> <span class="type-label">Tablette</span></a></li>
-						<li class="dropdown-header">Matériel réseau</li>
-						<li><a href="#" class="ip-type" data-type="server"><span class="material-icons md-18 pull-left">storage</span> <span class="type-label">Serveur</span></a></li>
-						<li><a href="#" class="ip-type" data-type="switch"><span class="material-icons md-18 pull-left">device_hub</span> <span class="type-label">Réseau</span></a></li>
+						<li class="dropdown-header"><?php echo lang("networks_mac_type_static"); ?></li>
+						<li><a href="#" class="ip-type" data-type="desktop"><span class="material-icons md-18 pull-left">desktop_windows</span> <span class="type-label"><?php echo lang("networks_mac_type_desktop"); ?></span></a></li>
+						<li><a href="#" class="ip-type" data-type="tv"><span class="material-icons md-18 pull-left">tv</span> <span class="type-label"><?php echo lang("networks_mac_type_tv"); ?></span></a></li>
+						<li><a href="#" class="ip-type" data-type="print"><span class="material-icons md-18 pull-left">print</span> <span class="type-label"><?php echo lang("networks_mac_type_print"); ?></span></a></li>
+						<li class="dropdown-header"><?php echo lang("networks_mac_type_mobile"); ?></li>
+						<li><a href="#" class="ip-type" data-type="laptop"><span class="material-icons md-18 pull-left">laptop</span> <span class="type-label"><?php echo lang("networks_mac_type_laptop"); ?></span></a></li>
+						<li><a href="#" class="ip-type" data-type="phone"><span class="material-icons md-18 pull-left">stay_primary_portrait</span> <span class="type-label"><?php echo lang("networks_mac_type_phone"); ?></span></a></li>
+						<li><a href="#" class="ip-type" data-type="tablet"><span class="material-icons md-18 pull-left">tablet</span> <span class="type-label"><?php echo lang("networks_mac_type_tablet"); ?></span></a></li>
+						<li class="dropdown-header"><?php echo lang("networks_mac_type_network"); ?></li>
+						<li><a href="#" class="ip-type" data-type="server"><span class="material-icons md-18 pull-left">storage</span> <span class="type-label"><?php echo lang("networks_mac_type_server"); ?></span></a></li>
+						<li><a href="#" class="ip-type" data-type="switch"><span class="material-icons md-18 pull-left">device_hub</span> <span class="type-label"><?php echo lang("networks_mac_type_switch"); ?></span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -234,7 +204,7 @@ function getType(type) {
 			return "Réseau";
 		case "desktop":
 		default:
-			return "ordinateur";
+			return "Ordinateur";
 	}
 }
 
@@ -279,13 +249,13 @@ function showIpBox(ip) {
 	var zIndex = $(".modal-backdrop").css("z-index");
 	$(".modal-dialog").css({"z-index": zIndex});
 
-	$(form).find(".ip-type").click(function(event) {
+	$(form).find("a.ip-type").click(function(event) {
 		event.preventDefault();
 		var link = $(this);
 		var type = $(this).data("type");
 
 		link.parents(".ip-form").find(".ip-type-icon").text(getIconType(type));
-		link.parents(".ip-type").find(".type-label").text(getType(type));
+		link.parents("div.ip-type").find(".type-label").text(getType(type));
 
 		$.post("do_setMacAddress_info.php", {type: type, macAddress: ip.mac_address}, function(data) {
 			if (data.ok) {
@@ -299,9 +269,6 @@ function showIpBox(ip) {
 					}
 				});
 			}
-
-			input.remove();
-			buttons.remove();
 
 		}, "json");
 
