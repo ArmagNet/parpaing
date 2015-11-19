@@ -164,48 +164,24 @@ function getIconType($type) {
 <script type="text/javascript">
 
 function getIconType(type) {
-	switch(type) {
-		case "tv":
-			return "tv";
-		case "print":
-			return "print";
-		case "laptop":
-			return "laptop";
-		case "phone":
-			return "stay_primary_portrait";
-		case "tablet":
-			return "tablet";
-		case "server":
-			return "storage";
-		case "switch":
-			return "device_hub";
-		case "desktop":
-		default:
-			return "desktop_windows";
+	var link = $("templates a.ip-type[data-type="+type+"]");
+
+	if (link.length == 1) {
+		return link.find("span.material-icons").text();
 	}
+
+	return "";
 }
 
 // I18N this function
 function getType(type) {
-	switch(type) {
-		case "tv":
-			return "TV";
-		case "print":
-			return "Imprimante";
-		case "laptop":
-			return "Portable";
-		case "phone":
-			return "Mobile";
-		case "tablet":
-			return "Tablette";
-		case "server":
-			return "Serveur";
-		case "switch":
-			return "Réseau";
-		case "desktop":
-		default:
-			return "Ordinateur";
+	var link = $("templates a.ip-type[data-type="+type+"]");
+
+	if (link.length == 1) {
+		return link.find("span.type-label").text();
 	}
+
+	return "";
 }
 
 function showIpBox(ip) {
@@ -231,19 +207,6 @@ function showIpBox(ip) {
 			      callback: function() {
 			      }
 			}
-/*			cancel: {
-			      label: $("*[aria-template-id=template-cancel]").text(),
-			      className: "btn-default",
-			      callback: function() {
-			      }
-			}
-			,
-			success: {
-			      label: $("*[aria-template-id=template-modify]").text(),
-			      className: "btn-primary",
-			      callback: function() {
-			      }
-			}*/
 		}
 	});
 	var zIndex = $(".modal-backdrop").css("z-index");
@@ -322,7 +285,6 @@ function showIpBox(ip) {
 				buttons.remove();
 
 			}, "json");
-
 		});
 
 		var cancelButton = buttons.find(".cancel-button");
@@ -351,11 +313,9 @@ $(function() {
 		event.preventDefault();
 
 		var ip = $(this).parents(".ip").data("ip");
-//		console.log(ip);
 
 		showIpBox(ip);
 	});
-
 });
 </script>
 </body>
