@@ -37,7 +37,7 @@ $safes = $networkBo->scan("192.168.1.1", true);
 	<div class="col-md-6 unsafe-network">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">Unsafe network</h3>
+				<h3 class="panel-title"><?php echo lang("networks_network_unsafe"); ?></h3>
 			</div>
 			<div class="panel-body">
 			</div>
@@ -46,7 +46,7 @@ $safes = $networkBo->scan("192.168.1.1", true);
 	<div class="col-md-6 safe-network">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">Safe network</h3>
+				<h3 class="panel-title"><?php echo lang("networks_network_safe"); ?></h3>
 			</div>
 			<div class="panel-body">
 			</div>

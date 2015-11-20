@@ -122,6 +122,8 @@ $lang["explorer_tooltip_icons"] = "Icônes";
 $lang["explorer_tooltip_addFiles"] = "Ajout de fichiers";
 $lang["explorer_tooltip_createFolder"] = "Création de répertoire";
 
+$lang["networks_network_safe"] = "Réseau sécurisé";
+$lang["networks_network_unsafe"] = "Réseau non sécurisé";
 $lang["networks_mac_type_static"] = "Matériel statique";
 $lang["networks_mac_type_mobile"] = "Matériel mobile";
 $lang["networks_mac_type_network"] = "Matériel réseau";
