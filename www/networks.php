@@ -22,30 +22,10 @@ require_once 'engine/bo/NetworkBo.'.$config["parpaing"]["dialect"].'.php';
 
 $networkBo = NetworkBo::newInstance($config);
 
+// Get the ips from somewhere
+
 $unsafes = $networkBo->scan("192.168.0.1", true);
 $safes = $networkBo->scan("192.168.1.1", true);
-
-function getIconType($type) {
-	switch($type) {
-		case "tv":
-			return "tv";
-		case "print":
-			return "print";
-		case "laptop":
-			return "laptop";
-		case "phone":
-			return "stay_primary_portrait";
-		case "tablet":
-			return "tablet";
-		case "server":
-			return "storage";
-		case "switch":
-			return "device_hub";
-		case "desktop":
-		default:
-			return "desktop_windows";
-	}
-}
 
 ?>
 <div class="container theme-showcase" role="main">
@@ -60,22 +40,6 @@ function getIconType($type) {
 				<h3 class="panel-title">Unsafe network</h3>
 			</div>
 			<div class="panel-body">
-<?php 	if (count($unsafes)) {
-			foreach($unsafes as $ip) {?>
-
-<div class="ip"
-	data-mac='<?php echo $ip["mac_address"]; ?>'
-	data-ip='<?php echo str_replace("\'", "\\'", json_encode($ip));?>'>
-	<a href="#"><span class="material-icons"><?php
-		echo getIconType($ip["type"]);
-	?></span></a>
-	<a href="#"><?php echo $ip["ip"]; ?></a>
-	<br/>
-	<a href="#"><span class="ip-label"><?php echo $ip["label"] ? $ip["label"] : $ip["netbios"]; ?></span></a>
-</div>
-
-<?php 		}
-		}?>
 			</div>
 		</div>
 	</div>
@@ -85,20 +49,6 @@ function getIconType($type) {
 				<h3 class="panel-title">Safe network</h3>
 			</div>
 			<div class="panel-body">
-<?php 	if (count($safes)) {
-			foreach($safes as $ip) {?>
-<div class="ip"
-	data-mac='<?php echo $ip["mac_address"]; ?>'
-	data-ip='<?php echo str_replace("\'", "\\'", json_encode($ip));?>'>
-	<a href="#"><span class="material-icons"><?php
-		echo getIconType($ip["type"]);
-	?></span></a>
-	<a href="#"><?php echo $ip["ip"]; ?></a>
-	<br/>
-	<a href="#"><span class="ip-label"><?php echo $ip["label"] ? $ip["label"] : $ip["netbios"]; ?></span></a>
-</div>
-<?php 		}
-		}?>
 			</div>
 		</div>
 	</div>
@@ -111,6 +61,14 @@ function getIconType($type) {
 	<span aria-template-id="template-modify"><?php echo lang("common_modify"); ?></span>
 	<span aria-template-id="template-cancel"><?php echo lang("common_cancel"); ?></span>
 	<span aria-template-id="template-close"><?php echo lang("common_close"); ?></span>
+	<div class="template-ip ip"
+		data-mac=''
+		data-ip=''>
+		<a href="#"><span class="material-icons">${icon_type}</span></a>
+		<a href="#">${ip}</a>
+		<br/>
+		<a href="#"><span class="ip-label">${label}</span></a>
+	</div>
 	<div aria-template-id="template-ip-form" class="ip-form">
 		<span class="material-icons pull-left ip-type-icon" style="height: 120px; font-size: 80px;">${icon_type}</span>
 		<div>
@@ -160,163 +118,16 @@ function getIconType($type) {
 	</div>
 </templates>
 
-<?php include("footer.php");?>
 <script type="text/javascript">
 
-function getIconType(type) {
-	var link = $("templates a.ip-type[data-type="+type+"]");
+//get the ips from somewhere
+var safeIp = "192.168.1.1";
+var unsafeIp = "192.168.0.1";
 
-	if (link.length == 1) {
-		return link.find("span.material-icons").text();
-	}
+var safeIps = <?php echo json_encode($safes); ?>;
+var unsafeIps = <?php echo json_encode($unsafes); ?>;
 
-	return "";
-}
-
-// I18N this function
-function getType(type) {
-	var link = $("templates a.ip-type[data-type="+type+"]");
-
-	if (link.length == 1) {
-		return link.find("span.type-label").text();
-	}
-
-	return "";
-}
-
-function showIpBox(ip) {
-	var form = 	$("*[aria-template-id=template-ip-form]").template(
-			"use", {
-			data: {
-				icon_type: getIconType(ip.type),
-				ip: ip.ip,
-				mac_address: ip.mac_address ? ip.mac_address : "-",
-				card_name: ip.card_name ? ip.card_name : "-",
-				type: getType(ip.type),
-				label: ip.label ? ip.label : (ip.netbios ? ip.netbios : "")
-			}
-		});
-
-	bootbox.dialog({
-		title: ip.ip,
-		message: form,
-		buttons: {
-			close: {
-			      label: $("*[aria-template-id=template-close]").text(),
-			      className: "btn-default",
-			      callback: function() {
-			      }
-			}
-		}
-	});
-	var zIndex = $(".modal-backdrop").css("z-index");
-	$(".modal-dialog").css({"z-index": zIndex});
-
-	$(form).find("a.ip-type").click(function(event) {
-		event.preventDefault();
-		var link = $(this);
-		var type = $(this).data("type");
-
-		link.parents(".ip-form").find(".ip-type-icon").text(getIconType(type));
-		link.parents("div.ip-type").find(".type-label").text(getType(type));
-
-		$.post("do_setMacAddress_info.php", {type: type, macAddress: ip.mac_address}, function(data) {
-			if (data.ok) {
-				// Update data
-				ip.type = type;
-
-				$(".ip").each(function() {
-					if ($(this).data("mac") == ip.mac_address) {
-						$(this).data("ip", ip);
-						$(this).find(".material-icons").text(getIconType(ip.type));
-					}
-				});
-			}
-
-		}, "json");
-
-	});
-
-	$(form).find(".ip-label").click(function() {
-		var content = $(this);
-		var input = $("<input style=\"width: 110px; margin-right: 10px;\"></input>");
-		input.val(content.text().trim());
-
-		content.before(input);
-		input.focus();
-
-		var buttons = "<div class=\"text-right\" style=\"display: inline-block;\">";
-		buttons += "<button class=\"btn btn-primary btn-xs modify-button\" type=\"button\"><span class=\"glyphicon glyphicon-ok\"></span></button>";
-		buttons += " <button class=\"btn btn-default btn-xs cancel-button\" type=\"button\"><span class=\"glyphicon glyphicon-remove\"></span></button>";
-		buttons += "</div>";
-		buttons = $(buttons);
-		content.before(buttons);
-
-		content.hide();
-
-		input.blur(function() {
-			if (input.val() == content.text().trim()) {
-				content.show();
-				input.remove();
-				buttons.remove();
-			}
-		});
-
-		var modifyButton = buttons.find(".modify-button");
-		modifyButton.click(function() {
-
-			var macLabel = input.val();
-			$.post("do_setMacAddress_info.php", {label: macLabel, macAddress: ip.mac_address}, function(data) {
-				if (data.ok) {
-					// Update data
-					ip.label = input.val();
-
-					content.text(ip.label);
-					$(".ip").each(function() {
-						if ($(this).data("mac") == ip.mac_address) {
-							$(this).data("ip", ip);
-							$(this).find("span.ip-label").text(ip.label);
-						}
-					});
-				}
-
-				content.show();
-				input.remove();
-				buttons.remove();
-
-			}, "json");
-		});
-
-		var cancelButton = buttons.find(".cancel-button");
-		cancelButton.click(function() {
-			content.show();
-			input.remove();
-			buttons.remove();
-		});
-	});
-}
-
-$(function() {
-	//get the ips from somewhere
-
-	// Get the unsafe network
-	$.get("do_getNetwork.php", {ip: "192.168.0.1"}, function(data) {
-		console.log(data);
-
-		// Get the safe network
-		$.get("do_getNetwork.php", {ip: "192.168.1.1"}, function(data) {
-			console.log(data);
-		}, "json");
-	}, "json");
-
-	$(".container").on("click", "div.ip a", function(event) {
-		event.preventDefault();
-
-		var ip = $(this).parents(".ip").data("ip");
-
-		showIpBox(ip);
-	});
-});
 </script>
+<?php include("footer.php");?>
 </body>
 </html>
