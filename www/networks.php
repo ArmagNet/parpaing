@@ -61,7 +61,7 @@ $safes = $networkBo->scan("192.168.1.1", true);
 	<span aria-template-id="template-modify"><?php echo lang("common_modify"); ?></span>
 	<span aria-template-id="template-cancel"><?php echo lang("common_cancel"); ?></span>
 	<span aria-template-id="template-close"><?php echo lang("common_close"); ?></span>
-	<div class="template-ip ip"
+	<div aria-template-id="template-ip" class="ip"
 		data-mac=''
 		data-ip=''>
 		<a href="#"><span class="material-icons">${icon_type}</span></a>
