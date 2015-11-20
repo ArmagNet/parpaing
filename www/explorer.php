@@ -249,6 +249,7 @@ function getPermString($perms) {
 					$external = true;
 					break;
 				case "video/mp4":
+				case "video/x-matroska":
 					$type = "file";
 					$icon = "glyphicon-film";
 //					$toolpath = "viewFilm.php";
