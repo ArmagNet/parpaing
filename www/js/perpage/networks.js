@@ -15,6 +15,8 @@ if (!unsafeIps) {
 }
 
 function getIconType(type) {
+	if (!type) type = "desktop";
+
 	var link = $("templates a.ip-type[data-type="+type+"]");
 
 	if (link.length == 1) {
@@ -26,6 +28,8 @@ function getIconType(type) {
 
 // I18N this function
 function getType(type) {
+	if (!type) type = "desktop";
+
 	var link = $("templates a.ip-type[data-type="+type+"]");
 
 	if (link.length == 1) {
