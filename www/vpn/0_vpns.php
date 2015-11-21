@@ -65,7 +65,6 @@ $(function() {
 
 <script>
 
-
 function updateStatus() {
 	if (activeStatus) {
 		$("#vpns_deactivateButton").removeClass("disabled");
@@ -173,6 +172,8 @@ function updateAvailableConfigurations(configurations) {
 				activateVpn(configurationId);
 			}
 		});
+		var zIndex = $(".modal-backdrop").css("z-index");
+		$(".modal-dialog").css({"z-index": zIndex});
 	});
 
 	list.find("a.delete").click(function() {
@@ -186,6 +187,8 @@ function updateAvailableConfigurations(configurations) {
 				deleteVpn(configurationId);
 			}
 		});
+		var zIndex = $(".modal-backdrop").css("z-index");
+		$(".modal-dialog").css({"z-index": zIndex});
 	});
 
 	list.find("a.modify").click(function() {
