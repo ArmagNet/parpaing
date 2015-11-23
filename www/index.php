@@ -79,8 +79,24 @@ while ($line = fgets($fh)) {
 fclose($fh);
 
 // CPU
+if (false && function_exists("sys_getloadavg")) {
+	$load = sys_getloadavg();
+}
+else {
+	$load = substr(strrchr(shell_exec("uptime"), ":"), 1);
 
-$load = sys_getloadavg();
+	$load = array_map("trim", explode(",", $load));
+
+	if (count($load) == 6) {
+		$newLoad = array();
+		for($i = 0; $i < 3; $i++) {
+			$newLoad[$i] = $load[$i * 2] . "." . $load[$i * 2 + 1];
+			$newLoad[$i] *= 1.;
+		}
+
+		$load = $newLoad;
+	}
+}
 
 $stat1 = file('/proc/stat');
 //sleep(1);
