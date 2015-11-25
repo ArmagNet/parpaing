@@ -24,6 +24,22 @@ class ArmagnetVpnApiClient {
 		$this->apiUrl = $apiUrl;
 	}
 
+	/**
+	 * #Warning using the method may induce invoices. But you need to be registered as a ticket member to do so.
+	 *
+	 * @param array $account {login, password}
+	 * @param string $productCode a product code (vpn_year, vpn_6months, parpaing_vpn_year)
+	 * @return array {ticket (The computed ticket), amount (the invoiced amount for this ticket), product (the product code)}
+	 */
+	function createTicket($account, $productCode) {
+		$fields = array(
+				'account' => urlencode(json_encode($account)),
+				'product' => $productCode
+		);
+
+		return $this->_post("createTicket", $fields);
+	}
+
 	function authenticate($account) {
 		$fields = array(
 				'account' => urlencode(json_encode($account))
