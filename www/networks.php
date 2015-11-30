@@ -23,9 +23,7 @@ require_once 'engine/bo/NetworkBo.'.$config["parpaing"]["dialect"].'.php';
 $networkBo = NetworkBo::newInstance($config);
 
 // Get the ips from somewhere
-
-$unsafes = $networkBo->scan("192.168.0.1", true);
-$safes = $networkBo->scan("192.168.1.1", true);
+$interfaces = $networkBo->getInterfaces();
 
 ?>
 <div class="container theme-showcase" role="main">
@@ -121,11 +119,26 @@ $safes = $networkBo->scan("192.168.1.1", true);
 <script type="text/javascript">
 
 //get the ips from somewhere
-var safeIp = "192.168.1.1";
-var unsafeIp = "192.168.0.1";
+<?php
+if (isset($interfaces["eth0.101"])) {
+	$unsafeIp = $interfaces["eth0.101"]["ip_v4"];
+	$unsafes = $networkBo->scan($unsafeIp, true);
 
-var safeIps = <?php echo json_encode($safes); ?>;
+?>
+var unsafeIp = "<?php echo $unsafeIp; ?>";
 var unsafeIps = <?php echo json_encode($unsafes); ?>;
+<?php
+}
+
+if (isset($interfaces["br0"])) {
+	$safeIp = $interfaces["br0"]["ip_v4"];
+	$safes = $networkBo->scan($safeIp, true);
+?>
+var safeIp = "<?php echo $safeIp; ?>";
+var safeIps = <?php echo json_encode($safes); ?>;
+<?php
+}
+?>
 
 </script>
 <?php include("footer.php");?>

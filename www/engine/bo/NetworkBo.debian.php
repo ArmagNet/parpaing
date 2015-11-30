@@ -31,9 +31,6 @@ class NetworkBo {
 	function scan($network, $fromCache = false) {
 		$filepath = $this->config["incron"]["path"] . "/$network.nmap";
 
-//		error_log("Scan $network");
-
-
 		if ($fromCache && !file_exists($filepath)) {
 			return array();
 		}
@@ -43,23 +40,12 @@ class NetworkBo {
 			file_put_contents($this->config["incron"]["path"] . "/nmap.su.ip", $network);
 
 			while(!file_exists($filepath) || strpos(file_get_contents($filepath), "done") === false) {
-//				error_log("Sleep $network");
-
 				sleep(1);
 			}
 		}
 
 
 		$content = file_get_contents($filepath);
-//		if (strpos($content, "") === false)
-
-// 		$cmd = "nmap -sU --script nbstat.nse -p137 $network/24";
-
-// 		echo "$cmd\n";
-
-// 		$result = NetworkBo::sendCommand($cmd);
-
-// 		echo "# $result #\n";
 
 		$re = "/^Nmap scan report for (.*)$/m";
 		preg_match_all($re, $content, $matches);
@@ -110,18 +96,8 @@ class NetworkBo {
 				$ip["label"] = $mac["label"];
 			}
 
-//			print_r($macMatches);
-
-//			echo $ip_part;
-
-//			print_r($ip);
-
 			$ips[] = $ip;
-
-//			echo "\n";
 		}
-
-//		$result = array($content);
 
 		return $ips;
 	}
@@ -146,6 +122,52 @@ class NetworkBo {
 	function saveMacs($macs) {
 		$content = json_encode($macs);
 		file_put_contents($this->_getFilePath(), $content);
+	}
+
+	function getInterfaces() {
+		$output = NetworkBo::sendCommand("ifconfig");
+
+		$lines = preg_split("/\n/", $output);
+
+		$currentInterface = array();
+
+		$interfaces = array();
+
+		foreach($lines as $index => $line) {
+			if (!$line) {
+				if (isset($currentInterface["name"])) {
+					$interfaces[$currentInterface["name"]] = $currentInterface;
+				}
+				$currentInterface = array();
+			}
+			else {
+				$re = "/^([a-z0-9\\.]+)\\s*Link encap:([A-Za-z0-9]+)\\s*(HWaddr)?\\s*([a-z0-9:\\-]*)/";
+				preg_match_all($re, $line, $matches);
+
+				if ($matches[0]) {
+					$currentInterface["name"] = $matches[1][0];
+					if ($matches[4]) {
+						$currentInterface["mac"] = $matches[4][0];
+					}
+				}
+
+				$re = "/inet addr:([0-9\\.]*)/";
+				preg_match_all($re, $line, $matches);
+
+				if ($matches[1]) {
+					$currentInterface["ip_v4"] = $matches[1][0];
+				}
+
+				$re = "/addr: ([a-f0-9\\:\\/]*)/";
+				preg_match_all($re, $line, $matches);
+
+				if ($matches[1]) {
+					$currentInterface["ip_v6"] = $matches[1][0];
+				}
+			}
+		}
+
+		return $interfaces;
 	}
 
 	static function sendCommand($cmd) {
