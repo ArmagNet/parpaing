@@ -17,6 +17,11 @@
     along with Parpaing.  If not, see <http://www.gnu.org/licenses/>.
 */
 include_once("header.php");
+require_once 'engine/bo/NetworkBo.'.$config["parpaing"]["dialect"].'.php';
+
+$networkBo = NetworkBo::newInstance($config);
+
+$ipInterfaces = $networkBo->getInterfaces();
 
 function humanFileSize($bytes, $si, $decimals = 1, $scale = 1) {
 	$thresh = $si ? 1000: 1024;
@@ -151,6 +156,10 @@ foreach($interfaces as $index => $interface) {
 	$interfaces[$index] = array("name" => $interface,
 								"in" => $consumptions[$index * 2] * 1024,
 								"out" => $consumptions[$index * 2 + 1] * 1024);
+
+	if (isset($ipInterfaces[$interface]["ip_v4"])) {
+		$interfaces[$index]["ip_v4"] = $ipInterfaces[$interface]["ip_v4"];
+	}
 }
 
 ?>
@@ -275,7 +284,9 @@ foreach($interfaces as $index => $interface) {
 				<legend><?php echo lang("index_network_legend"); ?></legend>
 				<?php 	foreach($interfaces as $interface) {?>
 				<div class="col-md-12 interface" id="interface-<?php echo $interface["name"]; ?>">
-					<label class="col-md-3"><?php echo $interface["name"]; ?> :</label>
+					<label class="col-md-3"><?php echo $interface["name"]; ?>
+					(<?php echo isset($interface["ip_v4"]) ? $interface["ip_v4"] : "-"; ?>);
+					 :</label>
 					<label class="col-md-2"><?php echo lang("index_network_download_label"); ?></label>
 					<span class="col-md-2 download" data-size="<?php echo $interface["in"]; ?>"><?php echo humanFileSize($interface["in"], false); ?>/s</span>
 					<label class="col-md-2"><?php echo lang("index_network_upload_label"); ?></label>
