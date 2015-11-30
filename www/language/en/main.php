@@ -109,6 +109,7 @@ $lang["index_cpu_x_label"] = "CPU {x} :";
 $lang["index_network_legend"] = "Network";
 $lang["index_network_download_label"] = "Download :";
 $lang["index_network_upload_label"] = "Upload :";
+$lang["index_network_no_ip"] = "No IP";
 
 $lang["bittorrent_url_label"] = "URL / Magnet :";
 $lang["bittorrent_question_remove"] = "Do you want to remove the torrent ?";

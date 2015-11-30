@@ -285,7 +285,7 @@ foreach($interfaces as $index => $interface) {
 				<?php 	foreach($interfaces as $interface) {?>
 				<div class="col-md-12 interface" id="interface-<?php echo $interface["name"]; ?>">
 					<label class="col-md-3"><?php echo $interface["name"]; ?>
-					(<?php echo isset($interface["ip_v4"]) ? $interface["ip_v4"] : "-"; ?>);
+					(<?php echo isset($interface["ip_v4"]) ? $interface["ip_v4"] : lang("index_network_no_ip"); ?>)
 					 :</label>
 					<label class="col-md-2"><?php echo lang("index_network_download_label"); ?></label>
 					<span class="col-md-2 download" data-size="<?php echo $interface["in"]; ?>"><?php echo humanFileSize($interface["in"], false); ?>/s</span>
