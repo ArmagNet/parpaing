@@ -53,10 +53,24 @@ class VpnBo {
 //		VpnBo::sendCommand("/etc/init.d/openvpn restart");
 	}
 
+	function activateForwarding($interface) {
+		VpnBo::sendCommand("uci set openvpn.myvpn.push='route 192.168.1.0 255.255.255.0'");
+
+		VpnBo::sendCommand("uci set firewall.@forwarding[0].dest=lan");
+		VpnBo::sendCommand("uci set firewall.@forwarding[0].src=$interface");
+		VpnBo::sendCommand("uci set firewall.@forwarding[1].dest=$interface");
+		VpnBo::sendCommand("uci set firewall.@forwarding[1].src=lan");
+
+		VpnBo::sendCommand("uci commit firewall");
+		VpnBo::sendCommand("/etc/init.d/firewall restart");
+	}
+
 	function activate($configuration = null) {
 		if ($configuration) {
 			$this->setConfiguration($configuration);
 		}
+
+		$this->activateForwarding("vpn");
 
 		VpnBo::sendCommand("/etc/init.d/openvpn enable");
 		VpnBo::sendCommand("/etc/init.d/openvpn restart");
@@ -65,16 +79,17 @@ class VpnBo {
 	}
 
 	function deactivate() {
+		$this->activateForwarding("wan");
+
 		VpnBo::sendCommand("/etc/init.d/openvpn stop");
 		VpnBo::sendCommand("/etc/init.d/openvpn disable");
 	}
 
 
 	function isActive() {
-		$activeStatus = VpnBo::sendCommand("/etc/init.d/openvpn status");
+		$activeStatus = VpnBo::sendCommand("ps | grep openvpn");
 
-		// TODO
-		$activeStatus = strpos($activeStatus, "not running") === false;
+		$activeStatus = strpos($activeStatus, "/usr/sbin/openvpn") !== false;
 
 		return $activeStatus;
 	}
