@@ -54,8 +54,6 @@ class VpnBo {
 	}
 
 	function activateForwarding($interface) {
-		VpnBo::sendCommand("uci set openvpn.myvpn.push='route 192.168.1.0 255.255.255.0'");
-
 		VpnBo::sendCommand("uci set firewall.@forwarding[0].dest=lan");
 		VpnBo::sendCommand("uci set firewall.@forwarding[0].src=$interface");
 		VpnBo::sendCommand("uci set firewall.@forwarding[1].dest=$interface");
@@ -63,6 +61,13 @@ class VpnBo {
 
 		VpnBo::sendCommand("uci commit firewall");
 		VpnBo::sendCommand("/etc/init.d/firewall restart");
+	}
+
+	function vpnLedStatus($status) {
+		VpnBo::sendCommand("uci set system.@led[4].default=$status");
+
+		VpnBo::sendCommand("uci commit system");
+		VpnBo::sendCommand("/etc/init.d/led restart");
 	}
 
 	function activate($configuration = null) {
@@ -76,6 +81,8 @@ class VpnBo {
 		VpnBo::sendCommand("/etc/init.d/openvpn restart");
 
 		sleep(10);
+
+		$this->vpnLedStatus(1);
 	}
 
 	function deactivate() {
@@ -83,8 +90,9 @@ class VpnBo {
 
 		VpnBo::sendCommand("/etc/init.d/openvpn stop");
 		VpnBo::sendCommand("/etc/init.d/openvpn disable");
-	}
 
+		$this->vpnLedStatus(0);
+	}
 
 	function isActive() {
 		$activeStatus = VpnBo::sendCommand("ps | grep openvpn");
