@@ -29,15 +29,16 @@ class BittorrentBo {
 	}
 
 	function isActive() {
-		$activeStatus = BittorrentBo::sendCommand("/etc/init.d/transmission-daemon status");
+		$activeStatus = BittorrentBo::sendCommand("ps | grep transmission");
 
-		$activeStatus = strpos($activeStatus, "not running") === false;
+		$activeStatus = strpos($activeStatus, "/usr/bin/transmission-daemon") !== false;
 
 		return $activeStatus;
 	}
 
 	function activate() {
-		file_put_contents($this->config["incron"]["path"] . "/bittorrent.start", "1");
+		BittorrentBo::sendCommand("/etc/init.d/transmission enable");
+		BittorrentBo::sendCommand("/etc/init.d/transmission restart");
 
 		do {
 			sleep(1);
@@ -46,7 +47,8 @@ class BittorrentBo {
 	}
 
 	function deactivate() {
-		file_put_contents($this->config["incron"]["path"] . "/bittorrent.stop", "1");
+		BittorrentBo::sendCommand("/etc/init.d/transmission stop");
+		BittorrentBo::sendCommand("/etc/init.d/transmission disable");
 
 		do {
 			sleep(1);

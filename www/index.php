@@ -246,7 +246,9 @@ foreach($interfaces as $index => $interface) {
 					<label class="col-md-3"><?php echo lang("index_cpu_nb_label"); ?></label>
 					<span class="col-md-3"><?php echo count($cpus) - 1; ?></span>
 				</div>
-				<?php foreach($cpus as $cpuIndex => $cpu) {?>
+				<?php foreach($cpus as $cpuIndex => $cpu) {
+						if (count($cpus) == 2 && $cpuIndex == 1) continue;
+					?>
 				<div class="col-md-12" id="cpu<?php echo $cpuIndex; ?>">
 					<label class="col-md-3"><?php
 						if ($cpuIndex) {
