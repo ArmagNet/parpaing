@@ -26,19 +26,22 @@ $data = array();
 $userBo = UserBo::newInstance($config);
 $user = $userBo->getUser();
 
-if ($user["password"] == $_REQUEST["password"]) {
+$password = $_REQUEST["password"];
+
+//if ($user["password"] == $password) {
+if ($userBo->checkRootPassword($password)) {
 	if ($_REQUEST["newPassword"]) {
 		if ($_REQUEST["newPassword"] != $_REQUEST["confirmNewPassword"]) {
 			$data["status"] = "renew_password";
 			$data["message"] = "notSameNewPassword";
 		}
 		else {
-			$userBo->setPassword($_REQUEST["newPassword"]);
+			$userBo->setPassword($password, $_REQUEST["newPassword"]);
 			$data["status"] = "ok";
 			SessionUtils::login($_SESSION);
 		}
 	}
-	else if ($user["password"] == $config["parpaing"]["default_password"]) {
+	else if ($password == $config["parpaing"]["default_password"]) {
 			$data["status"] = "renew_password";
 			$data["message"] = "defaultPassword";
 	}

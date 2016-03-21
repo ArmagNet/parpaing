@@ -32,6 +32,31 @@ class UserBo {
 		return "user.json";
 	}
 
+	function checkRootPassword($password) {
+		return $this->checkPassword("root", $password);
+	}
+
+	function checkPassword($login, $password) {
+		$user = UserBo::sendCommand("cat /etc/shadow | grep $login");
+
+		$re = "/^[a-z]+:\\W1\\W([0-9a-z]*)\\W([0-9a-z\\/\\.]*):/i";
+
+		preg_match($re, $user, $matches, PREG_OFFSET_CAPTURE);
+		$salt = $matches[1][0];
+
+		$linuxPassword = $this->getLinuxPassword($password, $salt);
+
+		return (strpos($user, $linuxPassword) !== false);
+	}
+
+	function getLinuxPassword($password, $salt) {
+		UserBo::sendCommand("echo $password > test.pwd");
+		$linuxPassword = trim(UserBo::sendCommand("openssl passwd -1 -salt $salt -in test.pwd"));
+		UserBo::sendCommand("rm test.pwd");
+
+		return $linuxPassword;
+	}
+
 	function getUser() {
 		if (file_exists($this->_getFilePath())) {
 			$content = file_get_contents($this->_getFilePath());
@@ -40,7 +65,7 @@ class UserBo {
 
 		$defaultUser = array();
 
-		$defaultUser["password"] = $this->config["parpaing"]["default_password"];
+//		$defaultUser["password"] = $this->config["parpaing"]["default_password"];
 		$defaultUser["language"] = $this->config["parpaing"]["default_language"];
 
 		return $defaultUser;
@@ -58,11 +83,32 @@ class UserBo {
 		$this->saveUser($user);
 	}
 
-	function setPassword($password) {
-		$user = $this->getUser();
-		$user["password"] = $password;
+	function setPassword($oldPassword, $newPassword) {
+		$user = UserBo::sendCommand("cat /etc/shadow | grep root");
 
-		$this->saveUser($user);
+		$re = "/^[a-z]+:\\W1\\W([0-9a-z]*)\\W([0-9a-z\\/\\.]*):/i";
+
+		preg_match($re, $user, $matches, PREG_OFFSET_CAPTURE);
+		$salt = $matches[1][0];
+
+		$oldLinuxPassword = $this->getLinuxPassword($oldPassword, $salt);
+		$newLinuxPassword = $this->getLinuxPassword($newPassword, $salt);
+
+		$content = UserBo::sendCommand("cat /etc/shadow");
+		$content = str_replace($oldLinuxPassword, $newLinuxPassword, $content);
+
+		file_put_contents("/etc/shadow", $content);
+
+// 		$user = $this->getUser();
+// 		$user["password"] = $password;
+
+// 		$this->saveUser($user);
+	}
+
+	static function sendCommand($cmd) {
+		// TODO add security
+
+		return shell_exec($cmd);
 	}
 }
 ?>
