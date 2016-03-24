@@ -63,11 +63,11 @@ class VpnBo {
 		VpnBo::sendCommand("/etc/init.d/firewall restart");
 	}
 
-	function vpnLedStatus($status) {
-		VpnBo::sendCommand("uci set system.@led[4].default=$status");
+	function vpnLedStatus($led, $color, $status) {
+		VpnBo::sendCommand("uci set system.@led[$led].sysfs=$color");
+		VpnBo::sendCommand("uci set system.@led[$led].default=$status");
 
 		VpnBo::sendCommand("uci commit system");
-		VpnBo::sendCommand("/etc/init.d/led restart");
 	}
 
 	function activate($configuration = null) {
@@ -82,7 +82,10 @@ class VpnBo {
 
 		sleep(10);
 
-		$this->vpnLedStatus(1);
+		$this->vpnLedStatus(2, 'domino:green:lan1', 0);
+		$this->vpnLedStatus(4, 'domino:red:wan', 0);
+
+		VpnBo::sendCommand("/etc/init.d/led restart");
 	}
 
 	function deactivate() {
@@ -91,7 +94,10 @@ class VpnBo {
 		VpnBo::sendCommand("/etc/init.d/openvpn stop");
 		VpnBo::sendCommand("/etc/init.d/openvpn disable");
 
-		$this->vpnLedStatus(0);
+		$this->vpnLedStatus(2, 'domino:red:wan', 0);
+		$this->vpnLedStatus(4, 'domino:green:lan1', 0);
+
+		VpnBo::sendCommand("/etc/init.d/led restart");
 	}
 
 	function isActive() {
