@@ -33,6 +33,11 @@ class VpnBo {
 		file_put_contents($this->config["openvpn"]["config"] . "_cert.crt", $configuration["crt"]);
 		file_put_contents($this->config["openvpn"]["config"] . "_key.key", $configuration["key"]);
 
+		$lanIpAddr = VpnBo::sendCommand("uci show network.lan.ipaddr");
+		$lanIpAddr = str_replace("network.lan.ipaddr=", "", $lanIpAddr);
+		$lanIpAddr = substr($lanIpAddr, 0, strrpos($lanIpAddr, "."));
+		$lanIpAddr .= "0";
+
 		VpnBo::sendCommand("echo > " . $this->config["openvpn"]["config"]);
 		VpnBo::sendCommand("uci set openvpn.myvpn=openvpn");
 		VpnBo::sendCommand("uci set openvpn.myvpn.enabled=1");
@@ -48,7 +53,7 @@ class VpnBo {
 		VpnBo::sendCommand("uci set openvpn.myvpn.remote='" . $configuration["json"]["remote"] . "'");
 		VpnBo::sendCommand("uci set openvpn.myvpn.cipher=" . $configuration["json"]["cipher"]);
 		VpnBo::sendCommand("uci set openvpn.myvpn.comp_lzo=" . $configuration["json"]["comp_lzo"]);
-		VpnBo::sendCommand("uci set openvpn.myvpn.push='route 192.168.1.0 255.255.255.0'");
+		VpnBo::sendCommand("uci set openvpn.myvpn.push='route $lanIpAddr 255.255.255.0'");
 		VpnBo::sendCommand("uci commit openvpn");
 //		VpnBo::sendCommand("/etc/init.d/openvpn restart");
 	}
