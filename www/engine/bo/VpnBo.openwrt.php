@@ -36,7 +36,7 @@ class VpnBo {
 		$lanIpAddr = VpnBo::sendCommand("uci show network.lan.ipaddr");
 		$lanIpAddr = str_replace("network.lan.ipaddr=", "", $lanIpAddr);
 		$lanIpAddr = substr($lanIpAddr, 0, strrpos($lanIpAddr, "."));
-		$lanIpAddr .= "0";
+		$lanIpAddr .= ".0";
 
 		VpnBo::sendCommand("echo > " . $this->config["openvpn"]["config"]);
 		VpnBo::sendCommand("uci set openvpn.myvpn=openvpn");
