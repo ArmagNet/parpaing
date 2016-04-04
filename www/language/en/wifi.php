@@ -23,6 +23,7 @@ $lang["wifi_wifi_placeholder"] = "name of your wifi (SSID)";
 $lang["wifi_encryption_label"] = "Encryption";
 $lang["wifi_encryption_select_none"] = "none";
 $lang["wifi_encryption_passphrase_placeholder"] = "passphrase of the wifi";
+$lang["wifi_power_label"] = "Transmit power";
 
 $lang["wifi_badWifiPasswordAlert"] = "The passphrase must contain between 8 and 63 characters";
 

@@ -30,6 +30,8 @@ $configuration = array();
 $configuration["ssid"] = $_REQUEST["ssidInput"];
 $configuration["channel"] = $_REQUEST["channelInput"];
 $configuration["encryption"] = $_REQUEST["encryptionInput"];
+$configuration["txpower"] = $_REQUEST["txpowerInput"];
+
 if ($configuration["encryption"] == "none") {
 	$configuration["key"] = "";
 }

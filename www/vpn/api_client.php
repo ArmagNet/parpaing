@@ -104,6 +104,9 @@ class ArmagnetVpnApiClient {
 		curl_setopt($ch, CURLOPT_POST, count($fields));
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $fieldsString);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// Do not verify the validity of the certificate
+		// TODO remove this
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
 		error_log("call method : $method");
 		error_log("call fields : $fieldsString");

@@ -31,7 +31,7 @@ $info = $wifiBo->getInfo();
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title"><?php echo lang("wifi_panel_label"); ?>Paramètres WIFI</h3>
+			<h3 class="panel-title"><?php echo lang("wifi_panel_label"); ?></h3>
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal" id="wifiForm">
@@ -40,7 +40,7 @@ $info = $wifiBo->getInfo();
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="ssidInput"><?php echo lang("wifi_wifi_label"); ?></label>
 						<div class="col-md-6">
-							<input id="ssidInput" name="ssidInput" type="text" placeholder="<?php echo lang("wifi_wifi_placeholder"); ?>SSID" class="form-control input-md" required="">
+							<input id="ssidInput" name="ssidInput" type="text" placeholder="<?php echo lang("wifi_wifi_placeholder"); ?>" class="form-control input-md" required="">
 						</div>
 						<div class="col-md-2">
 							<select id="channelInput" name="channelInput" class="form-control">
@@ -61,7 +61,7 @@ $info = $wifiBo->getInfo();
 					</div>
 
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="passphraseInput"><?php echo lang("wifi_encryption_label"); ?>Chiffrement</label>
+						<label class="col-md-4 control-label" for="passphraseInput"><?php echo lang("wifi_encryption_label"); ?></label>
 						<div class="col-md-2">
 							<select id="encryptionInput" name="encryptionInput" class="form-control">
 								<option value="none"><?php echo lang("wifi_encryption_select_none"); ?></option>
@@ -74,7 +74,45 @@ $info = $wifiBo->getInfo();
 							</select>
 						</div>
 						<div class="col-md-6">
-							<input id="passphraseInput" name="passphraseInput" type="text" placeholder="<?php echo lang("wifi_encryption_passphrase_placeholder"); ?>la phrase de passe du wifi" class="form-control input-md" required="">
+							<input id="passphraseInput" name="passphraseInput" type="text" placeholder="<?php echo lang("wifi_encryption_passphrase_placeholder"); ?>" class="form-control input-md" required="">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="txpowerInput"><?php echo lang("wifi_power_label"); ?></label>
+						<div class="col-md-3">
+							<select id="txpowerInput" name="txpowerInput" class="form-control">
+
+								<option id="txpower-0" value="0">0 dBm (1 mW)</option>
+								<option id="txpower-4" value="4">4 dBm (2 mW)</option>
+								<option id="txpower-5" value="5">5 dBm (3 mW)</option>
+								<option id="txpower-7" value="7">7 dBm (5 mW)</option>
+								<option id="txpower-8" value="8">8 dBm (6 mW)</option>
+								<option id="txpower-9" value="9">9 dBm (7 mW)</option>
+								<option id="txpower-10" value="10">10 dBm (10 mW)</option>
+								<option id="txpower-11" value="11">11 dBm (12 mW)</option>
+								<option id="txpower-12" value="12">12 dBm (15 mW)</option>
+								<option id="txpower-13" value="13">13 dBm (19 mW)</option>
+								<option id="txpower-14" value="14">14 dBm (25 mW)</option>
+								<option id="txpower-15" value="15">15 dBm (31 mW)</option>
+								<option id="txpower-16" value="16">16 dBm (39 mW)</option>
+								<option id="txpower-17" value="17">17 dBm (50 mW)</option>
+								<option id="txpower-18" value="18">18 dBm (63 mW)</option>
+								<option id="txpower-19" value="19">19 dBm (79 mW)</option>
+								<option id="txpower-20" value="20" selected="selected">20 dBm (100 mW)</option>
+<!--
+								<option id="txpower-21" value="21">21 dBm (125 mW)</option>
+								<option id="txpower-22" value="22">22 dBm (158 mW)</option>
+								<option id="txpower-23" value="23">23 dBm (199 mW)</option>
+								<option id="txpower-24" value="24">24 dBm (251 mW)</option>
+								<option id="txpower-25" value="25">25 dBm (316 mW)</option>
+								<option id="txpower-26" value="26">26 dBm (398 mW)</option>
+								<option id="txpower-27" value="27">27 dBm (501 mW)</option>
+								<option id="txpower-28" value="28">28 dBm (630 mW)</option>
+								<option id="txpower-29" value="29">29 dBm (794 mW)</option>
+								<option id="txpower-30" value="30">30 dBm (1000 mW)</option>
+ -->
+							</select>
 						</div>
 					</div>
 

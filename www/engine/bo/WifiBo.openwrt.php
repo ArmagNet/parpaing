@@ -85,6 +85,9 @@ config wifi-iface
 					$wifiDevice = $value;
 					$wifiIface = "";
 					break;
+				case "txpower":
+					$infos["txpower"] = $value;
+					break;
 				case "wifi-iface":
 					$wifiDevice = "";
 					$wifiIface = $value;
@@ -138,6 +141,10 @@ config wifi-iface
 			WifiBo::sendCommand("uci set wireless.@wifi-iface[0].encryption='" . $configuration["encryption"] . "';");
 			$updated = true;
 		}
+		if (isset($configuration["txpower"])) {
+			WifiBo::sendCommand("uci set wireless.radio0.txpower='" . $configuration["txpower"] . "';");
+			$updated = true;
+		}
 
 		if ($updated) {
 			WifiBo::sendCommand("uci commit wireless; wifi");
@@ -156,6 +163,10 @@ config wifi-iface
 
 	function setKey($key) {
 		WifiBo::sendCommand("uci set wireless.@wifi-iface[0].key='$key'; uci commit wireless; wifi");
+	}
+
+	function setPower($txpower) {
+		WifiBo::sendCommand("uci set wireless.radio0.txpower='$txpower'; uci commit wireless; wifi");
 	}
 
 	static function sendCommand($cmd) {

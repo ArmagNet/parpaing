@@ -3,6 +3,7 @@ function retrieveWifiInformationHandler(wifiInfos) {
 	$("#passphraseInput").val(wifiInfos.key);
 	$("#channelInput").val(wifiInfos.channel);
 	$("#encryptionInput").val(wifiInfos.encryption);
+	$("#txpowerInput").val(wifiInfos.txpower);
 
 	if (wifiInfos.disabled == 0) {
 		$("#enableButton").addClass("disabled");
@@ -12,6 +13,7 @@ function retrieveWifiInformationHandler(wifiInfos) {
 		$("#disableButton").addClass("disabled");
 		$("#enableButton").removeClass("disabled");
 	}
+
 	$("#commitButton").removeClass("disabled");
 	$("#encryptionInput").change();
 }
