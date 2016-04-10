@@ -39,7 +39,7 @@ class UserBo {
 	function checkPassword($login, $password) {
 		$user = UserBo::sendCommand("cat /etc/shadow | grep $login");
 
-		$re = "/^[a-z]+:\\W1\\W([0-9a-z]*)\\W([0-9a-z\\/\\.]*):/i";
+		$re = "/^[a-z]+:\\W1\\W([\\.0-9a-z]*)\\W([0-9a-z\\/\\.]*):/i";
 
 		preg_match($re, $user, $matches, PREG_OFFSET_CAPTURE);
 		$salt = $matches[1][0];
