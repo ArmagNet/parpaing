@@ -30,8 +30,13 @@ class VpnBo {
 
 	function setConfiguration($configuration) {
 		file_put_contents($this->config["openvpn"]["config"] . "_cacert.crt", $configuration["cacrt"]);
-		file_put_contents($this->config["openvpn"]["config"] . "_cert.crt", $configuration["crt"]);
-		file_put_contents($this->config["openvpn"]["config"] . "_key.key", $configuration["key"]);
+		if (isset($configuration["json"]["type"]) && $configuration["json"]["type"] == "login-password") {
+			file_put_contents($this->config["openvpn"]["config"] . "_lp.txt", $configuration["json"]["login"] . "\n" . $configuration["json"]["password"]);
+		}
+		else {
+			file_put_contents($this->config["openvpn"]["config"] . "_cert.crt", $configuration["crt"]);
+			file_put_contents($this->config["openvpn"]["config"] . "_key.key", $configuration["key"]);
+		}
 
 		$lanIpAddr = VpnBo::sendCommand("uci show network.lan.ipaddr");
 		$lanIpAddr = str_replace("network.lan.ipaddr=", "", $lanIpAddr);
@@ -45,12 +50,21 @@ class VpnBo {
 		VpnBo::sendCommand("uci set openvpn.myvpn.proto=" . $configuration["json"]["proto"]);
 		VpnBo::sendCommand("uci set openvpn.myvpn.log=/tmp/openvpn.log");
 		VpnBo::sendCommand("uci set openvpn.myvpn.verb=3");
+
+		if (isset($configuration["json"]["type"]) && $configuration["json"]["type"] == "login-password") {
+			VpnBo::sendCommand("uci set openvpn.myvpn.auth_user_pass=" . $this->config["openvpn"]["config"] . "_lp.txt");
+		}
+		else {
+			VpnBo::sendCommand("uci set openvpn.myvpn.cert=" . $this->config["openvpn"]["config"] . "_cert.crt");
+			VpnBo::sendCommand("uci set openvpn.myvpn.key=" . $this->config["openvpn"]["config"] . "_key.key");
+		}
+
 		VpnBo::sendCommand("uci set openvpn.myvpn.ca=" . $this->config["openvpn"]["config"] . "_cacert.crt");
-		VpnBo::sendCommand("uci set openvpn.myvpn.cert=" . $this->config["openvpn"]["config"] . "_cert.crt");
-		VpnBo::sendCommand("uci set openvpn.myvpn.key=" . $this->config["openvpn"]["config"] . "_key.key");
 		VpnBo::sendCommand("uci set openvpn.myvpn.client=1");
 		VpnBo::sendCommand("uci set openvpn.myvpn.remote_cert_tls=" . $configuration["json"]["remote_cert_tls"]);
-		VpnBo::sendCommand("uci set openvpn.myvpn.remote='" . $configuration["json"]["remote"] . "'");
+		if ($configuration["json"]["remote"]) {
+			VpnBo::sendCommand("uci set openvpn.myvpn.remote='" . $configuration["json"]["remote"] . "'");
+		}
 		VpnBo::sendCommand("uci set openvpn.myvpn.cipher=" . $configuration["json"]["cipher"]);
 		VpnBo::sendCommand("uci set openvpn.myvpn.comp_lzo=" . $configuration["json"]["comp_lzo"]);
 		VpnBo::sendCommand("uci set openvpn.myvpn.push='route $lanIpAddr 255.255.255.0'");
