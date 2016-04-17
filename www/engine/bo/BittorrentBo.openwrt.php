@@ -101,6 +101,9 @@ class BittorrentBo {
 		foreach($result as $index => $line) {
 			$data = preg_split("/[\s]+/", trim($line));
 
+			// Sometime the id finished with a *, remove it
+			$data[0] = str_replace("*", "", $data[0]);
+
 			if (!is_numeric($data[0])) continue;
 
 // 			print_r($data);
