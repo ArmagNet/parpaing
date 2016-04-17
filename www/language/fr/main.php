@@ -153,5 +153,6 @@ $lang["notSameNewPasswordAlert"] = "Les nouveaux mots de passe indiqués ne sont
 $lang["badPasswordAlert"] = "Mauvais mot de passe";
 
 $lang["about_footer"] = "À Propos";
+$lang["advanced_intertace_footer"] = "Interface avancée";
 $lang["parpaing_footer"] = "<a href=\"https://www.parpaing.net/\" target=\"_blank\">Parpaing</a> est une application fournie par <a href=\"https://www.armagnet.fr\" target=\"_blank\">ArmagNet</a>";
 ?>

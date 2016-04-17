@@ -62,7 +62,7 @@ include_once("header.php");
 			<div class="panel-heading" id="releases"><?php echo lang("about_releases_legend"); ?></div>
 			<div class="panel-body"><?php echo lang("about_releases_content"); ?></div>
 			<ul class="list-group">
-				<li class="list-group-item"><a class="grey social padding-left-0" href="https://github.com/ArmagNet/opentweetbar"
+				<li class="list-group-item"><a class="grey social padding-left-0" href="https://github.com/ArmagNet/parpaing"
 						target="_blank"><span class="octicon octicon-octoface octicon-grey"></span>Github Repository</a><span class="badge"><a class="color-inherit"
 						href="https://github.com/ArmagNet/parpaing" target="_blank"><span
 						class="glyphicon glyphicon-chevron-right"></span></a></span></li>
