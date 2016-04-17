@@ -131,7 +131,7 @@ function getPermString($perms) {
 				$path = "/";
 				$previous = null;
 
-				if (isset($_REQUEST["path"])) {
+				if (isset($_REQUEST["path"]) && $_REQUEST["path"]) {
 					$path = $_REQUEST["path"];
 
 					if (strpos($path, "..") !== false) {
