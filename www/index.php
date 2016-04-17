@@ -346,6 +346,12 @@ foreach($interfaces as $index => $interface) {
 		</div>
 	</div>
 
+	<div class="container padding-left-0" style="padding-right: 30px;">
+	<?php 	if (isset($config["parpaing"]["piratebox"]) && $config["parpaing"]["piratebox"]) {
+				echo lang("piratebox_access");
+			}?>
+	</div>
+
 	<div class="container hidden padding-left-0" style="padding-right: 30px;">
 		<?php echo addAlertDialog("defaultPasswordAlert", lang("defaultPasswordAlert"), "warning"); ?>
 		<?php echo addAlertDialog("notSameNewPasswordAlert", lang("notSameNewPasswordAlert"), "warning"); ?>

@@ -39,10 +39,20 @@ if (SessionUtils::isConnected($_SESSION)) {
 else {
 	SessionUtils::setLanguage($user["language"], $_SESSION);
 
-	if ($page != "index" && $page != "about") {
+	if ($page == "piraxplorer") {
+		if (!isset($config["parpaing"]["piratebox"]) || !$config["parpaing"]["piratebox"]) {
+			header("Location: index.php");
+			exit();
+		}
+	}
+
+	if ($page != "index"
+			&& $page != "about"
+			&& $page != "piraxplorer") {
 		header("Location: index.php");
 		exit();
 	}
+
 }
 
 $language = SessionUtils::getLanguage($_SESSION);

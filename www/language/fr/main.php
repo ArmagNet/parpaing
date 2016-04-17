@@ -79,6 +79,7 @@ $lang["breadcrumb_wifi"] = "Wifi";
 $lang["breadcrumb_explorer"] = "Explorateur";
 $lang["breadcrumb_bittorrent"] = "BitTorrent";
 $lang["breadcrumb_networks"] = "Réseaux";
+$lang["breadcrumb_piraxplorer"] = "Piratebox";
 $lang["breadcrumb_upgrader"] = "Mise à jour";
 $lang["breadcrumb_about"] = "À Propos";
 
@@ -136,6 +137,8 @@ $lang["networks_mac_type_phone"] = "Mobile";
 $lang["networks_mac_type_tablet"] = "Tablette";
 $lang["networks_mac_type_switch"] = "Réseau";
 $lang["networks_mac_type_server"] = "Serveur";
+
+$lang["piratebox_access"] = "Ou accès à la <a href='piraxplorer.php'>piratebox</a>";
 
 // Rates
 

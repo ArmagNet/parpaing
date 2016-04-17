@@ -21,7 +21,9 @@ require_once("config/config.php");
 require_once("engine/utils/SessionUtils.php");
 
 if (!SessionUtils::isConnected($_SESSION)) {
-	exit();
+	if (!isset($config["parpaing"]["piratebox"]) || !$config["parpaing"]["piratebox"]) {
+		exit();
+	}
 }
 
 $path = "/";
