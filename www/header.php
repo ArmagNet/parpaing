@@ -124,19 +124,17 @@ $language = SessionUtils::getLanguage($_SESSION);
 					<li <?php if ($page == "telephone") echo 'class="active"'; ?>><a href="telephone.php"><?php echo lang("menu_telephone"); ?><?php if ($page == "telephone") echo ' <span class="sr-only">(current)</span>'; ?></a></li>
 					<?php 	}?>
 
-					<?php 	if (isset($config["parpaing"]["root_directory"]) && $config["parpaing"]["root_directory"] && file_exists($config["parpaing"]["root_directory"])) {?>
-
 					<li class="dropdown <?php if ($page == "explorer" || $page == "bittorrent") echo 'active'; ?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 						<?php if ($page == "explorer" || $page != "bittorrent") { ?><?php echo lang("menu_explorer"); ?><?php }?>
 						<?php if ($page == "bittorrent") { ?><?php echo lang("menu_bittorrent"); ?><?php }?>
 						<span class="caret"></span> </a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="explorer.php"><?php echo lang("menu_explorer"); ?></a></li>
+					<?php 	if (isset($config["parpaing"]["root_directory"]) && $config["parpaing"]["root_directory"] && file_exists($config["parpaing"]["root_directory"])) {?>
 							<li><a href="bittorrent.php"><?php echo lang("menu_bittorrent"); ?></a></li>
+					<?php 	}?>
 						</ul>
 					</li>
-
-					<?php 	}?>
 
 					<?php }?>
 				</ul>

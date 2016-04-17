@@ -95,6 +95,10 @@ function getPermString($perms) {
 	return $info;
 }
 
+$devices = glob("/mnt/*", GLOB_ONLYDIR | GLOB_MARK);
+
+print_r($devices);
+
 ?>
 <div class="container theme-showcase" role="main">
 	<ol class="breadcrumb">
@@ -103,6 +107,13 @@ function getPermString($perms) {
 	</ol>
 
 	<div class="col-md-12 items" id="explorer">
+
+	<?php 	foreach($devices as $device) {?>
+	<a href="explorer/actions/do_changeRoot.php?path=<?php echo $device; ?>" class="change-root"><i class="material-icons" style="font-size: inherit;">usb</i><?php echo $device; ?></a>
+	<?php 		if ($device == $config["parpaing"]["root_directory"]) {?>
+		<span class="glyphicon glyphicon-ok text-success"></span>
+	<?php 		}?>
+	<?php 	}?>
 
 	<div>
 		<div class="pull-left breadcrumb">

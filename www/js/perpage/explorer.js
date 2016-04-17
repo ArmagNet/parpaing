@@ -227,4 +227,17 @@ $(function() {
 		$(".modal-dialog").css({"z-index": zIndex});
 	});
 
+	$("#explorer").on("click", "a.change-root", function(event) {
+		event.preventDefault();
+
+		var url = $(this).attr("href");
+		$.get(url, {}, function(data) {
+			$.get("explorer.php", {}, function(data) {
+				$("#explorer").children().remove();
+				$("#explorer").append($(data).find("#explorer").children());
+				normalizeButtonsState();
+				history.pushState('', document.title, "explorer.php");
+			}, "html");
+		}, "html");
+	});
 });
