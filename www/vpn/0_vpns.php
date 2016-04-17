@@ -132,6 +132,21 @@ function modifyVpn(configurationId) {
 			form.find("#remoteIpInput").val(remote[0]);
 			form.find("#remotePortInput").val(remote[1]);
 
+			if (!data.configuration.json.type && data.configuration.hasCert) {
+				data.configuration.json.type = "certificate";
+			}
+
+			// Handling the different types of connections
+			form.find("input[name=vpnTypeInput]").each(function() {
+				if ($(this).val() == data.configuration.json.type) {
+					$(this).attr("checked", "checked");
+				}
+				else {
+					$(this).removeAttr("checked");
+				}
+			});
+			vpnTypeHandler();
+
 			$("#vpnTabs #raw_vpn_tab a").tab("show");
 		}
 	}, "json");

@@ -40,6 +40,29 @@
 					</div>
 
 					<div class="form-group">
+						<label class="col-md-2 control-label" for="vpnLoginInput"><?php echo lang("vpn_addvpn_type");?></label>
+						<div class="col-md-10">
+							<label class="radio-inline" for="type-certificate"> <input type="radio" name="vpnTypeInput" id="type-certificate" value="certificate" checked="checked">
+								<?php echo lang("vpn_addvpn_type_certificate");?>
+							</label>
+							<label class="radio-inline" for="type-login-password"> <input type="radio" name="vpnTypeInput" id="type-login-password" value="login-password">
+								<?php echo lang("vpn_addvpn_type_login_password");?>
+							</label>
+						</div>
+					</div>
+
+					<div class="form-group method login-password">
+						<label class="col-md-2 control-label" for="vpnLoginInput"><?php echo lang("vpn_addvpn_login");?></label>
+						<div class="col-md-4">
+							<input id="vpnLoginInput" name="vpnLoginInput" type="text" placeholder="<?php echo lang("vpn_addvpn_login_placeholder");?>" class="form-control input-md" required="">
+						</div>
+						<label class="col-md-2 control-label" for="vpnPasswordInput"><?php echo lang("vpn_addvpn_passwword");?></label>
+						<div class="col-md-4">
+							<input id="vpnPasswordInput" name="vpnPasswordInput" type="password" placeholder="<?php echo lang("vpn_addvpn_password_placeholder");?>" class="form-control input-md" required="">
+						</div>
+					</div>
+
+					<div class="form-group method certificate">
 						<label class="col-md-2 control-label" for="keyButton"><?php echo lang("vpn_addvpn_key");?></label>
 						<div class="col-md-4">
 							<input id="keyButton" name="keyButton" class="input-file" type="file">
@@ -153,7 +176,6 @@
 
 	<script type="text/javascript">
 
-
 	function commitVpnHandler(data) {
 
 		if (data.ok) {
@@ -199,7 +221,17 @@
 //		$.post("vpn/actions/do_commit_vpn.php", myForm.serialize(), commitVpnHandler, "json");
 	}
 
+	function vpnTypeHandler() {
+		var vpnType = $("input[name=vpnTypeInput]:checked").val();
+
+		$(".method").hide();
+		$(".method." + vpnType).show();
+	}
+
 	$(function() {
+
+		$("input[name=vpnTypeInput]").change(vpnTypeHandler);
+		vpnTypeHandler();
 
 		$("#commitVpnButton").click(function(event) {
 			event.preventDefault();

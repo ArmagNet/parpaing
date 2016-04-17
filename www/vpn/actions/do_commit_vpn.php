@@ -61,6 +61,13 @@ if (isset($_FILES) && isset($_FILES["caButton"]) && $_FILES["caButton"]["name"])
 $configuration["json"] = array();
 $configuration["active"] = false;
 
+$configuration["json"]["type"] = $_REQUEST["vpnTypeInput"];
+
+if (isset($_REQUEST["vpnLoginInput"])) {
+	$configuration["json"]["login"] = $_REQUEST["vpnLoginInput"];
+	$configuration["json"]["password"] = $_REQUEST["vpnPasswordInput"];
+}
+
 $configuration["json"]["dev"] = $_REQUEST["devInput"];
 $configuration["json"]["proto"] = $_REQUEST["protoInput"];
 
