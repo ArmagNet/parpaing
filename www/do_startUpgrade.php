@@ -22,12 +22,33 @@ require_once("engine/utils/SessionUtils.php");
 
 if (!isset($_SERVER["HTTP_REFERER"])) exit();
 
-// Remove all previous files
-array_map('unlink', glob("upgrade/{*,*/*,*/*/*,*/*/*/*}", GLOB_BRACE));
+$fromVersion = $_REQUEST["from_version"];
+$toVersion = $_REQUEST["to_version"];
 
-$zipPath = 'upgrade/upgrade.zip';
-$content = file_get_contents($config["parpaing"]["zip_url"]);
-file_put_contents($zipPath, $content);
+$jsonVersionsUrl = $config["parpaing"]["base_upgrade_url"] . "versions.json";
+$jsonVersions = json_decode(file_get_contents($jsonVersionsUrl), true);
 
-echo json_encode(array("ok" => "ok", "md5" => md5($content), "sha1" => sha1($content)));
+$upgraders = array();
+
+$numberOfActions = 0;
+
+foreach($jsonVersions["versions"] as $version) {
+	if ($version["version"] <= $fromVersion) continue;
+	if ($version["version"] > $toVersion) continue;
+
+	$jsonUpgraderUrl = $config["parpaing"]["base_upgrade_url"] . $version["version"] . "/upgrader.json";
+	$jsonUpgrader = json_decode(file_get_contents($jsonUpgraderUrl), true);
+
+	$upgraders[] = $jsonUpgrader;
+	$numberOfActions += count($jsonUpgrader["actions"]);
+}
+
+$_SESSION["upgraders"] = json_encode($upgraders);
+$_SESSION["upgrader_index"] = j0;
+$_SESSION["action_index"] = 0;
+$_SESSION["number_of_actions"] = $numberOfActions;
+$_SESSION["number_of_done_actions"] = 0;
+$_SESSION["number_of_upgraders"] = count($upgraders);
+
+echo json_encode(array("ok" => "ok", "number_of_actions" => $_SESSION["number_of_actions"], "number_of_upgraders" => $_SESSION["number_of_upgraders"]));
 ?>
