@@ -44,6 +44,10 @@ foreach($conf as $index => $line) {
 	if (strpos($line, "root_directory") !== false) {
 		$newConf .= $newLine;
 	}
+	else if (strpos($line, "?>") !== false) {
+		$newConf .= "?>";
+		break;
+	}
 	else {
 		$newConf .= $line;
 	}
