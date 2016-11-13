@@ -78,7 +78,7 @@ include_once("header.php");
 <script type="text/javascript">
 var version = <?php include("version.json"); ?>;
 var newVersion = null;
-var versionUrl = "<?php echo $config["parpaing"]["version_url"]; ?>";
+var versionUrl = "do_getRemoteVersion.php";
 </script>
 <?php include("footer.php");?>
 </body>

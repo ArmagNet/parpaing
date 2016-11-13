@@ -29,7 +29,7 @@ function actionUpgrade() {
 		$("#upgradingDiv .progress-bar").attr("aria-valuenow", "" + progressBarValue);
 		$("#upgradingDiv .progress-bar").css({"width": progressBarValue + "%"});
 
-		if (data.number_of_actions < data.number_of_done_actions) {
+		if (data.number_of_actions > data.number_of_done_actions) {
 			actionUpgrade();
 		}
 		else {
@@ -39,7 +39,10 @@ function actionUpgrade() {
 }
 
 function startUpgrade() {
-	$.post("do_startUpgrade.php", {}, function(data) {
+	
+	$.post("do_startUpgrade.php", 
+				{from_version: $("#currentVersionPanel .versionLabel").text(), to_version: $("#lastVersionPanel .versionLabel").text()}, 
+			function(data) {
 		$("#upgradingDiv .progress-bar").attr("aria-valuenow", "10");
 		$("#upgradingDiv .progress-bar").css({"width": "10%"});
 

@@ -22,10 +22,13 @@ require_once("engine/utils/SessionUtils.php");
 
 if (!isset($_SERVER["HTTP_REFERER"])) exit();
 
-function copy($upgrader, $action) {
+function upgradeCopy($upgrader, $action) {
 	global $config;
 
-	$remoteFileUrl = $config["parpaing"]["base_upgrade_url"] . $upgrader["version"] . $action["file"];
+// 	print_r($upgrader);
+// 	echo "\n";
+	
+	$remoteFileUrl = $config["parpaing"]["base_upgrade_url"] . $upgrader["version"] . "/" . $action["file"];
 	$remoteFileContent = file_get_contents($remoteFileUrl);
 
 	$localFileUrl = $action["file"];
@@ -33,11 +36,14 @@ function copy($upgrader, $action) {
 		$localFileUrl = substr($localFileUrl, 1);
 	}
 
+// 	echo $localFileUrl . "\n";
+// 	echo $remoteFileUrl . "\n";
+	
 	@unlink($localFileUrl);
 	file_put_contents($localFileUrl, $remoteFileContent);
 }
 
-function delete($action) {
+function upgradeDelete($action) {
 	global $config;
 
 	$localFileUrl = $action["file"];
@@ -48,9 +54,12 @@ function delete($action) {
 	@unlink($localFileUrl);
 }
 
-function execute($action) {
+function upgradeExecute($action) {
 	global $config;
 }
+
+//print_r($_SESSION);
+//echo "\n";
 
 $numberOfActions = $_SESSION["number_of_actions"];
 $numberOfDoneActions = $_SESSION["number_of_done_actions"];
@@ -59,21 +68,27 @@ if ($numberOfDoneActions >= $numberOfActions) exit();
 
 $upgraders = json_decode($_SESSION["upgraders"], true);
 
+//printf($upgraders);
+//echo "\n";
+
 $actionIndex = $_SESSION["action_index"];
 $upgraderIndex = $_SESSION["upgrader_index"];
 
 $upgrader = $upgraders[$upgraderIndex];
 $action = $upgrader["actions"][$actionIndex];
 
+//printf($action);
+//echo "\n";
+
 switch($action["action"]) {
 	case "copy":
-		copy($upgrader, $action);
+		upgradeCopy($upgrader, $action);
 		break;
 	case "execute":
-		execute($action);
+		upgradeExecute($action);
 		break;
 	case "delete":
-		delete($action);
+		upgradeDelete($action);
 		break;
 }
 

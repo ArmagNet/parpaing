@@ -37,6 +37,11 @@ class BittorrentBo {
 	}
 
 	function activate() {
+		BittorrentBo::sendCommand("uci set transmission.@transmission[0].config_dir=" . $this->config["parpaing"]["root_directory"]);
+		BittorrentBo::sendCommand("uci set transmission.@transmission[0].download_dir=" . $this->config["parpaing"]["root_directory"]);
+		BittorrentBo::sendCommand("uci set transmission.@transmission[0].incomplete_dir=" . $this->config["parpaing"]["root_directory"]);
+		BittorrentBo::sendCommand("uci commit transmission");
+		
 		BittorrentBo::sendCommand("/etc/init.d/transmission enable");
 		BittorrentBo::sendCommand("/etc/init.d/transmission restart");
 
