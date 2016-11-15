@@ -52,6 +52,7 @@ $lang["menu_telephone"] = "Téléphone";
 $lang["menu_wifi"] = "Wifi";
 $lang["menu_explorer"] = "Explorateur";
 $lang["menu_bittorrent"] = "BitTorrent";
+$lang["menu_upnp"] = "UPnP";
 $lang["menu_upgrader"] = "Mise à jour";
 $lang["menu_logout"] = "Se déconnecter";
 
@@ -78,6 +79,7 @@ $lang["breadcrumb_telephone"] = "Telephone";
 $lang["breadcrumb_wifi"] = "Wifi";
 $lang["breadcrumb_explorer"] = "Explorateur";
 $lang["breadcrumb_bittorrent"] = "BitTorrent";
+$lang["breadcrumb_upnp"] = "Universal Plug and Play";
 $lang["breadcrumb_networks"] = "Réseaux";
 $lang["breadcrumb_piraxplorer"] = "Piratebox";
 $lang["breadcrumb_upgrader"] = "Mise à jour";
@@ -139,6 +141,8 @@ $lang["networks_mac_type_switch"] = "Réseau";
 $lang["networks_mac_type_server"] = "Serveur";
 
 $lang["piratebox_access"] = "Ou accès à la <a href='piraxplorer.php'>piratebox</a>";
+
+$lang["upnp_interface"] = "Réseau sur lequel le service est visible";
 
 // Rates
 

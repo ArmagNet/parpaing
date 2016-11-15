@@ -133,6 +133,9 @@ $language = SessionUtils::getLanguage($_SESSION);
 					<?php 	if (isset($config["parpaing"]["root_directory"]) && $config["parpaing"]["root_directory"] && file_exists($config["parpaing"]["root_directory"])) {?>
 							<li><a href="bittorrent.php"><?php echo lang("menu_bittorrent"); ?></a></li>
 					<?php 	}?>
+					<?php 	if (isset($config["parpaing"]["root_directory"]) && $config["parpaing"]["root_directory"] && file_exists($config["parpaing"]["root_directory"])) {?>
+							<li><a href="upnp.php"><?php echo lang("menu_upnp"); ?></a></li>
+					<?php 	}?>
 						</ul>
 					</li>
 
