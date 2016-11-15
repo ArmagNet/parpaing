@@ -210,10 +210,10 @@ foreach($interfaces as $index => $interface) {
 					<div class="col-md-5 total" data-size="<?php echo $totalSwap; ?>"><label class="col-md-7"><?php echo lang("index_swap_total_label"); ?></label><span class="col-md-5"><?php echo humanFileSize($totalSwap, false, 0, 10); ?></span></div>
 					<div class="col-md-5 used" data-size="<?php echo $totalSwap - $freeSwap; ?>"><label class="col-md-7"><?php echo lang("index_swap_used_label"); ?></label><span class="col-md-5"><?php echo humanFileSize($totalSwap - $freeSwap, false, 0, 10); ?></span></div>
 					<div class="col-md-2">
-						<div class="progress" data-used="<?php echo ($totalSwap - $freeSwap) / $totalSwap * 100; ?>">
+						<div class="progress" data-used="<?php echo ($totalSwap ? ($totalSwap - $freeSwap) / $totalSwap * 100 : 0); ?>">
 							<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-								style="width: <?php echo number_format(($totalSwap - $freeSwap) / $totalSwap * 100, 0) . "%"; ?>; text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;">
-								<span style="position: relative; left: 2px;"><?php echo number_format(($totalSwap - $freeSwap) / $totalSwap * 100, 1) . "%"; ?></span>
+								style="width: <?php echo ($totalSwap ? number_format(($totalSwap - $freeSwap) / $totalSwap * 100, 0) : 0) . "%"; ?>; text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;">
+								<span style="position: relative; left: 2px;"><?php echo ($totalSwap ? number_format(($totalSwap - $freeSwap) / $totalSwap * 100, 1) : 0) . "%"; ?></span>
 							</div>
 						</div>
 					</div>

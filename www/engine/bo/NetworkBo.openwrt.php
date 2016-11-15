@@ -141,7 +141,12 @@ class NetworkBo {
 				$currentInterface = array();
 			}
 			else {
-				$re = "/^([a-z0-9\\.]+)\\s*Link encap:([A-Za-z0-9]+)\\s*(HWaddr)?\\s*([a-z0-9:\\-]*)/";
+// 				echo $line . "<br>";
+
+// 				print_r($currentInterface);
+// 				echo "<br>";
+				
+				$re = "/^([a-z0-9\\.\\-]+)\\s*Link encap:([A-Za-z0-9]+)\\s*(HWaddr)?\\s*([a-z0-9:\\-]*)/";
 				preg_match_all($re, $line, $matches);
 
 				if ($matches[0]) {
@@ -151,22 +156,27 @@ class NetworkBo {
 					}
 				}
 
-				$re = "/inet addr:([0-9\\.]*)/";
+				$re = "/addr:([0-9\\.]*)/";
 				preg_match_all($re, $line, $matches);
 
-				if ($matches[1]) {
+				if ($matches[1] && $matches[1][0]) {
 					$currentInterface["ip_v4"] = $matches[1][0];
 				}
 
-				$re = "/addr: ([a-f0-9\\:\\/]*)/";
+				$re = "/6 addr:\\s*([a-z0-9\\:\\/\\-%]*) Scope:(\\w*)/";
 				preg_match_all($re, $line, $matches);
 
-				if ($matches[1]) {
-					$currentInterface["ip_v6"] = $matches[1][0];
+				if ($matches[1] && $matches[1][0]) {
+// 					print_r($matches);
+// 					echo "<br>";
+					$currentInterface["ip_v6_" . strtolower($matches[2][0])] = $matches[1][0];
 				}
 			}
 		}
 
+// 		print_r($interfaces);
+// 		echo "<br>";
+		
 		return $interfaces;
 	}
 
