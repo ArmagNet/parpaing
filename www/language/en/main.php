@@ -158,5 +158,5 @@ $lang["badPasswordAlert"] = "Bad password";
 
 $lang["about_footer"] = "About";
 $lang["advanced_intertace_footer"] = "Advanced interface";
-$lang["parpaing_footer"] = "<a href=\"https://www.parpaing.net/\" target=\"_blank\">Parpaing</a> is an application provided by <a href=\"https://www.armagnet.fr\" target=\"_blank\">ArmagNet</a>";
+$lang["parpaing_footer"] = "Parpaing is an application provided by <a href=\"https://www.armagnet.fr\" target=\"_blank\">ArmagNet</a>";
 ?>

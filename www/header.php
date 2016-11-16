@@ -98,7 +98,7 @@ $language = SessionUtils::getLanguage($_SESSION);
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#otb-navbar-collapse">
 					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.php"><img src="images/logo.svg" style="position: relative; top: -14px; width: 48px; height: 48px; background-color: #ffffff;"
+				<a class="navbar-brand" href="index.php"><img src="images/logo.png" style="position: relative; top: -14px; width: 48px; height: 48px; background-color: #ffffff;"
 					data-toggle="tooltip" data-placement="bottom" title="Parpaing" /> </a>
 			</div>
 
@@ -125,8 +125,9 @@ $language = SessionUtils::getLanguage($_SESSION);
 					<?php 	}?>
 
 					<li class="dropdown <?php if ($page == "explorer" || $page == "bittorrent") echo 'active'; ?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-						<?php if ($page == "explorer" || $page != "bittorrent") { ?><?php echo lang("menu_explorer"); ?><?php }?>
+						<?php if ($page == "explorer" || ($page != "bittorrent" && $page != "upnp")) { ?><?php echo lang("menu_explorer"); ?><?php }?>
 						<?php if ($page == "bittorrent") { ?><?php echo lang("menu_bittorrent"); ?><?php }?>
+						<?php if ($page == "upnp") { ?><?php echo lang("menu_upnp"); ?><?php }?>
 						<span class="caret"></span> </a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="explorer.php"><?php echo lang("menu_explorer"); ?></a></li>
