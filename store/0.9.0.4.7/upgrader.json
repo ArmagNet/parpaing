@@ -1,0 +1,7 @@
+{
+	"actions":[
+		{"action":"copy", "file": "language/fr/main.php"},
+		{"action":"copy", "file": "version.json"}
+	], 
+	"version": "0.9.0.4.7"
+}
