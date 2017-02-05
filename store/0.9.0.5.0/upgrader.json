@@ -1,0 +1,16 @@
+{
+	"actions":[
+		{"action":"copy", "file": "do_actionUpgrade.php"},
+		{"action":"copy", "file": "header.php"},
+		{"action":"copy", "file": "index.php"},
+		{"action":"copy", "file": "statistics.php"},
+		{"action":"copy", "file": "engine/bo/NetworkBo.openwrt.php"},
+		{"action":"copy", "file": "engine/bo/NetworkBo.debian.php"},
+		{"action":"copy", "file": "js/croned.js"},
+		{"action":"copy", "file": "js/user.js"},
+		{"action":"copy", "file": "language/en/main.php"},
+		{"action":"copy", "file": "language/fr/main.php"},
+		{"action":"copy", "file": "version.json"}
+	], 
+	"version": "0.9.0.5.0"
+}
